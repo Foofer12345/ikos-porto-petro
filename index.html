@@ -86,7 +86,17 @@
   .loc{
     font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;
     color:var(--ink-soft);margin-top:6px;
+    display:flex;align-items:center;justify-content:center;gap:8px;
   }
+  .es-flag{
+    display:inline-block;width:28px;height:18px;
+    border:1px solid var(--gold-soft);border-radius:2px;
+    overflow:hidden;vertical-align:middle;
+    box-shadow:0 2px 6px rgba(0,0,0,.18), 0 0 0 1px rgba(255,255,255,.05) inset;
+    flex:0 0 auto;
+  }
+  .es-flag .stripe-r{fill:#AA151B}
+  .es-flag .stripe-y{fill:#F1BF00}
   .dates{
     font-family:'Cormorant Garamond',serif;font-weight:500;font-size:24px;
     color:var(--navy);margin-top:14px;
@@ -407,7 +417,14 @@
 
     <div class="logo">IKOS PORTO PETRO</div>
     <div class="resort">Mallorca</div>
-    <div class="loc">Porto Petro · Mallorca · Illes Balears</div>
+    <div class="loc">
+      Porto Petro · Mallorca · Illes Balears
+      <svg class="es-flag" viewBox="0 0 60 40" aria-label="España">
+        <rect class="stripe-r" width="60" height="10"/>
+        <rect class="stripe-y" y="10" width="60" height="20"/>
+        <rect class="stripe-r" y="30" width="60" height="10"/>
+      </svg>
+    </div>
     <div class="dates">2 — 7 juni 2026</div>
     <div class="crest">
       <span class="crest-line"></span>
@@ -525,72 +542,82 @@ const SOURCES = [
   { key:'best',   url: OM('best_match') },
 ];
 
-/* Activiteiten · Claire & Michiel · una semana en Mallorca
+/* Activiteiten · Claire & Michiel · una semana en Mallorca · Deluxe Suite
    Aankomst di KL/LX 06:00 AMS → 08:25 Palma · transfer ~10:00
    Vertrek  zo 7/6 transfer ±13:30 · Palma 16:00 → Amsterdam 18:35
    Bevestigde diners: di Olivia · wo Seasons · do Anaya · vr Dinner on the Beach · za Beachclub
-   Massage voor twee: wo 3 juni
-   Lokale rit met huurauto: vr 5 juni */
+   Couple's massage: wo 3 juni
+   Lokale rit + wijnproeverij: vr 5 juni */
 const ACTIVITIES = {
-  '2026-06-02':{ theme:'Llegada · primera noche bij Olivia', photo:'pool-bar.jpg', photoCaption:'Pool Bar · una copa de bienvenida', arrival:true, items:[
+  '2026-06-02':{ theme:'Llegada · Deluxe Suite · primera noche', photo:'suite.jpg', photoCaption:'Deluxe Suite · jullie thuis voor de week', arrival:true, items:[
     {tag:'ontdek', icon:'✈️', title:'06:00 vertrek AMS · 08:25 landing Palma',
-     desc:'Transfer staat klaar bij de gate. ±1 uur over de zuidkust naar Porto Petro. Bij het resort rond 10:00 — koffers naar opslag tot de kamer klaar is.'},
-    {tag:'actief', icon:'🏊', title:'Primer chapuzón · 5 kristalheldere zwembaden',
-     desc:'Welkomst-cava bij Helios, daarna samen recht het hoofdzwembad in. De grote infinity pool kijkt uit op de baai.'},
+     desc:'Transfer wacht bij de gate. ±1 uur over de zuidkust van Mallorca. Bij het resort rond 10:00 — sleutels van jullie Deluxe Suite klaarliggen, koffers ernaartoe.'},
+    {tag:'wellness', icon:'🛎', title:'Check-in · Deluxe Suite met zeezicht',
+     desc:'Walk-in regendouche, koningskingbed, privé-terras dat uitkijkt op de baai. Welkomst-fles Mallorquí cava ligt al klaar. Even adem halen, ramen open, zout in de neus.'},
+    {tag:'actief', icon:'🏊', title:'Primer chapuzón · adults-only infinity pool',
+     desc:'Sportief openen: vijftig baantjes voor Michiel, Claire kiest de ligbedden onder de palmen. Koel water, lege baan, Mediterrane zon.'},
     {tag:'eten', icon:'🥗', title:'Late lunch bij The Market',
-     desc:'À la minute keuken, 100 wijnen op de kaart. Iets lichts — een gazpacho, jamón ibérico, pan tumaca — voor het echte diner vanavond.'},
-    {tag:'eten', icon:'🫒', title:'Diner · Olivia (mediterraan)',
-     desc:'Gereserveerd. Eerste avond samen. Gegrilde octopus, lamskoteletten, een fles Assyrtiko of Mallorquí Callet. Vraag de tafel buiten.'}
+     desc:'À la minute keuken, 100 wijnen open per glas. Begin licht: gazpacho andaluz, pa amb oli, ibérico de bellota, een glas Albariño voor Claire, Manto Negro voor Michiel.'},
+    {tag:'eten', icon:'🫒', title:'Diner · Olivia (Grieks-Mediterraan)',
+     desc:'Gereserveerd. Eerste avond samen onder de sterren. Gegrilde octopus met fava, lams-souvlaki, geitenkaas-spanakopita. Vraag de tafel met zeezicht; sommelier raadt Assyrtiko of Mallorquí Callet aan.'}
   ]},
-  '2026-06-03':{ theme:'Watersport · spa para dos · Seasons', photo:'seasons.jpg', photoCaption:'Seasons · signature dining', items:[
-    {tag:'actief', icon:'🏄', title:'Ochtend: SUP voor twee in de baai',
-     desc:'Twee zandige baaien, kalm water in de ochtend. Resort verhuurt SUP\'s, kajaks, snorkel-gear — allemaal inbegrepen. Misschien een paddle-board voor twee?'},
-    {tag:'eten', icon:'🥂', title:'Lunch bij de pool · cava & ceviche',
-     desc:'Lichte mediterrane bites: ceviche, ensaladilla, gegrilde garnalen. Een fles cava aan de poolside.'},
-    {tag:'wellness', icon:'💆', title:'Massage para dos · Ikos Spa by Anne Semonin Paris',
-     desc:'Geboekt. Side-by-side behandeling — diep, ontspannen, met sauna en stoom als bonus. Ideaal moment voor sobremesa.'},
+  '2026-06-03':{ theme:'Watersport · spa para dos · Seasons', photo:'seasons.jpg', photoCaption:'Seasons · mediterraan met Aziatische accenten', items:[
+    {tag:'actief', icon:'🏄', title:'Ochtend: SUP-tocht voor twee',
+     desc:'Twee zandige baaien, glas water in de ochtend. Resort verhuurt tandem-SUP\'s, kajaks en snorkel-gear — allemaal inbegrepen. Sportieve openingstoer, samen naar de overkant en terug.'},
+    {tag:'actief', icon:'🎾', title:'Padel: hij vs zij · best of three',
+     desc:'Verlichte padel-banen, boek 90 min via de conciërge-app. Verliezer trakteert op de cocktail van vanavond. Tegenstander niet onderschatten.'},
+    {tag:'eten', icon:'🥂', title:'Lunch poolside · cava & ceviche',
+     desc:'Pool Bar (10:00-19:00): ceviche van dorade, ensaladilla rusa, gegrilde gambas, een fles cava op ijs. Schaduw onder de witte parasols.'},
+    {tag:'wellness', icon:'💆', title:'Couple\'s massage · Ikos Spa by Anne Semonin Paris',
+     desc:'Geboekt. Side-by-side behandeling, vier handen op twee ruggen. Sauna + steam + koude dompel als bonus. Klassiek moment van sobremesa daarna.'},
     {tag:'eten', icon:'👑', title:'Diner · Seasons (signature)',
-     desc:'Gereserveerd. À la carte signature menu, seizoensgericht, Michelin-gecureerd. Dress code iets netter — Michiel pakt de witte broek, Claire de zomerjurk.'}
+     desc:'Gereserveerd. Mediterrane keuken met subtiele Aziatische accenten, al fresco, zeezicht. Michelin-gecureerd menu — wagyu tataki, miso-aubergine, dorade in zoutkorst. Dress code iets netter.'},
+    {tag:'eten', icon:'☕', title:'Nightcap · Espresso Martini bij Lobby Bar',
+     desc:'Lobby Bar (tot middernacht): de signature Espresso Martini — Mallorcan brandy, espresso, een snufje vanille. Voor Claire een twist met cava-foam. Onder de gouden lampen.'}
   ]},
-  '2026-06-04':{ theme:'Boot naar Mondragó · Anaya', photo:'anaya.jpg', photoCaption:'Anaya · Pan-Aziatisch', items:[
-    {tag:'actief', icon:'⛵', title:'Boottocht naar Cala Mondragó',
-     desc:'Een gehuurde sloep of de resort-RIB — Mondragó natuurpark ligt direct om de hoek. Anker uit, snorkel aan, turkoois zo helder dat je tot 6m kunt zien.'},
-    {tag:'ontdek', icon:'🤿', title:'Cala s\'Amarador · privé baai',
-     desc:'Een van de mooiste natuurbaaien van Mallorca. Vroeg in de ochtend nog rustig — neem koffie en croissants mee aan boord.'},
+  '2026-06-04':{ theme:'Boot naar Mondragó · Anaya', photo:'anaya.jpg', photoCaption:'Anaya · verfijnd Pan-Aziatisch', items:[
+    {tag:'actief', icon:'⛵', title:'Sloep huren · ochtendvaart Cala Mondragó',
+     desc:'Half-day sloep vanuit de marina (5 min lopen). Mondragó natuurpark ligt om de hoek — anker in turkoois water, snorkel aan, ±6 m zicht. Voor twee, geen kapitein nodig.'},
+    {tag:'ontdek', icon:'🤿', title:'Cala s\'Amarador · pure natuur',
+     desc:'Een van de mooiste natuurbaaien van het eiland, beschermd gebied. Pijnbomen tot aan de waterlijn. Koffie en croissants aan boord, anker op een zandbank, samen het water in.'},
     {tag:'eten', icon:'🐟', title:'Lunch · Beach Club Bar aan zee',
-     desc:'Versgegrilde vis, paella, ensalada mediterránea, ijskoude Estrella of Albariño. Tenen in het zand.'},
+     desc:'Geopend 08:00-22:00. Versgegrilde dorade, seafood paella voor twee, ensalada mediterránea, jamón ibérico, ijskoude Estrella. Tenen in het zand, geen schoenen verplicht.'},
     {tag:'eten', icon:'🥢', title:'Diner · Anaya (Pan-Aziatisch)',
-     desc:'Gereserveerd. Robata-grill, black cod miso, dim sum, yakitori. Flamboyant en vol smaak — vraag de chef-special.'}
+     desc:'Gereserveerd. Ikos\' signature pan-Aziatisch — Chinees, Indiaas, Thais, verfijnd. Dim sum, miso black cod, tandoori-lamb, gewokte wokpan, yuzu-cheesecake. Flamboyant en zelden voorspelbaar.'}
   ]},
-  '2026-06-05':{ theme:'Eilandtocht · dinner on the beach', photo:'mini.jpg', photoCaption:'Mallorca roadtrip · privé strand-diner', items:[
+  '2026-06-05':{ theme:'Roadtrip · wijnproeverij · dinner on the beach', photo:'mini.jpg', photoCaption:'Mallorca · ruta por el sur', items:[
     {tag:'ontdek', icon:'🚗', title:'Huurauto opgehaald · ruta por el sur',
-     desc:'Route ZO-kust: Cala d\'Or → Santanyí markt (donderdagochtend, maar zaterdag ook open) → Es Trenc strand → Felanitx. Stop bij Bodega Anita Cuevas voor een proeverij?'},
-    {tag:'eten', icon:'🐙', title:'Lunch in een dorpstaverna',
-     desc:'Santanyí of Felanitx — tapas, gegrilde sepia, pa amb oli, tumbet (Mallorcaans aubergine-stoofpotje), karaf huiswijn. Dine-Out programma dekt de rekening.'},
-    {tag:'wellness', icon:'🌅', title:'Atardecer · zonsondergang bij Cap de Ses Salines',
-     desc:'Zuidelijkste punt van Mallorca, ±20 min rijden. Vuurtoren, klippen, lege horizon. Misschien een copita ter plaatse.'},
+     desc:'MINI Countryman cabrio of vergelijkbaar, vanaf de resort-balie. Eerste etappe: Cala d\'Or → Santanyí (zaterdagochtendmarkt) → Es Trenc strand → Felanitx.'},
+    {tag:'ontdek', icon:'🍇', title:'Wijnproeverij · Bodegas Ánima Negra (Felanitx)',
+     desc:'Voorstel: tasting bij Ánima Negra in Felanitx — Pla i Llevant DO. Drie wijnen + tapas, ±€35 p.p. De legendarische AN/2 (Callet-Manto Negro-Fogoneu) als slot. Alternatieven: 4 Kilos of Vins Miquel Gelabert. Boek vooraf.'},
+    {tag:'eten', icon:'🐙', title:'Late lunch op het plein in Santanyí',
+     desc:'Cap des Mort of Es Cantonet: pulpo a la gallega, pa amb oli, tumbet, een karaf rosado Mallorquí. Dine-Out programma dekt de rekening — bewaar het bonnetje.'},
+    {tag:'wellness', icon:'🌅', title:'Atardecer bij Cap de Ses Salines',
+     desc:'Zuidelijkste punt van Mallorca, ±20 min rijden. Vuurtoren uit 1863, klippen, lege horizon richting Cabrera. Pak de copita-flask mee, geen woorden nodig.'},
     {tag:'eten', icon:'🔥', title:'Dinner on the Beach · privé op het zand',
-     desc:'Gereserveerd. Privétafel op het strand, fakkels, sterren, eigen kok. Hét hoogtepunt van de week — voor jullie twee alleen.'}
+     desc:'Gereserveerd. Privétafel op het strand, fakkels, kaarslicht, sterren, eigen kok. Het hoogtepunt van de week — alleen voor jullie twee. Een Espresso Martini als slot bij de fakkels.'}
   ]},
   '2026-06-06':{ theme:'Sol y mar · Beachclub', photo:'beachclub.jpg', photoCaption:'Beach Club · sol y mar', items:[
-    {tag:'actief', icon:'⛵', title:'Catamaran of zeilles in de baai',
-     desc:'Watersportcentrum geeft instructies of laat je los met de Hobie. Open water tussen de twee baaien — kalme bries, perfecte juni-condities.'},
+    {tag:'actief', icon:'⛵', title:'Catamaran-les in de baai',
+     desc:'Watersportcentrum geeft een instructie of laat je los met de Hobie. Open water tussen de twee baaien — kalme ochtendbries, perfecte juni-condities. Roeien-trekken-laveren.'},
+    {tag:'actief', icon:'🚴', title:'Optie: e-bike rondje Mondragó natuurpark',
+     desc:'Het resort leent e-bikes. Route via de wandelpaden van het natuurpark naar Cala s\'Amarador, ±18 km, grotendeels schaduw onder de pijnbomen.'},
     {tag:'eten', icon:'🍤', title:'Lunch · The Market à la minute',
-     desc:'Versgrilde vis, zeevruchten-paella, jamón ibérico, kaasplank. 100 wijnen op de kaart — neem een Albariño bij de vis, of een glas vino blanco Mallorquí.'},
-    {tag:'actief', icon:'🏖', title:'Middag bij het Beach Club zwembad',
-     desc:'Ligbedden voor twee, cocktails, DJ vanaf 16:00. Een sangría blanca of een mojito, een boek, de zon op je gezicht.'},
+     desc:'Versgrilde vis, seafood paella, jamón ibérico, kaasplank met manchego en Mahón. 100 wijnen open: glas Albariño bij de vis, of een Mallorquí blanc Prensal.'},
+    {tag:'actief', icon:'🏖', title:'Middag · Beach Club zwembad',
+     desc:'Ligbedden voor twee, DJ vanaf 16:00. Een sangría blanca, een mojito de cava, een boek. Een lange middag waar niets hoeft.'},
     {tag:'eten', icon:'🍸', title:'Diner · Beachclub',
-     desc:'Gereserveerd. Strandfront restaurant, live grill, gezellig en informeel. Late zon, koele bries, gouden lichtjes — een zaterdagavond als een toverlied.'}
+     desc:'Gereserveerd. Strandfront restaurant — internationaal à la carte, live grill, gezellig en informeel. Late zon, koele bries, gouden lichtjes. Sluit af met een Espresso Martini aan de bar.'}
   ]},
   '2026-06-07':{ theme:'Hasta la vista · vertrek ±13:30', photo:'overview.jpg', photoCaption:'Hasta luego, Porto Petro', departure:true, items:[
-    {tag:'actief', icon:'🏖', title:'Última mañana op het strand',
-     desc:'Koel zand, rustigste uur van de week. Een laatste duik, ochtendkoffie aan zee, of gewoon op een ligbed. Check-out is 12:00.'},
+    {tag:'actief', icon:'🏖', title:'Última mañana · strand of laatste padel',
+     desc:'Koel zand, rustigste uur van de week. Een laatste duik samen, of nog een padel-revanche. Check-out is 12:00.'},
     {tag:'eten', icon:'🥐', title:'Brunch bij The Market',
-     desc:'Ensaïmadas, jamón, eieren, gegrilde groente, vers fruit, sappen. Rustig aan — de koffer kan nog even wachten.'},
+     desc:'Ensaïmadas, ibérico, scrambled eggs, gegrilde groenten, vers fruit, sappen. Rustig aan — koffers worden door de butler opgehaald.'},
     {tag:'eten', icon:'🍷', title:'Afscheidslunch · Lobby Bar terras',
-     desc:'Tussen check-out en transfer: licht mediterraan met uitzicht op de tuinen. Una copita de Albariño als gouden slot.'},
+     desc:'Tussen check-out en transfer: licht mediterraan met uitzicht op de tuinen. Una copita de Albariño, of laatste Espresso Martini als gouden slot.'},
     {tag:'ontdek', icon:'✈️', title:'13:30 transfer · 16:00 Palma → 18:35 AMS',
-     desc:'Transfer ±13:30 naar Palma. Check-in, una última ensaïmada in de lounge, y a casa.'}
+     desc:'Transfer ±13:30 naar Palma. Check-in, una última ensaïmada in de lounge, y a casa con muchos recuerdos.'}
   ]}
 };
 
