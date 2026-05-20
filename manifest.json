@@ -1,0 +1,15 @@
+{
+  "name": "Ikos Porto Petro · Weerjournaal",
+  "short_name": "Ikos Porto Petro",
+  "description": "Live weervoorspelling en activiteiten voor de Van Heusden Boys op Ikos Porto Petro, 2–7 juni 2026.",
+  "start_url": "/ikos-porto-petro/",
+  "scope": "/ikos-porto-petro/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F8F1DF",
+  "theme_color": "#08192E",
+  "icons": [
+    {"src":"icon-192.png","sizes":"192x192","type":"image/png","purpose":"any maskable"},
+    {"src":"icon-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}
+  ]
+}
