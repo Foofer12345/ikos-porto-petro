@@ -500,7 +500,7 @@ const MONTHS_NL=['januari','februari','maart','april','mei','juni','juli','augus
 const OM = m =>
   `https://api.open-meteo.com/v1/forecast?latitude=${LAT}&longitude=${LON}`+
   `&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_probability_max,windspeed_10m_max,sunshine_duration,weathercode`+
-  `&timezone=${encodeURIComponent(TZ)}&start_date=${START}&end_date=${END}&models=${m}`;
+  `&timezone=${encodeURIComponent(TZ)}&forecast_days=16&models=${m}`;
 
 /* 12 onafhankelijke voorspellingsbronnen */
 const SOURCES = [
@@ -718,7 +718,7 @@ function renderDay(d, agg){
           <div class="metric"><div class="metric-label">Wind</div><div class="metric-value">${Math.round(w)}</div><div class="metric-sub">km/u max</div></div>
           <div class="metric"><div class="metric-label">Zee</div><div class="metric-value">~21°</div><div class="metric-sub">aangenaam, zwembaar</div></div>
         </div>
-        <p class="day-rating">Op basis van ${a.n} modellen · dagcijfer <strong>${fmtNL(score,1)}/10</strong>${act?.arrival?' · halve aankomstdag':act?.departure?' · halve vertrekdag':''}</p>
+        <p class="day-rating">${a.n>0 ? `Op basis van ${a.n} modellen · dagcijfer <strong>${fmtNL(score,1)}/10</strong>` : `Voorspelling nog buiten model-bereik — komt dichter bij de reisdatum binnen`}${act?.arrival?' · halve aankomstdag':act?.departure?' · halve vertrekdag':''}</p>
         ${items.length ? `
         <div class="acts-label">✦ Aanraders voor vandaag</div>
         ${items.map(it=>`
