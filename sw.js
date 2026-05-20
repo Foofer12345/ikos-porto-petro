@@ -1,4 +1,4 @@
-const CACHE = 'ikos-porto-petro-v2';
+const CACHE = 'ikos-porto-petro-v3';
 const ASSETS = [
   '/ikos-porto-petro/',
   '/ikos-porto-petro/index.html',
