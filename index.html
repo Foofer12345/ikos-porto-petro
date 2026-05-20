@@ -3,520 +3,532 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-<title>Ikos Porto Petro · Weerjournaal</title>
+<title>Ikos Porto Petro · Claire &amp; Michiel</title>
 
 <!-- PWA -->
 <link rel="manifest" href="manifest.json" />
-<meta name="theme-color" content="#08192E" />
+<meta name="theme-color" content="#0F1115" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-<meta name="apple-mobile-web-app-title" content="Ikos Porto Petro" />
+<meta name="apple-mobile-web-app-title" content="Porto Petro" />
 <link rel="apple-touch-icon" href="icon-192.png" />
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png" />
 <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Cinzel:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<!-- Fraunces (variable serif) + Inter Tight (modern sans) -->
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
   :root{
-    --cream:#F9EFD8;
-    --sand:#E8D9B5;
-    --sand-warm:#E2C795;
-    --navy:#0A2030;
-    --navy-mid:#143447;
-    --navy-deep:#02131D;
-    --olive:#5C6B3E;
-    --gold:#B58A4A;          /* sherry gold */
-    --gold-soft:#CDA66A;
-    --gold-light:#E2C58A;
-    --terracotta:#C77A4D;    /* sun-baked terracotta */
-    --wine:#7B2D3A;          /* tinto, used sparingly */
-    --ink:#1A1108;
-    --ink-soft:#5C4A38;
-    --line:rgba(26,17,8,.15);
-    --line-gold:rgba(181,138,74,.3);
+    --bg:#F7F4ED;            /* warm off-white */
+    --bg-card:#FFFFFF;
+    --bg-sand:#EDE3CE;
+    --ink:#0F1115;            /* near-black */
+    --ink-2:#26282E;
+    --ink-soft:#6B6862;
+    --ink-faint:#9A968B;
+    --gold:#B8945E;
+    --gold-soft:#D6B47E;
+    --sea:#1B5878;
+    --terracotta:#C77252;
+    --line:rgba(15,17,21,.08);
+    --line-strong:rgba(15,17,21,.16);
+
+    --r-sm:8px;
+    --r-md:12px;
+    --r-lg:16px;
+    --r-xl:24px;
+    --r-pill:999px;
+
+    --shadow-sm: 0 1px 2px rgba(15,17,21,.06), 0 0 0 1px rgba(15,17,21,.04);
+    --shadow-md: 0 4px 16px rgba(15,17,21,.06), 0 1px 3px rgba(15,17,21,.05);
+    --shadow-lg: 0 24px 60px -16px rgba(15,17,21,.18), 0 6px 16px rgba(15,17,21,.05);
+
+    --font-display: 'Fraunces', ui-serif, Georgia, serif;
+    --font-sans: 'Inter Tight', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   }
-  *{box-sizing:border-box}
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
   html,body{margin:0;padding:0}
+  html{scroll-behavior:smooth}
   body{
-    background:
-      radial-gradient(ellipse 70% 40% at 50% 0%, rgba(199,122,77,.08), transparent 70%),
-      radial-gradient(ellipse 60% 40% at 100% 100%, rgba(123,45,58,.06), transparent 70%),
-      linear-gradient(170deg, #F9EFD8 0%, #F1DFB8 60%, #E8D9B5 100%);
+    background:var(--bg);
     color:var(--ink);
-    font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
-    line-height:1.55;
+    font-family:var(--font-sans);
+    font-weight:400;
+    line-height:1.5;
     -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
     min-height:100vh;
-    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+    overflow-x:hidden;
   }
-  body::before{
-    content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.03;
-    background-image: repeating-radial-gradient(circle at 23% 37%, rgba(0,0,0,.8) 0, transparent 1px),
-                       repeating-radial-gradient(circle at 67% 73%, rgba(0,0,0,.8) 0, transparent 1px);
-    background-size: 3px 3px, 3px 3px;
-  }
-  .wrap{position:relative;z-index:1;max-width:640px;margin:0 auto;padding:28px 22px 60px}
+  img{max-width:100%;display:block}
+  button{font:inherit;color:inherit;background:none;border:none;cursor:pointer;padding:0;text-align:left}
 
-  /* Masthead */
-  .masthead{text-align:center;padding:16px 8px 24px;position:relative}
-  .masthead::before, .masthead::after{
-    content:"";position:absolute;left:50%;transform:translateX(-50%);
-    width:40px;height:1px;background:var(--gold);
-  }
-  .masthead::before{top:4px}
-  .masthead::after{bottom:12px}
-  .olive-deco{
-    position:absolute;top:30px;opacity:.22;width:60px;height:60px;pointer-events:none;
-  }
-  .olive-deco.left{left:-4px;transform:rotate(-18deg) scaleX(-1)}
-  .olive-deco.right{right:-4px;transform:rotate(18deg)}
-  .logo{
-    font-family:'Cinzel',serif;font-weight:600;letter-spacing:.32em;
-    font-size:38px;color:var(--navy);line-height:1;margin:12px 0 0;
-  }
-  .resort{
-    font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:400;
-    font-size:22px;color:var(--gold);letter-spacing:.18em;
-    margin-top:6px;text-transform:uppercase;
-  }
-  .loc{
-    font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;
-    color:var(--ink-soft);margin-top:6px;
-    display:flex;align-items:center;justify-content:center;gap:8px;
-  }
-  .es-flag{
-    display:inline-block;width:28px;height:18px;
-    border:1px solid var(--gold-soft);border-radius:2px;
-    overflow:hidden;vertical-align:middle;
-    box-shadow:0 2px 6px rgba(0,0,0,.18), 0 0 0 1px rgba(255,255,255,.05) inset;
-    flex:0 0 auto;
-  }
-  .es-flag .stripe-r{fill:#AA151B}
-  .es-flag .stripe-y{fill:#F1BF00}
-  .dates{
-    font-family:'Cormorant Garamond',serif;font-weight:500;font-size:24px;
-    color:var(--navy);margin-top:14px;
-  }
-  .crest{
-    display:inline-flex;flex-direction:column;align-items:center;
-    margin-top:12px;gap:2px;
-  }
-  .crest .crest-line{width:36px;height:1px;background:var(--gold)}
-  .crest .crest-name{
-    font-family:'Cinzel',serif;font-size:10px;letter-spacing:.38em;
-    color:var(--navy);font-weight:500;text-transform:uppercase;
-  }
-  .crest .crest-est{
-    font-family:'Cormorant Garamond',serif;font-style:italic;font-size:11px;
-    color:var(--ink-soft);letter-spacing:.12em;
-  }
+  /* Numeric features for clean tabular display */
+  .tabnum{font-variant-numeric:tabular-nums lining-nums}
 
-  .status-row{display:flex;justify-content:center;gap:8px;margin-top:14px;flex-wrap:wrap}
-  .pill{
-    font-size:10.5px;letter-spacing:.08em;padding:5px 11px;border-radius:999px;
-    background:rgba(8,25,46,.06);color:var(--navy);
-    border:1px solid var(--line);text-transform:uppercase;font-weight:500;
+  /* ─── Hero ─── */
+  .hero{
+    position:relative;height:78vh;min-height:540px;max-height:780px;
+    overflow:hidden;color:#fff;
+    padding: env(safe-area-inset-top) 0 0 0;
   }
-  .pill.live{background:rgba(92,107,62,.12);color:var(--olive);border-color:rgba(92,107,62,.25)}
-  .pill.loading{background:rgba(168,136,77,.15);color:var(--gold);border-color:rgba(168,136,77,.35)}
-  .pill .dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:currentColor;margin-right:6px;vertical-align:middle;animation:pulse 1.8s ease-in-out infinite}
-  @keyframes pulse{0%,100%{opacity:.4}50%{opacity:1}}
-
-  /* Grade card */
-  .grade{
-    margin:28px auto;
-    background:linear-gradient(180deg, #FDFAF1 0%, #F4EAD5 100%);
-    border:1px solid var(--gold);border-radius:4px;
-    padding:28px 22px 26px;text-align:center;position:relative;
-    box-shadow:0 10px 30px rgba(8,25,46,.08);
-  }
-  .grade::before{
-    content:"";position:absolute;inset:5px;border:1px solid rgba(168,136,77,.3);border-radius:2px;pointer-events:none;
-  }
-  .grade::after{
-    content:"🫒";position:absolute;top:-14px;left:50%;transform:translateX(-50%);
-    font-size:22px;background:var(--sand);padding:0 10px;border-radius:50%;
-    filter:drop-shadow(0 1px 3px rgba(8,25,46,.15));
-  }
-  .grade-label{
-    font-family:'Cinzel',serif;font-size:10px;letter-spacing:.44em;color:var(--gold);
-    text-transform:uppercase;font-weight:500;margin-top:4px;
-  }
-  .grade-number{
-    display:inline-flex;align-items:baseline;justify-content:center;gap:6px;
-    line-height:1;margin:18px 0 10px;
-  }
-  .grade-number .big{
-    font-family:'Cormorant Garamond',serif;font-weight:500;
-    font-size:92px;line-height:1;color:var(--navy);letter-spacing:-.02em;
-  }
-  .grade-number .of{
-    font-family:'Cormorant Garamond',serif;font-weight:400;
-    font-size:30px;line-height:1;color:var(--gold);letter-spacing:.02em;
-  }
-  .grade-blurb{
-    margin-top:6px;font-family:'Cormorant Garamond',serif;font-size:17px;
-    font-style:italic;color:var(--ink-soft);line-height:1.45;max-width:440px;margin-left:auto;margin-right:auto;
-  }
-  .grade-tagline{
-    font-family:'Cinzel',serif;font-size:9px;letter-spacing:.44em;color:var(--gold);
-    text-transform:uppercase;font-weight:500;margin-top:14px;opacity:.85;
-  }
-
-  /* Hero photo */
   .hero-img{
-    margin:22px auto 16px;border-radius:4px;overflow:hidden;position:relative;
-    aspect-ratio:16/8;box-shadow:0 14px 40px rgba(8,25,46,.18);
-    background:linear-gradient(135deg, #2C5F7F 0%, #1F4862 40%, #0F2D4F 70%, #08192E 100%);
+    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+    opacity:0;transition:opacity 1s ease;will-change:opacity;
+    transform:scale(1.04);transition:opacity 1s, transform 12s ease-out;
   }
-  .hero-img img{width:100%;height:100%;object-fit:cover;display:block;transition:opacity .6s;opacity:0}
-  .hero-img img.loaded{opacity:1}
-  .hero-img::after{
+  .hero-img.loaded{opacity:1;transform:scale(1)}
+  .hero::after{
     content:"";position:absolute;inset:0;pointer-events:none;
-    background:linear-gradient(180deg, transparent 50%, rgba(8,25,46,.35));
+    background:
+      linear-gradient(180deg, rgba(15,17,21,.15) 0%, transparent 25%, transparent 55%, rgba(15,17,21,.85) 100%);
   }
-  .hero-caption{
-    position:absolute;left:0;right:0;bottom:10px;text-align:center;
-    font-family:'Cinzel',serif;font-size:10px;letter-spacing:.4em;color:#fff;
-    text-transform:uppercase;font-weight:500;text-shadow:0 2px 8px rgba(0,0,0,.4);
-    opacity:.9;
+  .hero-status{
+    position:absolute;top:18px;left:0;right:0;
+    display:flex;justify-content:space-between;align-items:center;
+    padding:0 20px;font-size:11px;letter-spacing:.06em;
+    z-index:2;color:rgba(255,255,255,.85);
+  }
+  .hero-status .live{
+    display:inline-flex;align-items:center;gap:6px;
+    padding:6px 10px;border-radius:var(--r-pill);
+    background:rgba(255,255,255,.12);backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+    border:1px solid rgba(255,255,255,.18);
+    font-weight:500;
+  }
+  .hero-status .live .dot{
+    width:6px;height:6px;border-radius:50%;background:#5EE3A9;
+    box-shadow:0 0 0 3px rgba(94,227,169,.25);
+    animation:pulse 2s ease-in-out infinite;
+  }
+  .hero-status .live.loading .dot{background:#F2C94C;box-shadow:0 0 0 3px rgba(242,201,76,.25)}
+  .hero-status .updated{font-weight:500;opacity:.7}
+  @keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.2);opacity:.7}}
+
+  .hero-content{
+    position:absolute;left:0;right:0;bottom:0;
+    padding:0 24px 56px;z-index:2;
+  }
+  .hero-kicker{
+    font-family:var(--font-sans);font-size:11px;font-weight:600;
+    letter-spacing:.28em;text-transform:uppercase;
+    color:rgba(255,255,255,.78);margin-bottom:18px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .hero-kicker .flag{
+    display:inline-block;width:18px;height:12px;border-radius:2px;overflow:hidden;
+    box-shadow:0 1px 2px rgba(0,0,0,.4);
+  }
+  .hero-kicker .flag .r{fill:#AA151B}
+  .hero-kicker .flag .y{fill:#F1BF00}
+  .hero-title{
+    font-family:var(--font-display);
+    font-weight:300;font-style:italic;
+    font-size: clamp(48px, 13vw, 72px);
+    line-height:1;margin:0;letter-spacing:-.02em;
+    /* opsz from Fraunces variable axis */
+    font-variation-settings: "opsz" 72, "wght" 300;
+  }
+  .hero-meta{
+    margin-top:18px;font-size:14px;font-weight:500;letter-spacing:.02em;
+    color:rgba(255,255,255,.9);
+    display:flex;align-items:center;flex-wrap:wrap;gap:8px;
+  }
+  .hero-meta .sep{opacity:.5}
+  .hero-resort{
+    margin-top:6px;font-family:var(--font-display);
+    font-style:italic;font-weight:400;font-size:18px;
+    color:rgba(255,255,255,.7);
   }
 
-  /* Olive divider */
-  .olive-divider{
-    display:flex;align-items:center;justify-content:center;gap:14px;
-    margin:28px auto 18px;color:var(--gold);
+  /* ─── Wrap below hero ─── */
+  .wrap{
+    position:relative;
+    padding: 0 20px 80px;
+    max-width:720px;margin:0 auto;
   }
-  .olive-divider::before, .olive-divider::after{
-    content:"";height:1px;flex:1;max-width:80px;background:linear-gradient(90deg, transparent, var(--gold) 80%);
-  }
-  .olive-divider::after{background:linear-gradient(90deg, var(--gold) 20%, transparent)}
-  .olive-divider .em{font-family:'Cormorant Garamond',serif;font-size:13px;font-style:italic;color:var(--ink-soft);letter-spacing:.04em;white-space:nowrap}
+  .section{margin-top:48px}
+  .section:first-of-type{margin-top:-48px;position:relative;z-index:3}
 
-  .tap-hint{
-    text-align:center;margin:18px 0 10px;font-family:'Cormorant Garamond',serif;
-    font-style:italic;font-size:13px;color:var(--ink-soft);
+  /* ─── Grade card ─── */
+  .grade{
+    background:var(--bg-card);
+    border-radius:var(--r-xl);
+    padding:32px 28px 28px;
+    box-shadow:var(--shadow-lg);
+    text-align:center;
+    border:1px solid var(--line);
   }
-  .tap-hint span{color:var(--gold);font-family:'Cinzel',serif;font-size:9px;letter-spacing:.36em;text-transform:uppercase;margin-right:6px;font-style:normal;font-weight:500}
+  .grade .label{
+    font-size:11px;font-weight:600;letter-spacing:.24em;
+    text-transform:uppercase;color:var(--gold);margin-bottom:18px;
+  }
+  .grade .num{
+    display:inline-flex;align-items:baseline;gap:6px;
+    font-family:var(--font-display);line-height:.9;color:var(--ink);
+    margin:6px 0 18px;
+  }
+  .grade .num .big{
+    font-size: clamp(96px, 24vw, 124px);
+    font-weight:300;letter-spacing:-.04em;
+    font-variation-settings: "opsz" 144, "wght" 300;
+  }
+  .grade .num .of{
+    font-size:30px;font-weight:400;color:var(--gold);
+    letter-spacing:-.01em;
+    font-variation-settings: "opsz" 36, "wght" 400;
+  }
+  .grade .blurb{
+    font-family:var(--font-display);font-style:italic;
+    font-size:17px;line-height:1.55;color:var(--ink-soft);
+    margin:0 auto;max-width:440px;
+    font-variation-settings: "opsz" 18, "wght" 400;
+  }
 
-  /* Day cards (collapsible) */
+  /* ─── Section heading ─── */
+  .section-h{
+    display:flex;align-items:baseline;justify-content:space-between;
+    margin-bottom:18px;padding:0 2px;
+  }
+  .section-h h2{
+    font-family:var(--font-display);font-weight:400;
+    font-size:28px;letter-spacing:-.01em;color:var(--ink);margin:0;
+    font-variation-settings: "opsz" 32, "wght" 400;
+  }
+  .section-h .h-meta{
+    font-size:11px;font-weight:500;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--ink-faint);
+  }
+
+  /* ─── Day cards ─── */
+  .days{display:flex;flex-direction:column;gap:12px}
   .day{
-    background:var(--cream);border:1px solid var(--line);border-radius:4px;
-    margin-bottom:10px;overflow:hidden;
-    box-shadow:0 1px 3px rgba(8,25,46,.04);
-    transition:box-shadow .25s, border-color .25s;
+    background:var(--bg-card);
+    border-radius:var(--r-lg);
+    box-shadow:var(--shadow-sm);
+    border:1px solid var(--line);
+    overflow:hidden;
+    transition: box-shadow .25s, transform .25s, border-color .25s;
   }
   .day.open{
-    box-shadow:0 6px 20px rgba(8,25,46,.08);
-    border-color:var(--gold-soft);
+    box-shadow:var(--shadow-md);
+    border-color:var(--line-strong);
   }
-  .day-row{
-    display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:14px;
-    padding:14px 18px;width:100%;background:transparent;border:none;
-    color:inherit;text-align:left;font:inherit;cursor:pointer;
-    -webkit-tap-highlight-color:transparent;transition:background .2s;
+  .day-trigger{
+    display:grid;
+    grid-template-columns: 1fr auto;
+    align-items:center;gap:18px;
+    width:100%;padding:18px 20px;
+    transition:background .2s;
   }
-  .day-row:hover{background:rgba(168,136,77,.06)}
-  .day.open .day-row{
-    background:linear-gradient(180deg, rgba(168,136,77,.12), rgba(168,136,77,.04));
+  .day-trigger:hover{background:rgba(15,17,21,.02)}
+  .day-trigger:active{background:rgba(15,17,21,.04)}
+  .day-info{min-width:0}
+  .day-day{
+    font-size:12px;font-weight:600;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--ink-faint);
+    display:flex;align-items:center;gap:8px;
+  }
+  .day-day .chip{
+    display:inline-flex;align-items:center;gap:4px;
+    padding:2px 8px;border-radius:var(--r-pill);
+    font-size:10px;font-weight:600;letter-spacing:.12em;
+    background:var(--bg-sand);color:var(--ink-2);
+  }
+  .day-day .chip.arr{background:rgba(94,184,127,.16);color:#2C7548}
+  .day-day .chip.dep{background:rgba(199,114,82,.16);color:#9A4D2E}
+  .day-date{
+    font-family:var(--font-display);font-size:30px;font-weight:400;
+    color:var(--ink);line-height:1.05;margin-top:2px;letter-spacing:-.01em;
+    font-variation-settings: "opsz" 36, "wght" 400;
+  }
+  .day-headline{
+    margin-top:5px;font-size:13.5px;color:var(--ink-soft);
+    line-height:1.4;
+  }
+  .day-headline .sep{color:var(--ink-faint);margin:0 6px}
+  .day-headline .score{color:var(--ink);font-weight:600}
+  .day-wx{
+    display:flex;flex-direction:column;align-items:flex-end;gap:2px;
+    flex:0 0 auto;text-align:right;
+  }
+  .day-wx-icon{font-size:30px;line-height:1}
+  .day-wx-temp{
+    font-family:var(--font-display);font-size:22px;font-weight:400;
+    color:var(--ink);letter-spacing:-.01em;white-space:nowrap;
+    font-variation-settings: "opsz" 24, "wght" 400;
+  }
+  .day-chev{
+    width:28px;height:28px;border-radius:50%;
+    background:var(--bg);color:var(--ink-2);
+    display:flex;align-items:center;justify-content:center;
+    margin-left:8px;
+    font-size:14px;font-weight:600;
+    transition: transform .3s cubic-bezier(.4,0,.2,1);
+  }
+  .day.open .day-chev{transform:rotate(90deg);background:var(--gold);color:#fff}
+
+  .day-body{
+    max-height:0;overflow:hidden;opacity:0;
+    transition: max-height .45s cubic-bezier(.4,0,.2,1), opacity .25s ease;
+  }
+  .day.open .day-body{
+    max-height:3000px;opacity:1;
+    transition: max-height .55s cubic-bezier(.4,0,.2,1), opacity .3s .1s ease;
+  }
+  .day-body-inner{padding:0 20px 22px}
+  .day-divider{
+    height:1px;background:var(--line);margin:0 20px 22px;
+  }
+
+  /* Bento metrics */
+  .bento{
+    display:grid;grid-template-columns: repeat(4, 1fr);gap:8px;
+    margin-bottom:22px;
+  }
+  .bento .cell{
+    background:var(--bg);border-radius:var(--r-md);
+    padding:14px 12px;text-align:center;
+    border:1px solid var(--line);
+  }
+  .bento .cell .l{
+    font-size:10px;font-weight:600;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--ink-faint);
+  }
+  .bento .cell .v{
+    font-family:var(--font-display);font-size:22px;font-weight:400;
+    color:var(--ink);line-height:1.1;margin-top:4px;letter-spacing:-.01em;
+    font-variation-settings: "opsz" 24, "wght" 400;
+  }
+  .bento .cell .s{font-size:10.5px;color:var(--ink-soft);margin-top:2px}
+  @media (max-width:420px){ .bento{grid-template-columns: repeat(2, 1fr)} }
+
+  .based-on{
+    font-size:12px;color:var(--ink-soft);margin:0 0 18px;
+  }
+  .based-on strong{color:var(--ink);font-weight:600}
+
+  /* Activities */
+  .acts-h{
+    font-size:11px;font-weight:600;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--ink-faint);margin-bottom:10px;
+  }
+  .act{
+    display:flex;gap:12px;padding:11px 0;align-items:flex-start;
     border-bottom:1px solid var(--line);
   }
-  .day-weekday{
-    font-family:'Cinzel',serif;font-size:10px;letter-spacing:.34em;
-    color:var(--gold);text-transform:uppercase;font-weight:500;
-  }
-  .day-title{
-    font-family:'Cormorant Garamond',serif;font-weight:500;
-    font-size:22px;color:var(--navy);line-height:1.1;margin-top:2px;
-  }
-  .day-phrase{
-    font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;
-    color:var(--ink-soft);margin-top:3px;line-height:1.35;
-  }
-  .day-phrase .sep{color:var(--gold);margin:0 5px}
-  .day-phrase .score{color:var(--navy);font-style:normal;font-weight:500}
-  .day-icon{font-size:26px;line-height:1}
-  .day-temps{
-    font-family:'Cormorant Garamond',serif;font-weight:500;font-size:19px;
-    color:var(--navy);line-height:1;white-space:nowrap;margin-top:2px;
-  }
-  .day-right{text-align:right;min-width:0}
-  .day-chev{
-    width:26px;height:26px;border-radius:50%;
-    background:rgba(168,136,77,.15);color:var(--gold);
-    display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:600;
-    transition:transform .35s cubic-bezier(.4,0,.2,1), background .25s;flex:0 0 auto;
-  }
-  .day.open .day-chev{transform:rotate(90deg);background:rgba(168,136,77,.3)}
-  .travel-chip{
-    display:inline-block;margin-top:4px;
-    font-family:'Cinzel',serif;font-size:8.5px;letter-spacing:.26em;
-    padding:2px 9px;border-radius:999px;
-    background:rgba(183,96,62,.15);color:var(--terracotta);
-    font-weight:500;text-transform:uppercase;
-    border:1px solid rgba(183,96,62,.3);
-  }
-  .travel-chip.arr{background:rgba(92,107,62,.14);color:var(--olive);border-color:rgba(92,107,62,.3)}
-
-  .day-details{
-    max-height:0;overflow:hidden;opacity:0;
-    transition:max-height .45s cubic-bezier(.4,0,.2,1), opacity .3s .05s ease;
-  }
-  .day.open .day-details{max-height:2600px;opacity:1;transition:max-height .55s cubic-bezier(.4,0,.2,1), opacity .25s ease}
-  .day-pad{padding:18px 20px 22px}
-
-  .metrics{
-    display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px;
-  }
-  .metric{
-    text-align:center;padding:10px 4px;
-    background:rgba(244,234,213,.5);border:1px solid var(--line);border-radius:3px;
-  }
-  .metric-label{
-    font-family:'Cinzel',serif;font-size:8px;letter-spacing:.26em;
-    color:var(--ink-soft);text-transform:uppercase;font-weight:500;
-  }
-  .metric-value{
-    font-family:'Cormorant Garamond',serif;font-weight:500;font-size:20px;
-    color:var(--navy);margin-top:2px;line-height:1.1;
-  }
-  .metric-sub{font-size:9.5px;color:var(--ink-soft)}
-
-  @media (max-width:420px){
-    .metrics{grid-template-columns:repeat(2,1fr)}
-    .logo{font-size:30px;letter-spacing:.24em}
-    .dates{font-size:20px}
-  }
-
-  .day-rating{
-    font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;
-    color:var(--ink-soft);margin:0 0 14px;
-  }
-  .day-rating strong{color:var(--navy);font-weight:600;font-style:normal}
-
-  .acts-label{
-    font-family:'Cinzel',serif;font-size:9.5px;letter-spacing:.36em;
-    color:var(--gold);text-transform:uppercase;font-weight:500;margin-bottom:8px;
-  }
-  .act{display:flex;gap:10px;padding:9px 0;align-items:flex-start;border-bottom:1px dashed var(--line)}
   .act:last-child{border-bottom:none}
   .act-ic{
-    flex:0 0 32px;height:32px;border-radius:50%;
-    background:rgba(8,25,46,.06);display:flex;align-items:center;justify-content:center;font-size:16px;
+    flex:0 0 36px;width:36px;height:36px;border-radius:10px;
+    background:var(--bg);
+    display:flex;align-items:center;justify-content:center;
+    font-size:18px;
   }
   .act-body{flex:1;min-width:0}
   .act-title{
-    font-family:'Cormorant Garamond',serif;font-weight:600;font-size:16px;
-    color:var(--navy);line-height:1.25;
+    font-size:15px;font-weight:600;color:var(--ink);
+    line-height:1.35;
   }
-  .act-desc{font-size:12.5px;color:var(--ink-soft);margin-top:2px;line-height:1.45}
-  .tag{
-    display:inline-block;font-family:'Cinzel',serif;font-size:7.5px;letter-spacing:.22em;
-    padding:1px 6px;background:rgba(168,136,77,.2);color:#7E6432;
-    border-radius:999px;text-transform:uppercase;font-weight:500;margin-right:4px;vertical-align:middle;
+  .act-title .tag{
+    display:inline-block;font-size:9.5px;font-weight:700;
+    letter-spacing:.16em;text-transform:uppercase;
+    padding:2px 7px;border-radius:var(--r-pill);
+    background:var(--bg-sand);color:var(--ink-2);
+    margin-right:8px;vertical-align:1px;
   }
-  .tag.eten{background:rgba(183,96,62,.18);color:#8E4528}
-  .tag.actief{background:rgba(92,107,62,.18);color:#3D4D22}
-  .tag.ontdek{background:rgba(8,25,46,.1);color:var(--navy)}
-  .tag.wellness{background:rgba(168,136,77,.18);color:#7E6432}
+  .act-title .tag.eten{background:rgba(199,114,82,.15);color:#9A4D2E}
+  .act-title .tag.actief{background:rgba(46,109,69,.15);color:#235236}
+  .act-title .tag.ontdek{background:rgba(27,88,120,.13);color:#10405A}
+  .act-title .tag.wellness{background:rgba(184,148,94,.18);color:#7E5F33}
+  .act-desc{
+    font-size:13.5px;color:var(--ink-soft);
+    margin-top:3px;line-height:1.5;
+  }
 
-  /* Spaanse rode accent op de crest */
-  .crest .crest-est em{color:var(--terracotta);font-style:normal}
-
-  /* Per-day photo (onder het diner) */
+  /* Per-day photo */
   .day-photo{
-    margin:18px -20px -22px;position:relative;
-    aspect-ratio:16/7;overflow:hidden;background:#08192E;
-    border-top:1px solid var(--line-gold);
+    margin:20px -20px -22px;position:relative;
+    aspect-ratio:16/9;overflow:hidden;
+    background:#0F1115;
   }
   .day-photo img{
-    width:100%;height:100%;object-fit:cover;display:block;
+    width:100%;height:100%;object-fit:cover;
     opacity:0;transition:opacity .5s;
   }
   .day-photo img.loaded{opacity:1}
   .day-photo figcaption{
-    position:absolute;left:0;right:0;bottom:0;padding:8px 14px;
-    background:linear-gradient(180deg, transparent, rgba(3,17,34,.88));
-    color:#F8F1DF;font-family:'Cinzel',serif;font-size:9.5px;letter-spacing:.32em;
-    text-transform:uppercase;font-weight:500;
+    position:absolute;left:0;right:0;bottom:0;padding:14px 18px;
+    background:linear-gradient(180deg, transparent, rgba(0,0,0,.7));
+    color:rgba(255,255,255,.95);
+    font-size:11px;font-weight:600;letter-spacing:.16em;
+    text-transform:uppercase;
   }
-  .day-photo figcaption em{color:var(--gold-light);font-style:normal;margin-left:6px;letter-spacing:.2em}
+  .day-photo figcaption em{
+    color:rgba(255,255,255,.7);font-style:normal;
+    margin-left:8px;font-weight:400;letter-spacing:.12em;
+  }
 
-  /* Gallery */
-  .gallery-head{text-align:center;margin:30px 0 16px}
-  .gallery-head .kicker{
-    font-family:'Cinzel',serif;font-size:9.5px;letter-spacing:.5em;
-    color:var(--gold);text-transform:uppercase;font-weight:500;
-  }
-  .gallery-head .title{
-    font-family:'Cormorant Garamond',serif;font-weight:500;font-style:italic;
-    font-size:22px;color:var(--navy);margin-top:4px;letter-spacing:.02em;
-  }
+  /* ─── Gallery ─── */
   .gallery{
-    display:grid;grid-template-columns:repeat(2, 1fr);gap:10px;
-    margin-bottom:24px;
+    display:grid;grid-template-columns: 1fr 1fr;gap:10px;
   }
   .gallery figure{
-    position:relative;margin:0;border-radius:3px;overflow:hidden;
-    aspect-ratio:4/3;box-shadow:0 6px 18px rgba(8,25,46,.18);background:#08192E;
+    margin:0;position:relative;overflow:hidden;
+    border-radius:var(--r-md);
+    box-shadow:var(--shadow-sm);
+    background:#0F1115;
   }
+  .gallery figure.wide{grid-column: span 2;aspect-ratio:16/7}
+  .gallery figure:not(.wide){aspect-ratio:1/1}
   .gallery figure img{
-    width:100%;height:100%;object-fit:cover;display:block;
-    opacity:0;transition:opacity .5s, transform .8s;
+    width:100%;height:100%;object-fit:cover;
+    opacity:0;transition:opacity .5s, transform 1.2s ease-out;
   }
   .gallery figure img.loaded{opacity:1}
-  .gallery figure:hover img{transform:scale(1.04)}
+  .gallery figure:hover img{transform:scale(1.05)}
   .gallery figure figcaption{
-    position:absolute;inset:auto 0 0 0;padding:7px 10px;
-    background:linear-gradient(180deg, transparent, rgba(3,17,34,.85));
-    color:#F8F1DF;font-family:'Cinzel',serif;font-size:9.5px;letter-spacing:.28em;
-    text-transform:uppercase;font-weight:500;text-align:center;
+    position:absolute;left:12px;bottom:10px;
+    color:rgba(255,255,255,.95);
+    font-size:10.5px;font-weight:600;letter-spacing:.18em;
+    text-transform:uppercase;
+    text-shadow:0 1px 4px rgba(0,0,0,.4);
   }
-  .gallery figure.wide{grid-column:span 2;aspect-ratio:16/7}
 
-  /* Footer */
+  /* ─── Footer ─── */
   .footer{
-    text-align:center;margin-top:32px;padding:18px 10px 0;border-top:1px solid var(--line);
-    font-size:11px;color:var(--ink-soft);line-height:1.7;
+    margin-top:56px;padding:32px 0 0;border-top:1px solid var(--line);
+    text-align:center;
   }
-  .footer .mark{font-family:'Cinzel',serif;font-size:11px;letter-spacing:.4em;color:var(--navy);text-transform:uppercase;font-weight:500;margin-bottom:6px}
-  .footer .src{font-size:10px;opacity:.75;margin-top:4px}
-  .footer-olive{width:70px;height:28px;display:block;margin:0 auto 10px;opacity:.75}
+  .footer-mark{
+    font-family:var(--font-display);font-weight:400;
+    font-size:18px;color:var(--ink);letter-spacing:-.005em;
+    font-variation-settings: "opsz" 20, "wght" 400;
+  }
+  .footer-tag{
+    font-family:var(--font-display);font-style:italic;
+    font-size:13.5px;color:var(--gold);margin-top:4px;
+  }
+  .footer-meta{
+    margin-top:14px;font-size:11px;color:var(--ink-faint);
+    letter-spacing:.04em;
+  }
+
+  /* Subtle fade-in on initial load */
+  .fade-in{
+    opacity:0;transform:translateY(8px);
+    animation: fadeIn .8s cubic-bezier(.2,.6,.2,1) forwards;
+  }
+  @keyframes fadeIn{to{opacity:1;transform:none}}
+  .section{animation: fadeIn .8s cubic-bezier(.2,.6,.2,1) backwards}
+  .section:nth-of-type(1){animation-delay:.05s}
+  .section:nth-of-type(2){animation-delay:.15s}
+  .section:nth-of-type(3){animation-delay:.25s}
 </style>
 </head>
 <body>
-<div class="wrap">
 
-  <header class="masthead">
-    <svg class="olive-deco left"  viewBox="0 0 100 100" aria-hidden="true">
-      <g fill="#5C6B3E">
-        <path d="M50 90 Q45 65 48 38 Q50 18 55 8" stroke="#5C6B3E" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-        <ellipse cx="42" cy="75" rx="6" ry="12" transform="rotate(-40 42 75)"/>
-        <ellipse cx="55" cy="62" rx="6" ry="12" transform="rotate(30 55 62)"/>
-        <ellipse cx="42" cy="50" rx="6" ry="12" transform="rotate(-40 42 50)"/>
-        <ellipse cx="56" cy="38" rx="6" ry="12" transform="rotate(30 56 38)"/>
-        <ellipse cx="44" cy="26" rx="5" ry="10" transform="rotate(-40 44 26)"/>
-        <ellipse cx="56" cy="16" rx="5" ry="10" transform="rotate(30 56 16)"/>
-      </g>
-    </svg>
-    <svg class="olive-deco right" viewBox="0 0 100 100" aria-hidden="true">
-      <g fill="#5C6B3E">
-        <path d="M50 90 Q45 65 48 38 Q50 18 55 8" stroke="#5C6B3E" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-        <ellipse cx="42" cy="75" rx="6" ry="12" transform="rotate(-40 42 75)"/>
-        <ellipse cx="55" cy="62" rx="6" ry="12" transform="rotate(30 55 62)"/>
-        <ellipse cx="42" cy="50" rx="6" ry="12" transform="rotate(-40 42 50)"/>
-        <ellipse cx="56" cy="38" rx="6" ry="12" transform="rotate(30 56 38)"/>
-        <ellipse cx="44" cy="26" rx="5" ry="10" transform="rotate(-40 44 26)"/>
-        <ellipse cx="56" cy="16" rx="5" ry="10" transform="rotate(30 56 16)"/>
-      </g>
-    </svg>
-
-    <div class="logo">IKOS PORTO PETRO</div>
-    <div class="resort">Mallorca</div>
-    <div class="loc">
-      Porto Petro · Mallorca · Illes Balears
-      <svg class="es-flag" viewBox="0 0 60 40" aria-label="España">
-        <rect class="stripe-r" width="60" height="10"/>
-        <rect class="stripe-y" y="10" width="60" height="20"/>
-        <rect class="stripe-r" y="30" width="60" height="10"/>
-      </svg>
-    </div>
-    <div class="dates">2 — 7 juni 2026</div>
-    <div class="crest">
-      <span class="crest-line"></span>
-      <span class="crest-name">Claire &amp; Michiel</span>
-      <span class="crest-est">· Mallorca · MMXXVI ·</span>
-      <span class="crest-line"></span>
-    </div>
-    <div class="status-row">
-      <span class="pill loading" id="statusPill"><span class="dot"></span>12 bronnen worden opgehaald…</span>
-      <span class="pill" id="freshPill">Bijgewerkt —</span>
-    </div>
-  </header>
-
-  <section class="grade">
-    <div class="grade-label">Vakantieweercijfer</div>
-    <div class="grade-number" id="gradeNumber"><span class="big">8,5</span><span class="of">/10</span></div>
-    <p class="grade-blurb" id="gradeBlurb">Een zonnige Mediterrane week op Mallorca’s zuidkust — lange dagen, zachte avonden, glinsterend turkoois water tussen twee baaien.</p>
-    <div class="grade-tagline">A Majestic Mallorcan Sanctuary</div>
-  </section>
-
-  <!-- Hero -->
-  <figure class="hero-img" style="margin-top:28px">
-    <img src="resort-hero.jpg"
-         alt="Ikos Porto Petro · luchtfoto"
-         loading="lazy"
+  <!-- ═══════════ HERO ═══════════ -->
+  <section class="hero">
+    <img class="hero-img"
+         src="resort-hero.jpg"
+         alt="Ikos Porto Petro"
          onload="this.classList.add('loaded')"
          onerror="this.style.display='none'">
-    <figcaption class="hero-caption">Ikos Porto Petro · tussen twee baaien</figcaption>
-  </figure>
 
-  <div class="olive-divider"><span class="em">seis días · tussen twee zandige baaien</span></div>
-  <p class="tap-hint"><span>Tik</span> op een dag voor details &amp; activiteiten</p>
-  <div id="days"></div>
+    <div class="hero-status">
+      <span class="live loading" id="statusPill">
+        <span class="dot"></span><span id="statusText">Live · 12 bronnen</span>
+      </span>
+      <span class="updated" id="freshText">Bijgewerkt —</span>
+    </div>
 
-  <!-- Gallery -->
-  <div class="gallery-head">
-    <div class="kicker">Het Domein</div>
-    <div class="title">het resort in beeld</div>
+    <div class="hero-content">
+      <div class="hero-kicker">
+        Ikos Porto Petro
+        <svg class="flag" viewBox="0 0 60 40" aria-label="España"><rect class="r" width="60" height="10"/><rect class="y" y="10" width="60" height="20"/><rect class="r" y="30" width="60" height="10"/></svg>
+        Mallorca
+      </div>
+      <h1 class="hero-title">Claire &amp; Michiel</h1>
+      <div class="hero-meta tabnum">
+        <span>2 — 7 juni 2026</span>
+        <span class="sep">·</span>
+        <span>Deluxe Suite</span>
+      </div>
+      <div class="hero-resort">Una semana entre dos bahías</div>
+    </div>
+  </section>
+
+  <div class="wrap">
+
+    <!-- ═══════════ GRADE ═══════════ -->
+    <section class="section">
+      <div class="grade">
+        <div class="label">Vakantieweercijfer</div>
+        <div class="num tabnum">
+          <span class="big" id="gradeBig">8,9</span><span class="of">/10</span>
+        </div>
+        <p class="blurb" id="gradeBlurb">Een zonnige Mediterrane week op Mallorca's zuidkust — lange dagen, zachte avonden, glinsterend turkoois water tussen twee baaien.</p>
+      </div>
+    </section>
+
+    <!-- ═══════════ DAYS ═══════════ -->
+    <section class="section">
+      <div class="section-h">
+        <h2>De week</h2>
+        <span class="h-meta">Tap voor details</span>
+      </div>
+      <div class="days" id="days"></div>
+    </section>
+
+    <!-- ═══════════ GALLERY ═══════════ -->
+    <section class="section">
+      <div class="section-h">
+        <h2>Het resort</h2>
+        <span class="h-meta">Porto Petro</span>
+      </div>
+      <div class="gallery">
+        <figure class="wide">
+          <img src="overview.jpg" loading="lazy" onload="this.classList.add('loaded')" onerror="this.closest('figure').style.display='none'" alt="Overview">
+          <figcaption>Overview</figcaption>
+        </figure>
+        <figure>
+          <img src="pool.jpg" loading="lazy" onload="this.classList.add('loaded')" onerror="this.closest('figure').style.display='none'" alt="Pool">
+          <figcaption>Deluxe Pool</figcaption>
+        </figure>
+        <figure>
+          <img src="beachclub-aerial.jpg" loading="lazy" onload="this.classList.add('loaded')" onerror="this.closest('figure').style.display='none'" alt="Beach Club">
+          <figcaption>Beach Club</figcaption>
+        </figure>
+        <figure>
+          <img src="suite.jpg" loading="lazy" onload="this.classList.add('loaded')" onerror="this.closest('figure').style.display='none'" alt="Suite">
+          <figcaption>One Bedroom Suite</figcaption>
+        </figure>
+        <figure>
+          <img src="villa.jpg" loading="lazy" onload="this.classList.add('loaded')" onerror="this.closest('figure').style.display='none'" alt="Villa">
+          <figcaption>Deluxe Villa</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ═══════════ FOOTER ═══════════ -->
+    <footer class="footer">
+      <div class="footer-mark">Ikos · Porto Petro</div>
+      <div class="footer-tag">Mediterráneo en estado puro</div>
+      <div class="footer-meta" id="srcLine">12 live weermodellen · ververst bij elke opening</div>
+    </footer>
+
   </div>
-  <div class="gallery">
-    <figure class="wide">
-      <img src="overview.jpg" loading="lazy" onload="this.classList.add('loaded')" onerror="this.closest('figure').style.display='none'" alt="Ikos Porto Petro overview">
-      <figcaption>Ikos Porto Petro · overview</figcaption>
-    </figure>
-    <figure>
-      <img src="pool.jpg" loading="lazy" onload="this.classList.add('loaded')" onerror="this.closest('figure').style.display='none'" alt="Deluxe Pool">
-      <figcaption>Deluxe Pool</figcaption>
-    </figure>
-    <figure>
-      <img src="beachclub-aerial.jpg" loading="lazy" onload="this.classList.add('loaded')" onerror="this.closest('figure').style.display='none'" alt="Beach Club Aerial">
-      <figcaption>Beach Club</figcaption>
-    </figure>
-    <figure>
-      <img src="suite.jpg" loading="lazy" onload="this.classList.add('loaded')" onerror="this.closest('figure').style.display='none'" alt="One Bedroom Suite">
-      <figcaption>One Bedroom Suite</figcaption>
-    </figure>
-    <figure>
-      <img src="villa.jpg" loading="lazy" onload="this.classList.add('loaded')" onerror="this.closest('figure').style.display='none'" alt="Deluxe Villa">
-      <figcaption>Deluxe Villa</figcaption>
-    </figure>
-  </div>
-
-  <footer class="footer">
-    <svg class="footer-olive" viewBox="0 0 140 56" aria-hidden="true">
-      <g fill="#A8884D" opacity=".9">
-        <path d="M10 28 Q40 18 68 28" stroke="#A8884D" stroke-width="1.2" fill="none" stroke-linecap="round"/>
-        <ellipse cx="22" cy="22" rx="5" ry="2.5" transform="rotate(-24 22 22)"/>
-        <ellipse cx="34" cy="18" rx="5" ry="2.5" transform="rotate(-18 34 18)"/>
-        <ellipse cx="46" cy="17" rx="5" ry="2.5" transform="rotate(-8 46 17)"/>
-        <ellipse cx="58" cy="20" rx="5" ry="2.5" transform="rotate(5 58 20)"/>
-        <path d="M72 28 Q100 18 130 28" stroke="#A8884D" stroke-width="1.2" fill="none" stroke-linecap="round"/>
-        <ellipse cx="84" cy="20" rx="5" ry="2.5" transform="rotate(-5 84 20)"/>
-        <ellipse cx="96" cy="17" rx="5" ry="2.5" transform="rotate(8 96 17)"/>
-        <ellipse cx="108" cy="18" rx="5" ry="2.5" transform="rotate(18 108 18)"/>
-        <ellipse cx="120" cy="22" rx="5" ry="2.5" transform="rotate(24 120 22)"/>
-        <circle cx="70" cy="28" r="3" fill="#5C6B3E"/>
-      </g>
-    </svg>
-    <div class="mark">Ikos · Porto Petro</div>
-    <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;margin-top:2px">5 zwembaden · 2 baaien · grenzend aan Mondragó natuurpark</div>
-    <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:12px;margin-top:2px;color:var(--terracotta)">Mediterráneo en estado puro</div>
-    <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:.44em;text-transform:uppercase;color:var(--gold);margin-top:8px;font-weight:500">Unconditional Luxury</div>
-    <div style="margin-top:14px">Voorspelling ververst bij elke opening</div>
-    <div class="src" id="srcLine">Samengesteld uit 12 onafhankelijke weermodellen</div>
-  </footer>
-
-</div>
 
 <script>
-/* Ikos Porto Petro · Mallorca · 2-7 juni 2026 · De Van Heusden Boys */
+/* Ikos Porto Petro · Claire & Michiel · 2-7 juni 2026
+   Modern editorial redesign — same data layer, new shell */
+
 const LAT=39.3404, LON=3.2127, TZ='Europe/Madrid';
-const START='2026-06-02', END='2026-06-07';
 const DAYS=['2026-06-02','2026-06-03','2026-06-04','2026-06-05','2026-06-06','2026-06-07'];
 const WEEKDAYS={'2026-06-02':'Dinsdag','2026-06-03':'Woensdag','2026-06-04':'Donderdag','2026-06-05':'Vrijdag','2026-06-06':'Zaterdag','2026-06-07':'Zondag'};
 const MONTHS_NL=['januari','februari','maart','april','mei','juni','juli','augustus','september','oktober','november','december'];
@@ -526,7 +538,7 @@ const OM = m =>
   `&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_probability_max,windspeed_10m_max,sunshine_duration,weathercode`+
   `&timezone=${encodeURIComponent(TZ)}&forecast_days=16&models=${m}`;
 
-/* 12 onafhankelijke voorspellingsbronnen */
+/* 12 onafhankelijke bronnen */
 const SOURCES = [
   { key:'ecmwf',  url: OM('ecmwf_ifs025') },
   { key:'aifs',   url: OM('ecmwf_aifs025_single') },
@@ -542,40 +554,35 @@ const SOURCES = [
   { key:'best',   url: OM('best_match') },
 ];
 
-/* Activiteiten · Claire & Michiel · una semana en Mallorca · Deluxe Suite
-   Aankomst di KL/LX 06:00 AMS → 08:25 Palma · transfer ~10:00
-   Vertrek  zo 7/6 transfer ±13:30 · Palma 16:00 → Amsterdam 18:35
-   Bevestigde diners: di Olivia · wo Seasons · do Anaya · vr Dinner on the Beach · za Beachclub
-   Couple's massage: wo 3 juni
-   Lokale rit + wijnproeverij: vr 5 juni */
+/* Activiteiten · Claire & Michiel · Deluxe Suite */
 const ACTIVITIES = {
-  '2026-06-02':{ theme:'Llegada · Deluxe Suite · primera noche', photo:'suite.jpg', photoCaption:'Deluxe Suite · jullie thuis voor de week', arrival:true, items:[
+  '2026-06-02':{ theme:'Llegada · Deluxe Suite · primera noche', photo:'suite.jpg', photoCaption:'Deluxe Suite', arrival:true, items:[
     {tag:'ontdek', icon:'✈️', title:'06:00 vertrek AMS · 08:25 landing Palma',
      desc:'Transfer wacht bij de gate. ±1 uur over de zuidkust van Mallorca. Bij het resort rond 10:00 — sleutels van jullie Deluxe Suite klaarliggen, koffers ernaartoe.'},
     {tag:'wellness', icon:'🛎', title:'Check-in · Deluxe Suite met zeezicht',
-     desc:'Walk-in regendouche, koningskingbed, privé-terras dat uitkijkt op de baai. Welkomst-fles Mallorquí cava ligt al klaar. Even adem halen, ramen open, zout in de neus.'},
+     desc:'Walk-in regendouche, king-size bed, privé-terras dat uitkijkt op de baai. Welkomst-fles Mallorquí cava ligt al klaar. Even adem halen, ramen open, zout in de neus.'},
     {tag:'actief', icon:'🏊', title:'Primer chapuzón · adults-only infinity pool',
      desc:'Sportief openen: vijftig baantjes voor Michiel, Claire kiest de ligbedden onder de palmen. Koel water, lege baan, Mediterrane zon.'},
-    {tag:'eten', icon:'🥗', title:'Late lunch bij The Market',
+    {tag:'eten', icon:'🥗', title:'Late lunch · The Market',
      desc:'À la minute keuken, 100 wijnen open per glas. Begin licht: gazpacho andaluz, pa amb oli, ibérico de bellota, een glas Albariño voor Claire, Manto Negro voor Michiel.'},
     {tag:'eten', icon:'🫒', title:'Diner · Olivia (Grieks-Mediterraan)',
      desc:'Gereserveerd. Eerste avond samen onder de sterren. Gegrilde octopus met fava, lams-souvlaki, geitenkaas-spanakopita. Vraag de tafel met zeezicht; sommelier raadt Assyrtiko of Mallorquí Callet aan.'}
   ]},
-  '2026-06-03':{ theme:'Watersport · spa para dos · Seasons', photo:'seasons.jpg', photoCaption:'Seasons · mediterraan met Aziatische accenten', items:[
+  '2026-06-03':{ theme:'Watersport · spa para dos · Seasons', photo:'seasons.jpg', photoCaption:'Seasons', items:[
     {tag:'actief', icon:'🏄', title:'Ochtend: SUP-tocht voor twee',
      desc:'Twee zandige baaien, glas water in de ochtend. Resort verhuurt tandem-SUP\'s, kajaks en snorkel-gear — allemaal inbegrepen. Sportieve openingstoer, samen naar de overkant en terug.'},
     {tag:'actief', icon:'🎾', title:'Padel: hij vs zij · best of three',
      desc:'Verlichte padel-banen, boek 90 min via de conciërge-app. Verliezer trakteert op de cocktail van vanavond. Tegenstander niet onderschatten.'},
     {tag:'eten', icon:'🥂', title:'Lunch poolside · cava & ceviche',
      desc:'Pool Bar (10:00-19:00): ceviche van dorade, ensaladilla rusa, gegrilde gambas, een fles cava op ijs. Schaduw onder de witte parasols.'},
-    {tag:'wellness', icon:'💆', title:'Couple\'s massage · Ikos Spa by Anne Semonin Paris',
+    {tag:'wellness', icon:'💆', title:'Couple\'s massage · Anne Semonin Paris',
      desc:'Geboekt. Side-by-side behandeling, vier handen op twee ruggen. Sauna + steam + koude dompel als bonus. Klassiek moment van sobremesa daarna.'},
     {tag:'eten', icon:'👑', title:'Diner · Seasons (signature)',
      desc:'Gereserveerd. Mediterrane keuken met subtiele Aziatische accenten, al fresco, zeezicht. Michelin-gecureerd menu — wagyu tataki, miso-aubergine, dorade in zoutkorst. Dress code iets netter.'},
     {tag:'eten', icon:'☕', title:'Nightcap · Espresso Martini bij Lobby Bar',
      desc:'Lobby Bar (tot middernacht): de signature Espresso Martini — Mallorcan brandy, espresso, een snufje vanille. Voor Claire een twist met cava-foam. Onder de gouden lampen.'}
   ]},
-  '2026-06-04':{ theme:'Boot naar Mondragó · Anaya', photo:'anaya.jpg', photoCaption:'Anaya · verfijnd Pan-Aziatisch', items:[
+  '2026-06-04':{ theme:'Boot naar Mondragó · Anaya', photo:'anaya.jpg', photoCaption:'Anaya', items:[
     {tag:'actief', icon:'⛵', title:'Sloep huren · ochtendvaart Cala Mondragó',
      desc:'Half-day sloep vanuit de marina (5 min lopen). Mondragó natuurpark ligt om de hoek — anker in turkoois water, snorkel aan, ±6 m zicht. Voor twee, geen kapitein nodig.'},
     {tag:'ontdek', icon:'🤿', title:'Cala s\'Amarador · pure natuur',
@@ -595,9 +602,9 @@ const ACTIVITIES = {
     {tag:'wellness', icon:'🌅', title:'Atardecer bij Cap de Ses Salines',
      desc:'Zuidelijkste punt van Mallorca, ±20 min rijden. Vuurtoren uit 1863, klippen, lege horizon richting Cabrera. Pak de copita-flask mee, geen woorden nodig.'},
     {tag:'eten', icon:'🔥', title:'Dinner on the Beach · privé op het zand',
-     desc:'Gereserveerd. Privétafel op het strand, fakkels, kaarslicht, sterren, eigen kok. Het hoogtepunt van de week — alleen voor jullie twee. Een Espresso Martini als slot bij de fakkels.'}
+     desc:'Gereserveerd. Privétafel op het strand, fakkels, kaarslicht, sterren, eigen kok. Hét hoogtepunt van de week — alleen voor jullie twee. Een Espresso Martini als slot bij de fakkels.'}
   ]},
-  '2026-06-06':{ theme:'Sol y mar · Beachclub', photo:'beachclub.jpg', photoCaption:'Beach Club · sol y mar', items:[
+  '2026-06-06':{ theme:'Sol y mar · Beachclub', photo:'beachclub.jpg', photoCaption:'Beach Club', items:[
     {tag:'actief', icon:'⛵', title:'Catamaran-les in de baai',
      desc:'Watersportcentrum geeft een instructie of laat je los met de Hobie. Open water tussen de twee baaien — kalme ochtendbries, perfecte juni-condities. Roeien-trekken-laveren.'},
     {tag:'actief', icon:'🚴', title:'Optie: e-bike rondje Mondragó natuurpark',
@@ -622,7 +629,8 @@ const ACTIVITIES = {
 };
 
 const statusPill=document.getElementById('statusPill');
-const freshPill=document.getElementById('freshPill');
+const statusText=document.getElementById('statusText');
+const freshText=document.getElementById('freshText');
 const daysEl=document.getElementById('days');
 
 const mean=a=>a.length?a.reduce((x,y)=>x+y,0)/a.length:null;
@@ -655,21 +663,21 @@ function aggregate(results){
 }
 
 function wxIcon(wc, p){
-  if(wc==null){ return p>4?['⛈','Natte periode']: p>0.5?['🌦','Overtrekkende buien']:['☀︎','Zonneschijn']; }
-  if(wc===0)  return ['☀︎','Helder & zonnig'];
+  if(wc==null){ return p>4?['⛈','Natte periode']: p>0.5?['🌦','Overtrekkende buien']:['☀','Zonneschijn']; }
+  if(wc===0)  return ['☀','Helder & zonnig'];
   if(wc<=2)   return ['🌤','Overwegend zonnig'];
-  if(wc===3)  return ['⛅︎','Half bewolkt'];
+  if(wc===3)  return ['⛅','Half bewolkt'];
   if(wc<=48)  return ['🌫','Mistige start'];
   if(wc<=57)  return ['🌦','Lichte motregen'];
   if(wc<=67)  return ['🌧','Regenbuien'];
-  if(wc<=77)  return ['❄︎','Sneeuw (zelden)'];
+  if(wc<=77)  return ['❄','Sneeuw (zelden)'];
   if(wc<=82)  return ['🌦','Buien'];
   if(wc<=99)  return ['⛈','Mogelijk onweer'];
-  return ['⛅︎','Gemengde lucht'];
+  return ['⛅','Gemengde lucht'];
 }
 
 function dayScore(a){
-  // Echte voorspelling met een klein vleugje vakantie-optimisme ✨
+  /* Echte voorspelling met klein vleugje vakantie-optimisme */
   const p=mean(a.p)??0, w=mean(a.w)??0, hi=mean(a.hi);
   let s=10;
   if(p>8) s-=3; else if(p>3) s-=2; else if(p>0.5) s-=1;
@@ -681,7 +689,6 @@ function dayScore(a){
 }
 
 function overallScore(agg){
-  // Aankomst di 10:00 & vertrek zo 13:30 → eerste en laatste dag tellen half mee
   const weights = {'2026-06-02':0.7, '2026-06-03':1, '2026-06-04':1, '2026-06-05':1, '2026-06-06':1, '2026-06-07':0.5};
   let sum=0, tot=0;
   for(const d of DAYS){
@@ -693,13 +700,12 @@ function overallScore(agg){
 function blurbFor(score, agg){
   const p   = DAYS.map(d=>mean(agg[d].p)??0);
   const sun = DAYS.map(d=>(mean(agg[d].sun)??0)/3600);
-  const hi  = DAYS.map(d=>mean(agg[d].hi)??0);
   const wettest = p.indexOf(Math.max(...p));
   const sunniest = sun.indexOf(Math.max(...sun));
   const labels = ['dinsdag','woensdag','donderdag','vrijdag','zaterdag','zondag'];
   const wetMm = p[wettest];
 
-  if(score>=8.7) return 'Een zonnige mediterrane week op Mallorca\'s zuidkust — lange dagen, koele avonden, glinsterend turkoois water tussen Mondragó en Porto Petro.';
+  if(score>=8.7) return 'Een zonnige Mediterrane week op Mallorca\'s zuidkust — lange dagen, zachte avonden, glinsterend turkoois water tussen twee baaien.';
   if(score>=8.0) return `Overwegend zacht en zonnig tussen de twee baaien. Op ${labels[wettest]} kan het wat miezeren — ideaal moment voor de spa of een lange lunch bij The Market.`;
   if(score>=7.0) return `Wisselvallig maar charmant — ~${wetMm.toFixed(1).replace('.',',')} mm op de ${labels[wettest]}, maar ${labels[sunniest]} pakt de mooiste zon. Polo én windjack mee.`;
   if(score>=6.0) return 'Wisselvallige week met eigen charme — boottocht naar Mondragó, lekker eten en het volle spa-programma.';
@@ -708,7 +714,7 @@ function blurbFor(score, agg){
 
 function renderDay(d, agg){
   const a=agg[d];
-  // +1°C vakantie-warmte ✨
+  /* +1°C warm spell */
   const WARM = 1;
   const hi = mean(a.hi)!=null ? mean(a.hi)+WARM : null;
   const lo = mean(a.lo)!=null ? mean(a.lo)+WARM : null;
@@ -721,48 +727,53 @@ function renderDay(d, agg){
   const weekday=WEEKDAYS[d];
   const temps=(hi!=null && lo!=null)? `${Math.round(hi)}° / ${Math.round(lo)}°` : '—';
   const score=dayScore(a);
-  const headline = act?.theme ? `${phrase}<span class="sep">·</span>${act.theme}` : phrase;
-  const travelChip = act?.arrival ? '<div class="travel-chip arr">✈ Aankomst 10:00</div>'
-                  : act?.departure ? '<div class="travel-chip">Vertrek ±13:30 ✈</div>' : '';
-
-  // Filter out empty placeholder items
-  const items = (act?.items||[]).filter(it => it.title);
+  const headline = act?.theme || phrase;
+  const travelChip = act?.arrival ? '<span class="chip arr">Aankomst 10:00</span>'
+                  : act?.departure ? '<span class="chip dep">Vertrek 13:30</span>' : '';
 
   return `
   <article class="day" data-date="${d}">
-    <div class="day-row" role="button" tabindex="0" aria-expanded="false">
-      <div>
-        <div class="day-weekday">${weekday}</div>
-        <div class="day-title">${dd}</div>
-        ${travelChip}
-        <div class="day-phrase">${headline}<span class="sep">·</span><span class="score">${fmtNL(score,1)}/10</span></div>
-      </div>
-      <div class="day-right">
-        <div class="day-icon">${ic}</div>
-        <div class="day-temps">${temps}</div>
-      </div>
-      <div class="day-chev">›</div>
-    </div>
-    <div class="day-details">
-      <div class="day-pad">
-        <div class="metrics">
-          <div class="metric"><div class="metric-label">Hoog / Laag</div><div class="metric-value">${temps}</div><div class="metric-sub">°Celsius</div></div>
-          <div class="metric"><div class="metric-label">Regen</div><div class="metric-value">${fmtNL(p,1)}</div><div class="metric-sub">mm · ${Math.round(pp)}% kans</div></div>
-          <div class="metric"><div class="metric-label">Wind</div><div class="metric-value">${Math.round(w)}</div><div class="metric-sub">km/u max</div></div>
-          <div class="metric"><div class="metric-label">Zee</div><div class="metric-value">~21°</div><div class="metric-sub">aangenaam, zwembaar</div></div>
+    <button class="day-trigger" type="button" aria-expanded="false">
+      <div class="day-info">
+        <div class="day-day">
+          <span>${weekday}</span>
+          ${travelChip}
         </div>
-        <p class="day-rating">${a.n>0 ? `Op basis van ${a.n} modellen · dagcijfer <strong>${fmtNL(score,1)}/10</strong>` : `Voorspelling nog buiten model-bereik — komt dichter bij de reisdatum binnen`}${act?.arrival?' · halve aankomstdag':act?.departure?' · halve vertrekdag':''}</p>
-        ${items.length ? `
-        <div class="acts-label">✦ Aanraders voor vandaag</div>
-        ${items.map(it=>`
-          <div class="act">
-            <div class="act-ic">${it.icon}</div>
-            <div class="act-body">
-              <div class="act-title"><span class="tag ${it.tag}">${it.tag}</span>${it.title}</div>
-              <div class="act-desc">${it.desc}</div>
-            </div>
-          </div>`).join('')}
+        <div class="day-date">${dd}</div>
+        <div class="day-headline">${headline}<span class="sep">·</span>${phrase}<span class="sep">·</span><span class="score">${fmtNL(score,1)}</span></div>
+      </div>
+      <div style="display:flex;align-items:center">
+        <div class="day-wx">
+          <div class="day-wx-icon">${ic}</div>
+          <div class="day-wx-temp tabnum">${temps}</div>
+        </div>
+        <div class="day-chev">›</div>
+      </div>
+    </button>
+
+    <div class="day-body">
+      <div class="day-divider"></div>
+      <div class="day-body-inner">
+        <div class="bento">
+          <div class="cell"><div class="l">Hi / Lo</div><div class="v tabnum">${temps}</div><div class="s">°C</div></div>
+          <div class="cell"><div class="l">Regen</div><div class="v tabnum">${fmtNL(p,1)}</div><div class="s">mm · ${Math.round(pp)}%</div></div>
+          <div class="cell"><div class="l">Wind</div><div class="v tabnum">${Math.round(w)}</div><div class="s">km/u</div></div>
+          <div class="cell"><div class="l">Zee</div><div class="v">~21°</div><div class="s">aangenaam</div></div>
+        </div>
+        <p class="based-on">${a.n>0 ? `Op basis van <strong>${a.n}</strong> modellen · dagcijfer <strong>${fmtNL(score,1)}/10</strong>` : `Voorspelling nog buiten model-bereik — vult naar trip toe`}${act?.arrival?' · halve aankomstdag':act?.departure?' · halve vertrekdag':''}</p>
+
+        ${act?.items?.length ? `
+          <div class="acts-h">Aanraders voor vandaag</div>
+          ${act.items.map(it=>`
+            <div class="act">
+              <div class="act-ic">${it.icon}</div>
+              <div class="act-body">
+                <div class="act-title"><span class="tag ${it.tag}">${it.tag}</span>${it.title}</div>
+                <div class="act-desc">${it.desc}</div>
+              </div>
+            </div>`).join('')}
         ` : ''}
+
         ${act?.photo ? `<figure class="day-photo">
           <img src="${act.photo}" alt="${act.photoCaption||''}" loading="lazy" onload="this.classList.add('loaded')" onerror="this.closest('figure').style.display='none'">
           <figcaption>${act.photoCaption||''} <em>· Ikos Porto Petro</em></figcaption>
@@ -775,34 +786,30 @@ function renderDay(d, agg){
 /* Open dagen bewaren over live-refreshes heen */
 const openDays=new Set();
 daysEl.addEventListener('click', e=>{
-  const row=e.target.closest('.day-row'); if(!row) return;
-  const day=row.closest('.day'); const dt=day.dataset.date;
+  const trig=e.target.closest('.day-trigger'); if(!trig) return;
+  const day=trig.closest('.day'); const dt=day.dataset.date;
   const open=day.classList.toggle('open');
-  row.setAttribute('aria-expanded', open?'true':'false');
+  trig.setAttribute('aria-expanded', open?'true':'false');
   if(open) openDays.add(dt); else openDays.delete(dt);
-});
-daysEl.addEventListener('keydown', e=>{
-  if(e.key!=='Enter' && e.key!==' ') return;
-  const row=e.target.closest?.('.day-row'); if(!row) return;
-  e.preventDefault(); row.click();
 });
 function applyOpen(){
   daysEl.querySelectorAll('.day').forEach(d=>{
     if(openDays.has(d.dataset.date)){
       d.classList.add('open');
-      d.querySelector('.day-row')?.setAttribute('aria-expanded','true');
+      d.querySelector('.day-trigger')?.setAttribute('aria-expanded','true');
     }
   });
 }
 
 function setFresh(){
   const n=new Date();
-  freshPill.textContent='Bijgewerkt ' + n.toLocaleTimeString('nl-NL',{hour:'2-digit',minute:'2-digit'}) + ' · ' + n.toLocaleDateString('nl-NL',{day:'numeric',month:'short'});
+  freshText.textContent='Bijgewerkt ' + n.toLocaleTimeString('nl-NL',{hour:'2-digit',minute:'2-digit'});
 }
 
 async function run(){
-  statusPill.className='pill loading';
-  statusPill.innerHTML='<span class="dot"></span>12 bronnen worden opgehaald…';
+  statusPill.classList.add('loading');
+  statusText.textContent='12 bronnen…';
+
   const results=await fetchAll();
   const ok=results.filter(r=>r.ok).length;
   const agg=aggregate(results);
@@ -811,12 +818,12 @@ async function run(){
   applyOpen();
 
   const score=overallScore(agg);
-  document.getElementById('gradeNumber').innerHTML=`<span class="big">${fmtNL(score,1)}</span><span class="of">/10</span>`;
+  document.getElementById('gradeBig').textContent=fmtNL(score,1);
   document.getElementById('gradeBlurb').textContent=blurbFor(score, agg);
-  document.getElementById('srcLine').textContent=`Samengesteld uit ${ok} van de 12 onafhankelijke weermodellen`;
+  document.getElementById('srcLine').textContent=`${ok} live weermodellen · ververst bij elke opening`;
 
-  statusPill.className='pill live';
-  statusPill.innerHTML='<span class="dot"></span>Live · ' + ok + '/12 bronnen';
+  statusPill.classList.remove('loading');
+  statusText.textContent='Live · ' + ok + ' bronnen';
   setFresh();
 }
 
