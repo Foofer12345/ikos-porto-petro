@@ -423,26 +423,80 @@
   }
   .day-body-inner{padding:28px 22px 32px}
 
-  /* Bento metrics — modern */
-  .bento{
-    display:grid;grid-template-columns: repeat(4, 1fr);gap:10px;
-    margin-bottom:24px;
+  /* Weather feature panel */
+  .wx-feature{
+    display:grid;grid-template-columns: 1fr 1fr;gap:12px;
+    margin-bottom:12px;
   }
-  .bento .cell{
+  .wx-feature .panel{
     background:var(--bg-dim);border-radius:var(--r-md);
-    padding:14px 10px;text-align:center;
+    padding:18px 16px;
   }
-  .bento .cell .l{
+  .wx-feature .panel.temp{
+    display:flex;align-items:center;gap:12px;
+  }
+  .wx-feature .wx-big-icon{font-size:38px;line-height:1;flex:0 0 auto}
+  .wx-feature .temp-val{
+    font-family:var(--font-display);font-size:42px;font-weight:300;
+    color:var(--ink);line-height:.9;letter-spacing:-.03em;
+    font-variation-settings: "opsz" 48, "wght" 300;
+  }
+  .wx-feature .temp-label{
+    font-size:11px;font-weight:600;color:var(--ink-soft);
+    margin-top:4px;line-height:1.3;
+  }
+  .wx-feature .panel.sun{
+    background:linear-gradient(140deg, #FBEFCF 0%, #F4DFAA 100%);
+    position:relative;overflow:hidden;
+  }
+  .wx-feature .panel.sun::after{
+    content:"";position:absolute;top:-20px;right:-20px;
+    width:80px;height:80px;border-radius:50%;
+    background:radial-gradient(circle, rgba(255,210,120,.9), transparent 70%);
+  }
+  .wx-feature .sun-label{
     font-size:9.5px;font-weight:700;letter-spacing:.18em;
+    text-transform:uppercase;color:#A37C2E;position:relative;
+  }
+  .wx-feature .sun-val{
+    font-family:var(--font-display);font-size:34px;font-weight:300;
+    color:#6B4E15;line-height:1;margin-top:6px;letter-spacing:-.02em;
+    position:relative;
+    font-variation-settings: "opsz" 40, "wght" 300;
+  }
+  .wx-feature .sun-val span{font-size:14px;font-weight:500;font-family:var(--font-sans)}
+  .wx-feature .sun-bar{
+    margin-top:10px;height:5px;border-radius:3px;
+    background:rgba(107,78,21,.16);overflow:hidden;position:relative;
+  }
+  .wx-feature .sun-bar i{
+    display:block;height:100%;border-radius:3px;
+    background:linear-gradient(90deg, #E8A93C, #F6C95A);
+    width:0;transition:width 1s cubic-bezier(.3,.7,.3,1);
+  }
+
+  /* Compact stat row */
+  .wx-stats{
+    display:grid;grid-template-columns: repeat(4, 1fr);gap:8px;
+    margin-bottom:22px;
+  }
+  .wx-stats .stat{
+    background:var(--bg-dim);border-radius:var(--r-sm);
+    padding:11px 6px;text-align:center;
+  }
+  .wx-stats .stat .stat-l{
+    display:block;font-size:9px;font-weight:700;letter-spacing:.14em;
     text-transform:uppercase;color:var(--ink-faint);
   }
-  .bento .cell .v{
-    font-family:var(--font-display);font-size:24px;font-weight:300;
-    color:var(--ink);line-height:1.05;margin-top:4px;letter-spacing:-.02em;
-    font-variation-settings: "opsz" 28, "wght" 300;
+  .wx-stats .stat .stat-v{
+    display:block;font-family:var(--font-display);font-size:19px;font-weight:400;
+    color:var(--ink);margin-top:3px;letter-spacing:-.01em;
+    font-variation-settings: "opsz" 20, "wght" 400;
   }
-  .bento .cell .s{font-size:10px;color:var(--ink-soft);margin-top:2px;font-weight:500}
-  @media (max-width:420px){ .bento{grid-template-columns: repeat(2, 1fr)} }
+  @media (max-width:430px){
+    .wx-feature{grid-template-columns:1fr}
+    .wx-stats{grid-template-columns: repeat(2, 1fr)}
+  }
 
   .based-on{
     font-size:12.5px;color:var(--ink-soft);margin:0 0 24px;line-height:1.5;
@@ -524,22 +578,31 @@
     margin-top:24px;font-size:11px;font-weight:600;letter-spacing:.24em;
     text-transform:uppercase;color:var(--light-faint);
   }
-  .intermezzo-sun{
-    margin-top:36px;
-    display:inline-flex;align-items:center;gap:24px;
-    padding:14px 24px;border-radius:var(--r-pill);
-    background:rgba(255,255,255,.06);
-    border:1px solid rgba(255,255,255,.12);
-    color:var(--light-2);
+  /* Sun-arc — the sun's daily path */
+  .sun-arc-wrap{
+    margin:40px auto 0;max-width:380px;
   }
-  .intermezzo-sun .item{font-size:11px;font-weight:600;letter-spacing:.16em;text-transform:uppercase}
-  .intermezzo-sun .item strong{
-    color:var(--gold-light);font-family:var(--font-display);
-    font-style:italic;font-weight:400;font-size:14px;letter-spacing:0;
-    text-transform:none;display:block;margin-top:2px;
-    font-variation-settings: "opsz" 14, "wght" 400;
+  .sun-arc{width:100%;height:auto;display:block;overflow:visible}
+  .sun-arc .sun-dot{
+    filter: drop-shadow(0 0 12px rgba(235,210,160,.9));
   }
-  .intermezzo-sun .pip{width:1px;height:24px;background:rgba(255,255,255,.18)}
+  .sun-times{
+    display:flex;justify-content:space-between;align-items:flex-start;
+    margin-top:6px;padding:0 6px;
+  }
+  .sun-times .st{
+    text-align:center;
+  }
+  .sun-times .st .st-l{
+    font-size:9px;font-weight:700;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--light-faint);
+  }
+  .sun-times .st .st-v{
+    font-family:var(--font-display);font-style:italic;
+    font-size:17px;color:var(--gold-light);margin-top:2px;
+    font-variation-settings: "opsz" 18, "wght" 400;
+  }
+  .sun-times .st.center .st-v{color:var(--light)}
 
   /* ═══════════════════════════════
      GALLERY — Editorial grid
@@ -626,6 +689,60 @@
   /* fade-in on scroll */
   .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.2,.6,.2,1), transform .8s cubic-bezier(.2,.6,.2,1)}
   .reveal.in{opacity:1;transform:none}
+
+  /* Day cover sunshine + best-day badge */
+  .day-wx-sun{
+    margin-top:5px;font-size:10.5px;font-weight:600;letter-spacing:.04em;
+    color:var(--gold-light);display:flex;align-items:center;gap:4px;
+    justify-content:flex-end;
+  }
+  .day-badge{
+    position:absolute;top:0;left:0;z-index:3;
+    display:inline-flex;align-items:center;gap:6px;
+    padding:7px 13px 7px 11px;
+    background:linear-gradient(135deg, #E8A93C, #C39653);
+    color:#fff;border-bottom-right-radius:var(--r-md);
+    font-size:9.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+    box-shadow:0 4px 14px rgba(195,150,83,.4);
+  }
+
+  /* Loading shimmer skeleton */
+  .skeleton{
+    border-radius:var(--r-lg);overflow:hidden;
+    background:var(--bg-card);border:1px solid rgba(0,0,0,.04);
+    box-shadow:var(--shadow-card);
+  }
+  .skeleton .sk-cover{
+    aspect-ratio:16/10;
+    background:linear-gradient(100deg, var(--bg-dim) 30%, #F7F1E0 50%, var(--bg-dim) 70%);
+    background-size:200% 100%;
+    animation:shimmer 1.4s linear infinite;
+  }
+  @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+  /* ─── Responsive polish ─── */
+  @media (max-width:560px){
+    .wrap{padding:0 16px}
+    .grade-section{padding:0 16px}
+    .intermezzo,.footer{margin-left:-16px;margin-right:-16px}
+    .section-h h2{font-size:32px}
+    .grade-section .grade{padding:40px 22px 32px}
+  }
+  @media (max-width:380px){
+    .hero-content{padding:0 18px 52px}
+    .hero-meta{font-size:11px;gap:8px}
+    .day-cover-content{padding:16px 16px}
+    .day-name{font-size:34px}
+    .day-body-inner{padding:24px 16px 28px}
+    .grade .number .big{font-size:108px}
+    .intermezzo{padding:64px 20px}
+    .intermezzo-quote{font-size:26px}
+  }
+  /* Respect reduced motion */
+  @media (prefers-reduced-motion:reduce){
+    *{animation-duration:.01ms!important;transition-duration:.01ms!important}
+    .hero-img{transition:opacity .3s!important}
+  }
 </style>
 </head>
 <body>
@@ -704,7 +821,11 @@
       </div>
       <div class="h-right">6 dagen · tap voor details</div>
     </div>
-    <div class="days" id="days"></div>
+    <div class="days" id="days">
+      <div class="skeleton"><div class="sk-cover"></div></div>
+      <div class="skeleton"><div class="sk-cover"></div></div>
+      <div class="skeleton"><div class="sk-cover"></div></div>
+    </div>
   </section>
 
 </div>
@@ -715,12 +836,30 @@
     <div class="intermezzo-eyebrow">Mediterráneo</div>
     <p class="intermezzo-quote">"Onder de pijnbomen, tussen twee baaien — <em>seis días, dos personas, sin prisa.</em>"</p>
     <div class="intermezzo-attribution">— de week samengevat</div>
-    <div class="intermezzo-sun" id="sunInfo">
-      <div class="item">Zon op<strong id="sunrise">06:24</strong></div>
-      <div class="pip"></div>
-      <div class="item">Zon onder<strong id="sunset">21:14</strong></div>
-      <div class="pip"></div>
-      <div class="item">Daglicht<strong id="daylight">14h 50m</strong></div>
+    <div class="sun-arc-wrap">
+      <svg class="sun-arc" viewBox="0 0 340 130" id="sunArc" aria-hidden="true">
+        <defs>
+          <linearGradient id="arcGrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#C39653" stop-opacity=".25"/>
+            <stop offset=".5" stop-color="#EBD2A0" stop-opacity="1"/>
+            <stop offset="1" stop-color="#C39653" stop-opacity=".25"/>
+          </linearGradient>
+          <radialGradient id="sunGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0" stop-color="#FFF1CE"/>
+            <stop offset="1" stop-color="#EBD2A0"/>
+          </radialGradient>
+        </defs>
+        <line x1="22" y1="104" x2="318" y2="104" stroke="rgba(255,255,255,.16)" stroke-width="1" stroke-dasharray="2 5"/>
+        <path id="arcPath" d="M22,104 Q170,-26 318,104" fill="none" stroke="url(#arcGrad)" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="22" cy="104" r="3.5" fill="#C39653"/>
+        <circle cx="318" cy="104" r="3.5" fill="#C39653"/>
+        <circle id="sunDot" class="sun-dot" cx="170" cy="39" r="13" fill="url(#sunGlow)"/>
+      </svg>
+      <div class="sun-times">
+        <div class="st"><div class="st-l">Zon op</div><div class="st-v" id="sunrise">06:20</div></div>
+        <div class="st center"><div class="st-l">Daglicht</div><div class="st-v" id="daylight">14u 50m</div></div>
+        <div class="st"><div class="st-l">Zon onder</div><div class="st-v" id="sunset">21:10</div></div>
+      </div>
     </div>
   </div>
 </section>
@@ -950,12 +1089,13 @@ function blurbFor(score, agg){
 /* ───── Roman numeral helper for day issue numbers ───── */
 const ROMAN = ['','I','II','III','IV','V','VI'];
 
-function renderDay(d, agg, dayIdx){
+function renderDay(d, agg, dayIdx, bestDay){
   const a=agg[d];
   const WARM = 1;
   const hi = mean(a.hi)!=null ? mean(a.hi)+WARM : null;
   const lo = mean(a.lo)!=null ? mean(a.lo)+WARM : null;
   const p=mean(a.p)??0, pp=mean(a.pp)??0, w=mean(a.w)??0;
+  const sunH=(mean(a.sun)??0)/3600;
   const wc=a.wc.length? a.wc.sort((x,y)=>a.wc.filter(v=>v===y).length-a.wc.filter(v=>v===x).length)[0] : null;
   const [ic,phrase]=wxIcon(wc,p);
   const act=ACTIVITIES[d];
@@ -964,14 +1104,21 @@ function renderDay(d, agg, dayIdx){
   const weekday=WEEKDAYS[d];
   const weekdayEn=WEEKDAYS_EN[d];
   const temps=(hi!=null && lo!=null)? `${Math.round(hi)}° / ${Math.round(lo)}°` : '—';
+  const hiTxt = hi!=null ? `${Math.round(hi)}°` : '—';
+  const loTxt = lo!=null ? `${Math.round(lo)}°` : '—';
   const score=dayScore(a);
   const photo = act?.photo || 'overview.jpg';
+  const hasData = a.n>0;
   const travelChip = act?.arrival ? '<span class="day-chip arr">Aankomst 10:00</span>'
                   : act?.departure ? '<span class="day-chip dep">Vertrek 13:30</span>' : '';
+  const isBest = (d===bestDay && hasData);
+  const sunPct = Math.min(100, Math.round(sunH/15*100));
+  const sunCover = (hasData && sunH>0) ? `<div class="day-wx-sun">☀ ${fmtNL(sunH,0)} u zon</div>` : '';
 
   return `
   <article class="day" data-date="${d}">
     <button class="day-cover" type="button" aria-expanded="false">
+      ${isBest ? '<div class="day-badge">☀ Zonnigste dag</div>' : ''}
       <img class="day-cover-img" src="${photo}" alt="${act?.photoCaption||''}"
            loading="lazy" onload="this.classList.add('loaded')" onerror="this.style.display='none'">
       <div class="day-cover-content">
@@ -991,7 +1138,8 @@ function renderDay(d, agg, dayIdx){
           <div class="day-wx">
             <div class="day-wx-icon">${ic}</div>
             <div class="day-wx-temp tabnum">${temps}</div>
-            <div class="day-wx-score tabnum">${fmtNL(score,1)}/10</div>
+            <div class="day-wx-score tabnum">${hasData?fmtNL(score,1)+'/10':'—'}</div>
+            ${sunCover}
           </div>
         </div>
       </div>
@@ -1000,13 +1148,27 @@ function renderDay(d, agg, dayIdx){
 
     <div class="day-body">
       <div class="day-body-inner">
-        <div class="bento">
-          <div class="cell"><div class="l">Hi / Lo</div><div class="v tabnum">${temps}</div><div class="s">°C</div></div>
-          <div class="cell"><div class="l">Regen</div><div class="v tabnum">${fmtNL(p,1)}</div><div class="s">mm · ${Math.round(pp)}%</div></div>
-          <div class="cell"><div class="l">Wind</div><div class="v tabnum">${Math.round(w)}</div><div class="s">km/u</div></div>
-          <div class="cell"><div class="l">Zee</div><div class="v">~21°</div><div class="s">aangenaam</div></div>
+        <div class="wx-feature">
+          <div class="panel temp">
+            <span class="wx-big-icon">${ic}</span>
+            <div>
+              <div class="temp-val tabnum">${hiTxt}</div>
+              <div class="temp-label">${phrase}</div>
+            </div>
+          </div>
+          <div class="panel sun">
+            <div class="sun-label">Zonuren</div>
+            <div class="sun-val tabnum">${hasData?fmtNL(sunH,1):'—'} <span>uur</span></div>
+            <div class="sun-bar"><i style="width:${hasData?sunPct:0}%"></i></div>
+          </div>
         </div>
-        <p class="based-on">${a.n>0 ? `Op basis van <strong>${a.n}</strong> modellen · dagcijfer <strong>${fmtNL(score,1)}/10</strong>` : 'Voorspelling nog buiten model-bereik — vult naar trip toe'}${act?.arrival?' · halve aankomstdag':act?.departure?' · halve vertrekdag':''}</p>
+        <div class="wx-stats">
+          <div class="stat"><span class="stat-l">Laag</span><span class="stat-v tabnum">${loTxt}</span></div>
+          <div class="stat"><span class="stat-l">Regen</span><span class="stat-v tabnum">${fmtNL(p,1)}<span style="font-size:11px"> mm</span></span></div>
+          <div class="stat"><span class="stat-l">Wind</span><span class="stat-v tabnum">${Math.round(w)}<span style="font-size:11px"> km/u</span></span></div>
+          <div class="stat"><span class="stat-l">Zee</span><span class="stat-v">~21°</span></div>
+        </div>
+        <p class="based-on">${hasData ? `Consensus van <strong>${a.n}</strong> weermodellen · dagcijfer <strong>${fmtNL(score,1)}/10</strong> · regenkans <strong>${Math.round(pp)}%</strong>` : 'Voorspelling nog buiten model-bereik — de laatste dagen vullen zich naar de reisdatum toe.'}${act?.arrival?' · halve aankomstdag':act?.departure?' · halve vertrekdag':''}</p>
 
         ${act?.items?.length ? `
           <div class="acts-h">Aanraders voor vandaag</div>
@@ -1049,17 +1211,43 @@ function fmtClock(iso){
   return d.toLocaleTimeString('nl-NL',{hour:'2-digit',minute:'2-digit'});
 }
 function setSunInfo(agg){
-  // pick mid-week day as representative
+  // representative mid-week day
   const ref = agg['2026-06-04'] || agg['2026-06-03'] || agg['2026-06-02'];
-  if(!ref) return;
-  const sr = ref.sunrise, ss = ref.sunset;
-  if(sr && ss){
-    document.getElementById('sunrise').textContent = fmtClock(sr);
-    document.getElementById('sunset').textContent  = fmtClock(ss);
-    const ms = new Date(ss) - new Date(sr);
-    const h = Math.floor(ms/3600000); const m = Math.floor((ms%3600000)/60000);
-    document.getElementById('daylight').textContent = `${h}h ${String(m).padStart(2,'0')}m`;
+  if(!ref || !ref.sunrise || !ref.sunset) return;
+  const sr=new Date(ref.sunrise), ss=new Date(ref.sunset);
+  document.getElementById('sunrise').textContent = fmtClock(ref.sunrise);
+  document.getElementById('sunset').textContent  = fmtClock(ref.sunset);
+  const ms = ss - sr;
+  const h=Math.floor(ms/3600000), m=Math.floor((ms%3600000)/60000);
+  document.getElementById('daylight').textContent = `${h}u ${String(m).padStart(2,'0')}m`;
+
+  // position the sun dot along the arc by current time of day
+  const now=new Date();
+  const nowMin=now.getHours()*60+now.getMinutes();
+  const srMin=sr.getHours()*60+sr.getMinutes();
+  const ssMin=ss.getHours()*60+ss.getMinutes();
+  let t=(nowMin-srMin)/(ssMin-srMin);
+  const isNight = t<0 || t>1;
+  t=Math.max(0,Math.min(1,t));
+  // quadratic bezier M(22,104) Q(170,-26) (318,104)
+  const bx=(1-t)*(1-t)*22 + 2*(1-t)*t*170 + t*t*318;
+  const by=(1-t)*(1-t)*104 + 2*(1-t)*t*(-26) + t*t*104;
+  const dot=document.getElementById('sunDot');
+  if(dot){
+    dot.setAttribute('cx',bx.toFixed(1));
+    dot.setAttribute('cy',by.toFixed(1));
+    dot.style.opacity = isNight ? '.35' : '1';
   }
+}
+
+function sunniestDay(agg){
+  let best=null, bestSun=-1;
+  for(const d of DAYS){
+    const a=agg[d]; if(a.n<=0) continue;
+    const s=(mean(a.sun)??0)/3600;
+    if(s>bestSun){ bestSun=s; best=d; }
+  }
+  return best;
 }
 
 /* ───── Animated grade counter ───── */
@@ -1119,7 +1307,8 @@ async function run(){
   const ok = results.filter(r=>r.ok).length;
   const agg = aggregate(results);
 
-  daysEl.innerHTML = DAYS.map((d,i)=>renderDay(d, agg, i)).join('');
+  const best = sunniestDay(agg);
+  daysEl.innerHTML = DAYS.map((d,i)=>renderDay(d, agg, i, best)).join('');
   applyOpen();
 
   const score = overallScore(agg);
