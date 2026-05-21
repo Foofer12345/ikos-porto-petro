@@ -120,11 +120,13 @@
      HERO — Magazine cover
   ═══════════════════════════════ */
   .hero{
-    position:relative;height:100vh;min-height:620px;max-height:880px;
+    position:relative;
+    height:clamp(560px, 82vh, 740px);
     overflow:hidden;color:var(--light);
   }
   .hero-img{
     position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+    object-position:center 38%;
     opacity:0;transform:scale(1.06);
     transition:opacity 1.4s ease, transform 18s ease-out;
     will-change:opacity,transform;
@@ -257,9 +259,9 @@
     width:50px;height:1px;background:var(--gold);margin:0 auto 22px;
   }
   .grade .blurb{
-    font-family:var(--font-display);font-size:18px;font-style:italic;
-    line-height:1.55;color:var(--ink-soft);max-width:440px;margin:0 auto;
-    font-variation-settings: "opsz" 20, "wght" 400;
+    font-family:var(--font-display);font-size:15px;font-style:italic;
+    line-height:1.55;color:var(--ink-soft);max-width:400px;margin:0 auto;
+    font-variation-settings: "opsz" 16, "wght" 400;
   }
   .grade .meta{
     margin-top:28px;display:flex;justify-content:center;gap:24px;flex-wrap:wrap;
@@ -393,25 +395,6 @@
     color:var(--gold-light);
   }
 
-  /* Expand affordance */
-  .day-expand{
-    position:absolute;bottom:14px;left:50%;transform:translateX(-50%);
-    z-index:3;
-    display:inline-flex;align-items:center;gap:6px;
-    padding:7px 14px;border-radius:var(--r-pill);
-    background:rgba(255,255,255,.92);
-    color:var(--ink);
-    font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
-    box-shadow:0 4px 16px rgba(0,0,0,.18);
-    backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
-    transition: opacity .3s, transform .3s;
-  }
-  .day-expand::after{
-    content:"›";font-size:14px;color:var(--gold);font-weight:600;
-    transition:transform .35s cubic-bezier(.4,0,.2,1);
-  }
-  .day.open .day-expand{opacity:0;pointer-events:none;transform:translateX(-50%) translateY(8px)}
-
   /* Day body — expanded */
   .day-body{
     max-height:0;overflow:hidden;opacity:0;
@@ -544,6 +527,15 @@
     font-size:13.5px;color:var(--ink-soft);
     margin-top:4px;line-height:1.55;
   }
+  /* Restaurant hyperlink */
+  .r-link{
+    color:var(--terracotta);font-weight:600;text-decoration:none;
+    border-bottom:1.5px solid rgba(190,94,62,.3);
+    transition:border-color .2s;
+  }
+  .r-link:hover{border-bottom-color:var(--terracotta)}
+  .act-title .r-link{color:inherit;border-bottom:1.5px solid var(--gold-soft)}
+  .act-title .r-link:hover{border-bottom-color:var(--gold)}
 
   /* ═══════════════════════════════
      DARK INTERMEZZO
@@ -929,6 +921,16 @@ const SOURCES = [
   { key:'best',  url: OM('best_match') },
 ];
 
+/* Restaurant-links naar de officiële Ikos Porto Petro pagina's */
+const RESTO = {
+  oliva:    'https://ikosresorts.com/resorts/ikos-porto-petro/restaurants-bars/oliva/',
+  seasons:  'https://ikosresorts.com/resorts/ikos-porto-petro/restaurants-bars/seasons/',
+  anaya:    'https://ikosresorts.com/resorts/ikos-porto-petro/restaurants-bars/anaya/',
+  beach:    'https://ikosresorts.com/resorts/ikos-porto-petro/restaurants-bars/beach-club/',
+  market:   'https://ikosresorts.com/resorts/ikos-porto-petro/restaurants-bars/the-market/',
+};
+const rl = (txt,key)=>`<a class="r-link" href="${RESTO[key]}" target="_blank" rel="noopener">${txt}</a>`;
+
 /* Activiteiten · Claire & Michiel · Deluxe Suite */
 const ACTIVITIES = {
   '2026-06-02':{ theme:'Llegada · primera noche', photo:'suite.jpg', photoCaption:'Deluxe Suite', arrival:true, items:[
@@ -938,12 +940,12 @@ const ACTIVITIES = {
      desc:'Walk-in regendouche, king-size bed, privé-terras dat uitkijkt op de baai. Welkomst-fles Mallorquí cava ligt al klaar. Even adem halen, ramen open, zout in de neus.'},
     {tag:'actief', icon:'🏊', title:'Primer chapuzón · adults-only infinity pool',
      desc:'Sportief openen: vijftig baantjes voor Michiel, Claire kiest de ligbedden onder de palmen. Koel water, lege baan, Mediterrane zon.'},
-    {tag:'eten', icon:'🥗', title:'Late lunch · The Market',
+    {tag:'eten', icon:'🥗', title:'Late lunch · '+rl('The Market','market'),
      desc:'À la minute keuken, 100 wijnen open per glas. Begin licht: gazpacho andaluz, pa amb oli, ibérico de bellota, een glas Albariño voor Claire, Manto Negro voor Michiel.'},
-    {tag:'eten', icon:'🫒', title:'Diner · Olivia (Grieks-Mediterraan)',
-     desc:'Gereserveerd. Eerste avond samen onder de sterren. Gegrilde octopus met fava, lams-souvlaki, geitenkaas-spanakopita. Vraag de tafel met zeezicht; sommelier raadt Assyrtiko of Mallorquí Callet aan.'}
+    {tag:'eten', icon:'🫒', title:'Diner · '+rl('Oliva','oliva')+' (Grieks-Mediterraan)',
+     desc:'Gereserveerd bij '+rl('Oliva','oliva')+'. Eerste avond samen onder de sterren. Gegrilde octopus met fava, lams-souvlaki, geitenkaas-spanakopita. Vraag de tafel met zeezicht; sommelier raadt Assyrtiko of Mallorquí Callet aan.'}
   ]},
-  '2026-06-03':{ theme:'Watersport · spa para dos · Seasons', photo:'seasons.jpg', photoCaption:'Seasons', items:[
+  '2026-06-03':{ theme:'Watersport · spa para dos · Seasons', photo:'beach.jpg', photoCaption:'Het strand van Porto Petro', items:[
     {tag:'actief', icon:'🏄', title:'Ochtend: SUP-tocht voor twee',
      desc:'Twee zandige baaien, glas water in de ochtend. Resort verhuurt tandem-SUP\'s, kajaks en snorkel-gear — allemaal inbegrepen. Sportieve openingstoer, samen naar de overkant en terug.'},
     {tag:'actief', icon:'🎾', title:'Padel: hij vs zij · best of three',
@@ -952,20 +954,22 @@ const ACTIVITIES = {
      desc:'Pool Bar (10:00-19:00): ceviche van dorade, ensaladilla rusa, gegrilde gambas, een fles cava op ijs. Schaduw onder de witte parasols.'},
     {tag:'wellness', icon:'💆', title:'Couple\'s massage · Anne Semonin Paris',
      desc:'Geboekt. Side-by-side behandeling, vier handen op twee ruggen. Sauna + steam + koude dompel als bonus. Klassiek moment van sobremesa daarna.'},
-    {tag:'eten', icon:'👑', title:'Diner · Seasons (signature)',
-     desc:'Gereserveerd. Mediterrane keuken met subtiele Aziatische accenten, al fresco, zeezicht. Michelin-gecureerd menu — wagyu tataki, miso-aubergine, dorade in zoutkorst. Dress code iets netter.'},
+    {tag:'eten', icon:'👑', title:'Diner · '+rl('Seasons','seasons')+' (signature)',
+     desc:'Gereserveerd bij '+rl('Seasons','seasons')+'. Mediterrane keuken met subtiele Aziatische accenten, al fresco, zeezicht. Michelin-gecureerd menu — wagyu tataki, miso-aubergine, dorade in zoutkorst. Dress code iets netter.'},
     {tag:'eten', icon:'☕', title:'Nightcap · Espresso Martini bij Lobby Bar',
      desc:'Lobby Bar (tot middernacht): de signature Espresso Martini — Mallorcan brandy, espresso, een snufje vanille. Voor Claire een twist met cava-foam. Onder de gouden lampen.'}
   ]},
-  '2026-06-04':{ theme:'Boot naar Mondragó · Anaya', photo:'anaya.jpg', photoCaption:'Anaya', items:[
-    {tag:'actief', icon:'⛵', title:'Sloep huren · ochtendvaart Cala Mondragó',
-     desc:'Half-day sloep vanuit de marina (5 min lopen). Mondragó natuurpark ligt om de hoek — anker in turkoois water, snorkel aan, ±6 m zicht. Voor twee, geen kapitein nodig.'},
-    {tag:'ontdek', icon:'🤿', title:'Cala s\'Amarador · pure natuur',
-     desc:'Een van de mooiste natuurbaaien van het eiland, beschermd gebied. Pijnbomen tot aan de waterlijn. Koffie en croissants aan boord, anker op een zandbank, samen het water in.'},
-    {tag:'eten', icon:'🐟', title:'Lunch · Beach Club Bar aan zee',
-     desc:'Geopend 08:00-22:00. Versgegrilde dorade, seafood paella voor twee, ensalada mediterránea, jamón ibérico, ijskoude Estrella. Tenen in het zand, geen schoenen verplicht.'},
-    {tag:'eten', icon:'🥢', title:'Diner · Anaya (Pan-Aziatisch)',
-     desc:'Gereserveerd. Ikos\' signature pan-Aziatisch — Chinees, Indiaas, Thais, verfijnd. Dim sum, miso black cod, tandoori-lamb, gewokte wokpan, yuzu-cheesecake. Flamboyant en zelden voorspelbaar.'}
+  '2026-06-04':{ theme:'Día de playa · Anaya', photo:'anaya.jpg', photoCaption:'Anaya', items:[
+    {tag:'actief', icon:'🏖', title:'Luie strandochtend · twee baaien',
+     desc:'Vandaag draait alles om het zand. Handdoeken claimen vroeg, een dubbel ligbed onder een parasol, boeken open, niets moet. De twee baaien van het resort zijn rustig in de ochtend.'},
+    {tag:'actief', icon:'🤿', title:'Snorkelen & zwemmen vanaf het strand',
+     desc:'Helder, kalm water — snorkel mee de baai in, zeegras en kleine vis op een paar meter diep. Tussendoor: zon, een duik, herhalen.'},
+    {tag:'eten', icon:'🐟', title:'Lunch · '+rl('Beach Club Bar','beach')+' aan zee',
+     desc:'Geopend 08:00-22:00. '+rl('Beach Club','beach')+': versgegrilde dorade, seafood paella voor twee, ensalada mediterránea, jamón ibérico, ijskoude Estrella. Tenen in het zand.'},
+    {tag:'wellness', icon:'🌅', title:'Strand-aperitivo bij zonsondergang',
+     desc:'Laatste uur op het strand met een vermut of Aperol — de lucht kleurt boven de baai. Geen agenda, alleen het ritme van de golven.'},
+    {tag:'eten', icon:'🥢', title:'Diner · '+rl('Anaya','anaya')+' (Pan-Aziatisch)',
+     desc:'Gereserveerd bij '+rl('Anaya','anaya')+'. Ikos\' signature pan-Aziatisch — Chinees, Indiaas, Thais, verfijnd. Dim sum, miso black cod, tandoori-lamb, yuzu-cheesecake. Flamboyant en zelden voorspelbaar.'}
   ]},
   '2026-06-05':{ theme:'Roadtrip · wijnproeverij · dinner on the beach', photo:'mini.jpg', photoCaption:'Mallorca · ruta por el sur', items:[
     {tag:'ontdek', icon:'🚗', title:'Huurauto opgehaald · ruta por el sur',
@@ -979,22 +983,22 @@ const ACTIVITIES = {
     {tag:'eten', icon:'🔥', title:'Dinner on the Beach · privé op het zand',
      desc:'Gereserveerd. Privétafel op het strand, fakkels, kaarslicht, sterren, eigen kok. Hét hoogtepunt van de week — alleen voor jullie twee. Een Espresso Martini als slot bij de fakkels.'}
   ]},
-  '2026-06-06':{ theme:'Sol y mar · Beachclub', photo:'beachclub.jpg', photoCaption:'Beach Club', items:[
-    {tag:'actief', icon:'⛵', title:'Catamaran-les in de baai',
-     desc:'Watersportcentrum geeft een instructie of laat je los met de Hobie. Open water tussen de twee baaien — kalme ochtendbries, perfecte juni-condities. Roeien-trekken-laveren.'},
-    {tag:'actief', icon:'🚴', title:'Optie: e-bike rondje Mondragó natuurpark',
-     desc:'Het resort leent e-bikes. Route via de wandelpaden van het natuurpark naar Cala s\'Amarador, ±18 km, grotendeels schaduw onder de pijnbomen.'},
-    {tag:'eten', icon:'🍤', title:'Lunch · The Market à la minute',
-     desc:'Versgrilde vis, seafood paella, jamón ibérico, kaasplank met manchego en Mahón. 100 wijnen open: glas Albariño bij de vis, of een Mallorquí blanc Prensal.'},
-    {tag:'actief', icon:'🏖', title:'Middag · Beach Club zwembad',
-     desc:'Ligbedden voor twee, DJ vanaf 16:00. Een sangría blanca, een mojito de cava, een boek. Een lange middag waar niets hoeft.'},
-    {tag:'eten', icon:'🍸', title:'Diner · Beachclub',
-     desc:'Gereserveerd. Strandfront restaurant — internationaal à la carte, live grill, gezellig en informeel. Late zon, koele bries, gouden lichtjes. Sluit af met een Espresso Martini aan de bar.'}
+  '2026-06-06':{ theme:'Relajación extrema · Beachclub', photo:'beachclub.jpg', photoCaption:'Beach Club', items:[
+    {tag:'wellness', icon:'😌', title:'Geen wekker · ontbijt op het terras',
+     desc:'De dag van niets-moeten. Laat ontbijten, koffie op het privé-terras van de Deluxe Suite, de krant ongelezen laten.'},
+    {tag:'wellness', icon:'🧖', title:'Spa-ochtend · thermal circuit voor twee',
+     desc:'Ikos Spa by Anne Semonin Paris: sauna, hammam, stoom, koude dompel, relaxruimte met kruidenthee. Niet gehaast, helemaal leeg het hoofd.'},
+    {tag:'eten', icon:'🍤', title:'Lunch · '+rl('The Market','market'),
+     desc:rl('The Market','market')+' à la minute: versgrilde vis, seafood paella, jamón ibérico, kaasplank met manchego en Mahón. Een glas Albariño, niets meer te wensen.'},
+    {tag:'actief', icon:'🏖', title:'Middag · '+rl('Beach Club','beach')+' zwembad',
+     desc:'Ligbedden voor twee, DJ vanaf 16:00. Een sangría blanca, een mojito de cava, een boek. Relajación extrema in de puurste vorm.'},
+    {tag:'eten', icon:'🍸', title:'Diner · '+rl('Beachclub','beach'),
+     desc:'Gereserveerd bij '+rl('Beach Club','beach')+'. Strandfront restaurant — internationaal à la carte, live grill, gezellig en informeel. Late zon, koele bries, gouden lichtjes. Sluit af met een Espresso Martini aan de bar.'}
   ]},
   '2026-06-07':{ theme:'Hasta la vista', photo:'overview.jpg', photoCaption:'Hasta luego, Porto Petro', departure:true, items:[
     {tag:'actief', icon:'🏖', title:'Última mañana · strand of laatste padel',
      desc:'Koel zand, rustigste uur van de week. Een laatste duik samen, of nog een padel-revanche. Check-out is 12:00.'},
-    {tag:'eten', icon:'🥐', title:'Brunch bij The Market',
+    {tag:'eten', icon:'🥐', title:'Brunch bij '+rl('The Market','market'),
      desc:'Ensaïmadas, ibérico, scrambled eggs, gegrilde groenten, vers fruit, sappen. Rustig aan — koffers worden door de butler opgehaald.'},
     {tag:'eten', icon:'🍷', title:'Afscheidslunch · Lobby Bar terras',
      desc:'Tussen check-out en transfer: licht mediterraan met uitzicht op de tuinen. Una copita de Albariño, of laatste Espresso Martini als gouden slot.'},
@@ -1143,7 +1147,6 @@ function renderDay(d, agg, dayIdx, bestDay){
           </div>
         </div>
       </div>
-      <div class="day-expand">Lees verder</div>
     </button>
 
     <div class="day-body">

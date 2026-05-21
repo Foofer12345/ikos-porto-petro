@@ -1,4 +1,4 @@
-const CACHE = 'ikos-porto-petro-v4';
+const CACHE = 'ikos-porto-petro-v5';
 const ASSETS = [
   '/ikos-porto-petro/',
   '/ikos-porto-petro/index.html',
@@ -11,6 +11,7 @@ const ASSETS = [
   '/ikos-porto-petro/pool.jpg',
   '/ikos-porto-petro/pool-bar.jpg',
   '/ikos-porto-petro/beachclub.jpg',
+  '/ikos-porto-petro/beach.jpg',
   '/ikos-porto-petro/beachclub-aerial.jpg',
   '/ikos-porto-petro/suite.jpg',
   '/ikos-porto-petro/villa.jpg',
