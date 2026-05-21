@@ -1056,23 +1056,32 @@ function wxIcon(wc, p){
 }
 
 function dayScore(a){
-  const p=mean(a.p)??0, w=mean(a.w)??0, hi=mean(a.hi);
-  let s=10;
-  if(p>8) s-=3; else if(p>3) s-=2; else if(p>0.5) s-=1;
-  if(w>30) s-=2; else if(w>22) s-=1;
-  if(hi!=null && hi<16) s-=2; else if(hi!=null && hi<20) s-=1;
-  if(hi!=null && hi>=22 && p<0.5 && w<20) s+=0.5;
-  s += 0.3;
-  return Math.max(5, Math.min(9.7, s));
+  if(!a || a.n<=0) return null;          // geen data → geen cijfer
+  const p=mean(a.p)??0, w=mean(a.w)??0;
+  const hi=mean(a.hi)??27;
+  const sunH=(mean(a.sun)??0)/3600;
+  let s=8.0;                              // basis (riante mediterrane week)
+  // Temperatuur-comfort — scherpe piek bij 27°C zodat 1° écht telt
+  const tc = 1 - Math.min(1, Math.abs(hi-27)/6);   // 1,0 bij 27° · 0 bij ±6°
+  s += tc*1.8;                                      // tot +1,8
+  // Wind — vloeiend, 20 km/u neutraal, elke km/u verschuift het cijfer
+  s += (20 - w)*0.07;
+  // Zon
+  if(sunH>=13) s+=0.15; else if(sunH>=10) s+=0; else if(sunH>=7) s-=0.5; else s-=1.2;
+  // Regen — getrapt
+  if(p>8) s-=2.8; else if(p>3) s-=1.8; else if(p>1) s-=0.9; else if(p>0.3) s-=0.35;
+  return Math.round(Math.max(6, Math.min(9.9, s))*10)/10;
 }
 
 function overallScore(agg){
   const weights = {'2026-06-02':0.7, '2026-06-03':1, '2026-06-04':1, '2026-06-05':1, '2026-06-06':1, '2026-06-07':0.5};
   let sum=0, tot=0;
   for(const d of DAYS){
-    const w=weights[d]||1; sum += dayScore(agg[d])*w; tot += w;
+    const sc=dayScore(agg[d]);
+    if(sc==null) continue;            // dagen zonder data tellen niet mee
+    const w=weights[d]||1; sum += sc*w; tot += w;
   }
-  return sum/tot;
+  return tot>0 ? sum/tot : 8.5;
 }
 
 function blurbFor(score, agg){
@@ -1122,7 +1131,7 @@ function renderDay(d, agg, dayIdx, bestDay){
   return `
   <article class="day" data-date="${d}">
     <button class="day-cover" type="button" aria-expanded="false">
-      ${isBest ? '<div class="day-badge">☀ Zonnigste dag</div>' : ''}
+      ${isBest ? '<div class="day-badge">★ Topdag van de week</div>' : ''}
       <img class="day-cover-img" src="${photo}" alt="${act?.photoCaption||''}"
            loading="lazy" onload="this.classList.add('loaded')" onerror="this.style.display='none'">
       <div class="day-cover-content">
@@ -1243,12 +1252,12 @@ function setSunInfo(agg){
   }
 }
 
-function sunniestDay(agg){
-  let best=null, bestSun=-1;
+function topDay(agg){
+  let best=null, bestScore=-1;
   for(const d of DAYS){
-    const a=agg[d]; if(a.n<=0) continue;
-    const s=(mean(a.sun)??0)/3600;
-    if(s>bestSun){ bestSun=s; best=d; }
+    const sc=dayScore(agg[d]);
+    if(sc==null) continue;
+    if(sc>bestScore){ bestScore=sc; best=d; }
   }
   return best;
 }
@@ -1310,7 +1319,7 @@ async function run(){
   const ok = results.filter(r=>r.ok).length;
   const agg = aggregate(results);
 
-  const best = sunniestDay(agg);
+  const best = topDay(agg);
   daysEl.innerHTML = DAYS.map((d,i)=>renderDay(d, agg, i, best)).join('');
   applyOpen();
 
