@@ -1,4 +1,4 @@
-const CACHE = 'ikos-porto-petro-v5';
+const CACHE = 'ikos-porto-petro-v7';
 const ASSETS = [
   '/ikos-porto-petro/',
   '/ikos-porto-petro/index.html',
@@ -21,7 +21,8 @@ const ASSETS = [
   '/ikos-porto-petro/village.jpg',
   '/ikos-porto-petro/formentor.jpg',
   '/ikos-porto-petro/mixologist.jpg',
-  '/ikos-porto-petro/sup.jpg'
+  '/ikos-porto-petro/sup.jpg',
+  '/ikos-porto-petro/winetasting.jpg'
 ];
 
 self.addEventListener('install', e => {

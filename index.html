@@ -1288,7 +1288,7 @@ const rl = (txt,key)=>`<a class="r-link" href="${RESTO[key]}" target="_blank" re
 
 /* Activiteiten · Claire & Michiel · Deluxe Suite */
 const ACTIVITIES = {
-  '2026-06-02':{ theme:'Llegada · primera noche', photo:'suite.jpg', photoCaption:'Deluxe Suite', arrival:true, items:[
+  '2026-06-02':{ theme:'Zonnig start · primera noche', photo:'suite.jpg', photoCaption:'Deluxe Suite', arrival:true, items:[
     {tag:'ontdek', icon:'✈️', title:'06:00 vertrek AMS · 08:25 landing Palma',
      desc:'Transfer wacht bij de gate. ±1 uur over de zuidkust van Mallorca. Bij het resort rond 10:00 — sleutels van jullie Deluxe Suite klaarliggen, koffers ernaartoe.'},
     {tag:'wellness', icon:'🛎', title:'Check-in · Deluxe Suite met zeezicht',
@@ -1297,10 +1297,10 @@ const ACTIVITIES = {
      desc:'Sportief openen: vijftig baantjes voor Michiel, Claire kiest de ligbedden onder de palmen. Koel water, lege baan, Mediterrane zon.'},
     {tag:'eten', icon:'🥗', title:'Late lunch · '+rl('The Market','market'),
      desc:'À la minute keuken, 100 wijnen open per glas. Begin licht: gazpacho andaluz, pa amb oli, ibérico de bellota, een glas Albariño voor Claire, Manto Negro voor Michiel.'},
-    {tag:'eten', icon:'🫒', title:'Diner · '+rl('Oliva','oliva')+' (Grieks-Mediterraan)',
-     desc:'Gereserveerd bij '+rl('Oliva','oliva')+'. Eerste avond samen onder de sterren. Gegrilde octopus met fava, lams-souvlaki, geitenkaas-spanakopita. Vraag de tafel met zeezicht; sommelier raadt Assyrtiko of Mallorquí Callet aan.'}
+    {tag:'eten', icon:'👑', title:'Diner · '+rl('Seasons','seasons')+' (signature)',
+     desc:'Gereserveerd bij '+rl('Seasons','seasons')+'. Eerste avond samen onder de sterren. Mediterrane keuken met Aziatische accenten, al fresco, zeezicht. Een glas Mallorquí Callet om aan te tikken — op een mooie week.'}
   ]},
-  '2026-06-03':{ theme:'Watersport · spa para dos · Seasons', photo:'beach.jpg', photoCaption:'Het strand van Porto Petro', items:[
+  '2026-06-03':{ theme:'Sport en Watersport · spa para dos', photo:'sup.jpg', photoCaption:'Sport & SUP aan de baai', items:[
     {tag:'actief', icon:'🏄', title:'Ochtend: SUP-tocht voor twee',
      desc:'Twee zandige baaien, glas water in de ochtend. Resort verhuurt tandem-SUP\'s, kajaks en snorkel-gear — allemaal inbegrepen. Sportieve openingstoer, samen naar de overkant en terug.'},
     {tag:'actief', icon:'🎾', title:'Padel: hij vs zij · best of three',
@@ -1314,7 +1314,7 @@ const ACTIVITIES = {
     {tag:'eten', icon:'☕', title:'Nightcap · Espresso Martini bij Lobby Bar',
      desc:'Lobby Bar (tot middernacht): de signature Espresso Martini — Mallorcan brandy, espresso, een snufje vanille. Voor Claire een twist met cava-foam. Onder de gouden lampen.'}
   ]},
-  '2026-06-04':{ theme:'Día de playa · Anaya', photo:'anaya.jpg', photoCaption:'Anaya', items:[
+  '2026-06-04':{ theme:'Día de playa · Anaya', photo:'beach.jpg', photoCaption:'Het strand van Porto Petro', items:[
     {tag:'actief', icon:'🏖', title:'Luie strandochtend · twee baaien',
      desc:'Vandaag draait alles om het zand. Handdoeken claimen vroeg, een dubbel ligbed onder een parasol, boeken open, niets moet. De twee baaien van het resort zijn rustig in de ochtend.'},
     {tag:'actief', icon:'🤿', title:'Snorkelen & zwemmen vanaf het strand',
@@ -1326,11 +1326,11 @@ const ACTIVITIES = {
     {tag:'eten', icon:'🥢', title:'Diner · '+rl('Anaya','anaya')+' (Pan-Aziatisch)',
      desc:'Gereserveerd bij '+rl('Anaya','anaya')+'. Ikos\' signature pan-Aziatisch — Chinees, Indiaas, Thais, verfijnd. Dim sum, miso black cod, tandoori-lamb, yuzu-cheesecake. Flamboyant en zelden voorspelbaar.'}
   ]},
-  '2026-06-05':{ theme:'Roadtrip · wijnproeverij · dinner on the beach', photo:'mini.jpg', photoCaption:'Mallorca · ruta por el sur', items:[
+  '2026-06-05':{ theme:'Roadtrip · wijnproeverij · dinner on the beach', photo:'winetasting.jpg', photoCaption:'Dalt Turó · proeverij in Felanitx', items:[
     {tag:'ontdek', icon:'🚗', title:'Huurauto opgehaald · ruta por el sur',
      desc:'MINI Countryman cabrio of vergelijkbaar, vanaf de resort-balie. Eerste etappe: Cala d\'Or → Santanyí (zaterdagochtendmarkt) → Es Trenc strand → Felanitx.'},
-    {tag:'ontdek', icon:'🍇', title:'Wijnproeverij · Bodegas Ánima Negra (Felanitx)',
-     desc:'Voorstel: tasting bij Ánima Negra in Felanitx — Pla i Llevant DO. Drie wijnen + tapas, ±€35 p.p. De legendarische AN/2 (Callet-Manto Negro-Fogoneu) als slot. Alternatieven: 4 Kilos of Vins Miquel Gelabert. Boek vooraf.'},
+    {tag:'ontdek', icon:'🍇', title:'Wijnproeverij · <a class="r-link" href="https://www.daltturo.com" target="_blank" rel="noopener">Dalt Turó</a> (Felanitx)',
+     desc:'Voorstel: tasting bij <a class="r-link" href="https://www.daltturo.com" target="_blank" rel="noopener">Dalt Turó</a> in Felanitx — biologische bodega op de heuvel boven het dorp. Rondleiding door wijngaard + kelder, drie wijnen met tapas. Hun Callet en Manto Negro doen hun werk. Boek vooraf via daltturo.com.'},
     {tag:'eten', icon:'🐙', title:'Late lunch op het plein in Santanyí',
      desc:'Cap des Mort of Es Cantonet: pulpo a la gallega, pa amb oli, tumbet, een karaf rosado Mallorquí. Dine-Out programma dekt de rekening — bewaar het bonnetje.'},
     {tag:'wellness', icon:'🌅', title:'Atardecer bij Cap de Ses Salines',
@@ -1367,11 +1367,18 @@ const mean=a=>a.length?a.reduce((x,y)=>x+y,0)/a.length:null;
 const fmtNL=(n,d=1)=>n==null?'—':Number(n).toFixed(d).replace('.',',');
 
 async function fetchOne(s){
+  const ctl = new AbortController();
+  const to  = setTimeout(()=>ctl.abort(), 7000);   // langzamer model = sla over, blokkeer niet
   try{
-    const r=await fetch(s.url); if(!r.ok) throw 0;
+    const r=await fetch(s.url, {signal:ctl.signal});
+    clearTimeout(to);
+    if(!r.ok) throw 0;
     const j=await r.json(); if(!j.daily?.time) throw 0;
     return {key:s.key, ok:true, daily:j.daily, hourly:j.hourly};
-  }catch{ return {key:s.key, ok:false}; }
+  }catch{
+    clearTimeout(to);
+    return {key:s.key, ok:false};
+  }
 }
 const fetchAll=()=>Promise.all(SOURCES.map(fetchOne));
 
@@ -1930,11 +1937,17 @@ function buildDayNav(){
 buildDayNav();
 
 /* Feature 2: "Nu in Porto Petro" — live current weather (ververst elke 5 min) */
-const NOW_URL = `https://api.open-meteo.com/v1/forecast?latitude=${LAT}&longitude=${LON}&current=temperature_2m,weathercode&timezone=${encodeURIComponent(TZ)}`;
-async function refreshNow(){
+const NOW_URL = `https://api.open-meteo.com/v1/forecast?latitude=${LAT}&longitude=${LON}&current=temperature_2m,weather_code&timezone=${encodeURIComponent(TZ)}`;
+async function refreshNow(retry=true){
   try{
-    const r = await fetch(NOW_URL);
-    if(!r.ok) return;
+    const ctl = new AbortController();
+    const to  = setTimeout(()=>ctl.abort(), 8000);
+    const r   = await fetch(NOW_URL, {signal:ctl.signal});
+    clearTimeout(to);
+    if(!r.ok){
+      if(retry) setTimeout(()=>refreshNow(false), 4000);   // bij rate-limit één keer opnieuw
+      return;
+    }
     const j = await r.json();
     const cur = j.current; if(!cur) return;
     const t  = cur.temperature_2m;
@@ -1945,10 +1958,12 @@ async function refreshNow(){
     if(phrase)       set('nowPhrase', phrase);
     if(ic)           set('nowIcon', ic);
     set('nowClock', new Date().toLocaleTimeString('nl-NL',{hour:'2-digit',minute:'2-digit',timeZone:'Europe/Madrid'}));
-  }catch{ /* fail-safe: laat placeholder staan */ }
+  }catch{
+    if(retry) setTimeout(()=>refreshNow(false), 4000);     // netwerk-hiccup: één retry
+  }
 }
 refreshNow();
-setInterval(refreshNow, 300000);
+setInterval(()=>refreshNow(true), 300000);
 
 document.addEventListener('visibilitychange', ()=>{ if(!document.hidden) run(); });
 window.addEventListener('pageshow', run);
