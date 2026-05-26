@@ -690,6 +690,30 @@
   .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.2,.6,.2,1), transform .8s cubic-bezier(.2,.6,.2,1)}
   .reveal.in{opacity:1;transform:none}
 
+  /* Feature 8: Hourly sparkline per dag */
+  .hourly{
+    margin:18px 0 6px;
+    padding:14px 14px 10px;background:var(--bg-dim);border-radius:var(--r-md);
+  }
+  .hourly .h-h{
+    font-size:9.5px;font-weight:700;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--ink-faint);
+    display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;
+  }
+  .hourly .h-h .h-r{
+    color:var(--gold);font-family:var(--font-display);font-style:italic;font-size:12px;
+    letter-spacing:0;text-transform:none;font-weight:400;
+  }
+  .hourly svg{width:100%;height:80px;display:block}
+  .hourly .h-x{
+    display:flex;justify-content:space-between;margin-top:4px;
+    font-size:9px;font-weight:600;color:var(--ink-faint);letter-spacing:.08em;
+    font-variant-numeric:tabular-nums;
+  }
+  .hourly .h-line{stroke:var(--gold);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+  .hourly .h-fill{fill:url(#hFill)}
+  .hourly .h-dot{fill:var(--gold-soft);stroke:#fff;stroke-width:2}
+
   /* Feature 7: Time-of-day achtergrond-tint */
   .time-tint{
     position:fixed;inset:0;pointer-events:none;z-index:99;
@@ -1205,9 +1229,10 @@ const WEEKDAYS={'2026-06-02':'Dinsdag','2026-06-03':'Woensdag','2026-06-04':'Don
 const WEEKDAYS_EN={'2026-06-02':'Tuesday','2026-06-03':'Wednesday','2026-06-04':'Thursday','2026-06-05':'Friday','2026-06-06':'Saturday','2026-06-07':'Sunday'};
 const MONTHS_NL=['januari','februari','maart','april','mei','juni','juli','augustus','september','oktober','november','december'];
 
-const OM = m =>
+const OM = (m, hr=false) =>
   `https://api.open-meteo.com/v1/forecast?latitude=${LAT}&longitude=${LON}`+
   `&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_probability_max,windspeed_10m_max,sunshine_duration,weathercode,sunrise,sunset`+
+  (hr?`&hourly=temperature_2m`:``)+
   `&timezone=${encodeURIComponent(TZ)}&forecast_days=16&models=${m}`;
 
 const SOURCES = [
@@ -1222,7 +1247,7 @@ const SOURCES = [
   { key:'ukmo',  url: OM('ukmo_seamless') },
   { key:'knmi',  url: OM('knmi_seamless') },
   { key:'metno', url: OM('metno_seamless') },
-  { key:'best',  url: OM('best_match') },
+  { key:'best',  url: OM('best_match', true) },   // best_match brings the hourly curve
 ];
 
 /* Restaurant-links naar de officiële Ikos Porto Petro pagina's */
@@ -1319,14 +1344,14 @@ async function fetchOne(s){
   try{
     const r=await fetch(s.url); if(!r.ok) throw 0;
     const j=await r.json(); if(!j.daily?.time) throw 0;
-    return {key:s.key, ok:true, daily:j.daily};
+    return {key:s.key, ok:true, daily:j.daily, hourly:j.hourly};
   }catch{ return {key:s.key, ok:false}; }
 }
 const fetchAll=()=>Promise.all(SOURCES.map(fetchOne));
 
 function aggregate(results){
   const per={};
-  for(const d of DAYS) per[d]={hi:[],lo:[],p:[],pp:[],w:[],sun:[],wc:[],sunrise:null,sunset:null,n:0};
+  for(const d of DAYS) per[d]={hi:[],lo:[],p:[],pp:[],w:[],sun:[],wc:[],sunrise:null,sunset:null,n:0,hourly:[]};
   for(const r of results){
     if(!r.ok) continue;
     const t=r.daily.time;
@@ -1336,10 +1361,19 @@ function aggregate(results){
       let any=false;
       const keys=[['hi','temperature_2m_max'],['lo','temperature_2m_min'],['p','precipitation_sum'],['pp','precipitation_probability_max'],['w','windspeed_10m_max'],['sun','sunshine_duration'],['wc','weathercode']];
       for(const [k,s] of keys){ const v=r.daily[s]?.[i]; if(v!=null){ push(k,v); any=true; } }
-      // sunrise/sunset (first valid wins)
       if(per[d].sunrise == null && r.daily.sunrise?.[i]) per[d].sunrise = r.daily.sunrise[i];
       if(per[d].sunset  == null && r.daily.sunset?.[i])  per[d].sunset  = r.daily.sunset[i];
       if(any) per[d].n++;
+    }
+    // hourly per-day, vanaf de eerste bron die het levert (best_match)
+    if(r.hourly?.time && r.hourly?.temperature_2m){
+      for(let i=0;i<r.hourly.time.length;i++){
+        const ts=r.hourly.time[i];
+        const d=ts.slice(0,10);
+        if(!per[d]) continue;
+        if(per[d].hourly.length>=24) continue;
+        per[d].hourly.push({ h: parseInt(ts.slice(11,13),10), t: r.hourly.temperature_2m[i] });
+      }
     }
   }
   return per;
@@ -1405,6 +1439,43 @@ function blurbFor(score, agg){
 
 /* ───── Roman numeral helper for day issue numbers ───── */
 const ROMAN = ['','I','II','III','IV','V','VI'];
+
+/* Feature 8: Hourly sparkline */
+function renderHourly(a){
+  const hrs = a.hourly || [];
+  if(hrs.length<6) return '';
+  const W=320, H=80, PAD_X=8, PAD_Y=14;
+  const xs = hrs.map((p,i)=> PAD_X + (W-2*PAD_X) * (i/(hrs.length-1)));
+  const temps = hrs.map(p=>p.t).filter(v=>v!=null);
+  if(!temps.length) return '';
+  const tMin = Math.min(...temps), tMax = Math.max(...temps);
+  const range = Math.max(1, tMax - tMin);
+  const ys = hrs.map(p=> PAD_Y + (H-2*PAD_Y) * (1 - (p.t - tMin)/range) );
+  let dLine = `M${xs[0].toFixed(1)},${ys[0].toFixed(1)}`;
+  for(let i=1;i<xs.length;i++){
+    const xm=(xs[i-1]+xs[i])/2;
+    dLine += ` C${xm.toFixed(1)},${ys[i-1].toFixed(1)} ${xm.toFixed(1)},${ys[i].toFixed(1)} ${xs[i].toFixed(1)},${ys[i].toFixed(1)}`;
+  }
+  const dFill = dLine + ` L${xs[xs.length-1].toFixed(1)},${H} L${xs[0].toFixed(1)},${H} Z`;
+  const iMax = temps.indexOf(tMax), iMin = temps.indexOf(tMin);
+  return `
+    <div class="hourly">
+      <div class="h-h"><span>Uurverwachting · temperatuur</span><span class="h-r">${Math.round(tMin)}° ↔ ${Math.round(tMax)}°</span></div>
+      <svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="hFill" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="rgba(195,150,83,.38)"/>
+            <stop offset="1" stop-color="rgba(195,150,83,.02)"/>
+          </linearGradient>
+        </defs>
+        <path class="h-fill" d="${dFill}"/>
+        <path class="h-line" d="${dLine}"/>
+        <circle class="h-dot" cx="${xs[iMax].toFixed(1)}" cy="${ys[iMax].toFixed(1)}" r="3.5"/>
+        <circle class="h-dot" cx="${xs[iMin].toFixed(1)}" cy="${ys[iMin].toFixed(1)}" r="3"/>
+      </svg>
+      <div class="h-x"><span>00</span><span>06</span><span>12</span><span>18</span><span>24</span></div>
+    </div>`;
+}
 
 function renderDay(d, agg, dayIdx, bestDay){
   const a=agg[d];
@@ -1485,6 +1556,8 @@ function renderDay(d, agg, dayIdx, bestDay){
           <div class="stat"><span class="stat-l">Zee</span><span class="stat-v">~21°</span></div>
         </div>
         <p class="based-on">${hasData ? `Consensus van <strong>${a.n}</strong> weermodellen · dagcijfer <strong>${fmtNL(score,1)}/10</strong> · regenkans <strong>${Math.round(pp)}%</strong>` : 'Voorspelling nog buiten model-bereik — de laatste dagen vullen zich naar de reisdatum toe.'}${act?.arrival?' · halve aankomstdag':act?.departure?' · halve vertrekdag':''}</p>
+
+        ${renderHourly(a)}
 
         ${act?.items?.length ? `
           <div class="acts-h">Aanraders voor vandaag</div>
