@@ -690,6 +690,29 @@
   .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.2,.6,.2,1), transform .8s cubic-bezier(.2,.6,.2,1)}
   .reveal.in{opacity:1;transform:none}
 
+  /* Feature 4: Drijvende sparkles in intermezzo (pure CSS) */
+  .sparkles{
+    position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0;
+  }
+  .sparkle{
+    position:absolute;width:3px;height:3px;border-radius:50%;
+    background:var(--gold-light);
+    box-shadow:0 0 6px rgba(235,210,160,.7);
+    opacity:0;
+    bottom:-10px;left:var(--x,50%);
+    animation: sparkle-float var(--dur,8s) linear infinite;
+    animation-delay: var(--delay,0s);
+  }
+  @keyframes sparkle-float{
+    0%   {opacity:0;transform:translateY(0) translateX(0) scale(.5)}
+    10%  {opacity:1}
+    90%  {opacity:1}
+    100% {opacity:0;transform:translateY(-100vh) translateX(var(--drift,12px)) scale(.8)}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .sparkle{animation:none;display:none}
+  }
+
   /* Feature 3: Marquee feiten-ticker (pure CSS) */
   .marquee{
     overflow:hidden;
@@ -960,6 +983,23 @@
 
 <!-- ═════════════ DARK INTERMEZZO ═════════════ -->
 <section class="intermezzo reveal">
+  <!-- Feature 4: drijvende sparkles -->
+  <div class="sparkles" aria-hidden="true">
+    <span class="sparkle" style="--x:8%;--dur:9s;--delay:-1s;--drift:14px"></span>
+    <span class="sparkle" style="--x:18%;--dur:11s;--delay:-4s;--drift:-12px"></span>
+    <span class="sparkle" style="--x:28%;--dur:8s;--delay:-7s;--drift:18px"></span>
+    <span class="sparkle" style="--x:36%;--dur:13s;--delay:-2s;--drift:-8px"></span>
+    <span class="sparkle" style="--x:44%;--dur:10s;--delay:-6s;--drift:16px"></span>
+    <span class="sparkle" style="--x:52%;--dur:9s;--delay:-9s;--drift:-14px"></span>
+    <span class="sparkle" style="--x:58%;--dur:12s;--delay:-3s;--drift:10px"></span>
+    <span class="sparkle" style="--x:66%;--dur:8s;--delay:-5s;--drift:-18px"></span>
+    <span class="sparkle" style="--x:74%;--dur:11s;--delay:-8s;--drift:12px"></span>
+    <span class="sparkle" style="--x:82%;--dur:10s;--delay:-1s;--drift:-10px"></span>
+    <span class="sparkle" style="--x:90%;--dur:9s;--delay:-6s;--drift:8px"></span>
+    <span class="sparkle" style="--x:14%;--dur:12s;--delay:-10s;--drift:-16px"></span>
+    <span class="sparkle" style="--x:64%;--dur:11s;--delay:-4s;--drift:-12px"></span>
+    <span class="sparkle" style="--x:78%;--dur:9s;--delay:-7s;--drift:14px"></span>
+  </div>
   <div class="intermezzo-content">
     <div class="intermezzo-eyebrow">Mediterráneo</div>
     <p class="intermezzo-quote">"Onder de pijnbomen, tussen twee baaien — <em>seis días, dos personas, sin prisa.</em>"</p>
