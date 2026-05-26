@@ -690,6 +690,23 @@
   .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.2,.6,.2,1), transform .8s cubic-bezier(.2,.6,.2,1)}
   .reveal.in{opacity:1;transform:none}
 
+  /* Feature 10: Auto-VANDAAG vlaggetje */
+  .day-cover .today-flag{
+    position:absolute;top:14px;right:14px;z-index:3;
+    display:inline-flex;align-items:center;gap:6px;
+    padding:6px 12px;border-radius:var(--r-pill);
+    background:rgba(190,94,62,.92);color:#fff;
+    font-size:9.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+    box-shadow:0 4px 14px rgba(190,94,62,.4);
+  }
+  .day-cover .today-flag::before{
+    content:"";width:6px;height:6px;border-radius:50%;background:#fff;
+    animation:pulse 1.6s ease-in-out infinite;
+  }
+  @media (prefers-reduced-motion: reduce){
+    .day-cover .today-flag::before{animation:none}
+  }
+
   /* Feature 9: Confetti canvas */
   #confetti{
     position:fixed;inset:0;pointer-events:none;z-index:200;
@@ -1708,6 +1725,7 @@ async function run(){
   const best = topDay(agg);
   daysEl.innerHTML = DAYS.map((d,i)=>renderDay(d, agg, i, best)).join('');
   applyOpen();
+  autoExpandToday();
 
   const score = overallScore(agg);
   animateNumber(document.getElementById('gradeBig'), score, 1);
@@ -1735,6 +1753,26 @@ function tickClock(){
 }
 tickClock();
 setInterval(tickClock, 30000);
+
+/* Feature 10: Auto-VANDAAG — open vandaag automatisch + plak een vlaggetje */
+function autoExpandToday(){
+  const today = new Date().toISOString().slice(0,10);
+  if(!DAYS.includes(today)) return;
+  const card = document.querySelector(`.day[data-date="${today}"]`);
+  if(!card) return;
+  if(!card.classList.contains('open')){
+    card.classList.add('open');
+    card.querySelector('.day-cover')?.setAttribute('aria-expanded','true');
+    if (typeof openDays !== 'undefined') openDays.add(today);
+  }
+  const cover = card.querySelector('.day-cover');
+  if(cover && !cover.querySelector('.today-flag')){
+    const flag = document.createElement('div');
+    flag.className = 'today-flag';
+    flag.textContent = 'Vandaag';
+    cover.appendChild(flag);
+  }
+}
 
 /* Feature 9: Confetti burst (canvas, geen libs) — bij grade ≥ 9.5, eenmalig per sessie */
 let confettiFired = false;
