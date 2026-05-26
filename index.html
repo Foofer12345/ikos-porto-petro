@@ -690,6 +690,59 @@
   .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.2,.6,.2,1), transform .8s cubic-bezier(.2,.6,.2,1)}
   .reveal.in{opacity:1;transform:none}
 
+  /* Feature 2: Live "Nu in Porto Petro" strip */
+  .now-strip{ max-width:680px; margin:14px auto 0; padding:0 20px; }
+  .now-inner{
+    background:linear-gradient(135deg, #FDF6E3 0%, #F5E5C0 100%);
+    border-radius:var(--r-lg);
+    border:1px solid rgba(195,150,83,.2);
+    padding:14px 18px;
+    display:flex;align-items:center;gap:14px;
+    box-shadow:0 4px 14px rgba(195,150,83,.08);
+    position:relative;overflow:hidden;
+  }
+  .now-inner::after{
+    content:"";position:absolute;top:-30px;right:-30px;
+    width:90px;height:90px;border-radius:50%;
+    background:radial-gradient(circle, rgba(255,210,120,.5), transparent 70%);
+    pointer-events:none;
+  }
+  .now-icon{
+    font-size:34px;line-height:1;flex:0 0 auto;position:relative;
+    filter:drop-shadow(0 2px 6px rgba(195,150,83,.3));
+  }
+  .now-body{flex:1;min-width:0;position:relative}
+  .now-label{
+    font-size:9.5px;font-weight:700;letter-spacing:.32em;
+    text-transform:uppercase;color:#A37C2E;margin-bottom:4px;
+  }
+  .now-line{
+    display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;
+    font-variant-numeric:tabular-nums;
+  }
+  .now-temp{
+    font-family:var(--font-display);font-weight:300;font-size:28px;
+    line-height:1;color:var(--ink);letter-spacing:-.02em;
+    font-variation-settings:"opsz" 32, "wght" 300;
+  }
+  .now-phrase{
+    font-family:var(--font-display);font-style:italic;font-size:15px;
+    color:var(--ink-soft);
+    font-variation-settings:"opsz" 16, "wght" 400;
+  }
+  .now-sep{color:var(--gold);font-size:11px;font-weight:600;opacity:.5}
+  .now-clock{
+    font-size:11px;font-weight:600;color:var(--ink-soft);letter-spacing:.04em;
+  }
+  .now-clock b{color:var(--ink);font-weight:700}
+  @media (max-width:430px){
+    .now-strip{padding:0 16px}
+    .now-inner{padding:12px 14px;gap:10px}
+    .now-icon{font-size:28px}
+    .now-temp{font-size:22px}
+    .now-phrase{font-size:13px}
+  }
+
   /* Day cover sunshine + best-day badge */
   .day-wx-sun{
     margin-top:5px;font-size:10.5px;font-weight:600;letter-spacing:.04em;
@@ -809,6 +862,23 @@
     <div class="meta">
       <span><strong id="metaSources">12</strong> bronnen</span>
       <span><strong id="metaRefresh">—</strong> bijgewerkt</span>
+    </div>
+  </div>
+</section>
+
+<!-- Feature 2: Live "Nu in Porto Petro" strip -->
+<section class="now-strip reveal">
+  <div class="now-inner">
+    <span class="now-icon" id="nowIcon">☀</span>
+    <div class="now-body">
+      <div class="now-label">Nu in Porto Petro</div>
+      <div class="now-line">
+        <span class="now-temp"><span id="nowTemp">—</span>°</span>
+        <span class="now-sep">·</span>
+        <span class="now-phrase" id="nowPhrase">live ophalen…</span>
+        <span class="now-sep">·</span>
+        <span class="now-clock"><b id="nowClock">—</b> lokale tijd</span>
+      </div>
     </div>
   </div>
 </section>
@@ -1359,6 +1429,27 @@ function tickClock(){
 }
 tickClock();
 setInterval(tickClock, 30000);
+
+/* Feature 2: "Nu in Porto Petro" — live current weather (ververst elke 5 min) */
+const NOW_URL = `https://api.open-meteo.com/v1/forecast?latitude=${LAT}&longitude=${LON}&current=temperature_2m,weathercode&timezone=${encodeURIComponent(TZ)}`;
+async function refreshNow(){
+  try{
+    const r = await fetch(NOW_URL);
+    if(!r.ok) return;
+    const j = await r.json();
+    const cur = j.current; if(!cur) return;
+    const t  = cur.temperature_2m;
+    const wc = cur.weather_code ?? cur.weathercode;
+    const [ic, phrase] = wxIcon(wc, 0);
+    const set = (id, val)=>{ const e=document.getElementById(id); if(e) e.textContent = val; };
+    if(t!=null)      set('nowTemp', Math.round(t));
+    if(phrase)       set('nowPhrase', phrase);
+    if(ic)           set('nowIcon', ic);
+    set('nowClock', new Date().toLocaleTimeString('nl-NL',{hour:'2-digit',minute:'2-digit',timeZone:'Europe/Madrid'}));
+  }catch{ /* fail-safe: laat placeholder staan */ }
+}
+refreshNow();
+setInterval(refreshNow, 300000);
 
 document.addEventListener('visibilitychange', ()=>{ if(!document.hidden) run(); });
 window.addEventListener('pageshow', run);
