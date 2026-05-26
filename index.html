@@ -690,6 +690,47 @@
   .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.2,.6,.2,1), transform .8s cubic-bezier(.2,.6,.2,1)}
   .reveal.in{opacity:1;transform:none}
 
+  /* Feature 5: Day-nav chip-bar (sticky) */
+  .day-nav{
+    position:sticky;top:54px;z-index:20;
+    margin:0 -20px 16px;
+    padding:10px 16px;
+    background:rgba(250,246,236,.88);
+    backdrop-filter:blur(20px) saturate(160%);
+    -webkit-backdrop-filter:blur(20px) saturate(160%);
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+    overflow-x:auto;-webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+  }
+  .day-nav::-webkit-scrollbar{display:none}
+  .day-nav-inner{display:flex;gap:8px;width:max-content}
+  .day-nav .chip{
+    flex:0 0 auto;padding:8px 14px;border-radius:var(--r-pill);
+    background:var(--bg-card);border:1px solid var(--line);
+    font-family:var(--font-sans);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--ink);cursor:pointer;
+    transition:all .2s;
+    display:inline-flex;align-items:center;gap:6px;
+    white-space:nowrap;
+  }
+  .day-nav .chip:hover{border-color:var(--gold-soft);background:#FDF8EC}
+  .day-nav .chip.active{background:var(--ink);color:var(--light);border-color:var(--ink)}
+  .day-nav .chip .d-date{
+    font-family:var(--font-display);font-weight:400;font-size:13px;
+    letter-spacing:-.01em;text-transform:none;color:var(--gold);
+  }
+  .day-nav .chip.active .d-date{color:var(--gold-light)}
+  .day-nav .chip.today{
+    box-shadow:0 0 0 2px var(--gold-soft);
+    background:linear-gradient(135deg, #FDF8EC, #F8EFCD);
+  }
+  .day-nav .chip .pulse{
+    width:6px;height:6px;border-radius:50%;background:var(--terracotta);
+    box-shadow:0 0 0 3px rgba(190,94,62,.2);
+    animation:pulse 1.8s ease-in-out infinite;
+  }
+
   /* Feature 4: Drijvende sparkles in intermezzo (pure CSS) */
   .sparkles{
     position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0;
@@ -949,6 +990,9 @@
       </div>
       <div class="h-right">6 dagen · tap voor details</div>
     </div>
+
+    <!-- Feature 5: Sticky day-nav chips -->
+    <nav class="day-nav" id="dayNav" aria-label="Snel naar dag"></nav>
 
     <!-- Feature 3: Marquee feiten-ticker -->
     <div class="marquee" aria-hidden="true">
@@ -1524,6 +1568,40 @@ function tickClock(){
 }
 tickClock();
 setInterval(tickClock, 30000);
+
+/* Feature 5: Day-nav chip-bar — jump-to-day */
+function buildDayNav(){
+  const nav = document.getElementById('dayNav');
+  if(!nav) return;
+  const SHORT = {'2026-06-02':'Di','2026-06-03':'Wo','2026-06-04':'Do','2026-06-05':'Vr','2026-06-06':'Za','2026-06-07':'Zo'};
+  const today = new Date().toISOString().slice(0,10);
+  nav.innerHTML = `<div class="day-nav-inner">` + DAYS.map(d=>{
+    const isToday = d===today;
+    const dateNum = parseInt(d.slice(8,10),10);
+    return `<button class="chip${isToday?' today':''}" data-jump="${d}">`+
+      `${isToday?'<span class="pulse"></span>':''}`+
+      `${SHORT[d]} <span class="d-date">${dateNum}</span>`+
+      `</button>`;
+  }).join('') + `</div>`;
+
+  nav.addEventListener('click', e=>{
+    const c = e.target.closest('.chip'); if(!c) return;
+    const d = c.getAttribute('data-jump');
+    const card = document.querySelector(`.day[data-date="${d}"]`);
+    if(card){
+      if(!card.classList.contains('open')){
+        card.classList.add('open');
+        card.querySelector('.day-cover')?.setAttribute('aria-expanded','true');
+        if (typeof openDays !== 'undefined') openDays.add(d);
+      }
+      const top = card.getBoundingClientRect().top + window.scrollY - 110;
+      window.scrollTo({top, behavior:'smooth'});
+      nav.querySelectorAll('.chip').forEach(x=>x.classList.remove('active'));
+      c.classList.add('active');
+    }
+  });
+}
+buildDayNav();
 
 /* Feature 2: "Nu in Porto Petro" — live current weather (ververst elke 5 min) */
 const NOW_URL = `https://api.open-meteo.com/v1/forecast?latitude=${LAT}&longitude=${LON}&current=temperature_2m,weathercode&timezone=${encodeURIComponent(TZ)}`;
