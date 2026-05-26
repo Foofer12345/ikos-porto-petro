@@ -690,6 +690,38 @@
   .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.2,.6,.2,1), transform .8s cubic-bezier(.2,.6,.2,1)}
   .reveal.in{opacity:1;transform:none}
 
+  /* Feature 3: Marquee feiten-ticker (pure CSS) */
+  .marquee{
+    overflow:hidden;
+    background:var(--bg-dim);
+    border-radius:var(--r-pill);
+    margin:0 0 18px;
+    padding:9px 0;
+    border:1px solid var(--line);
+    -webkit-mask: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+            mask: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  }
+  .marquee-track{
+    display:flex;gap:0;width:max-content;
+    animation: marquee-roll 38s linear infinite;
+  }
+  .m-item{
+    flex:0 0 auto;padding:0 16px;
+    font-size:10.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--ink-soft);
+    display:inline-flex;align-items:center;gap:14px;
+  }
+  .m-item::after{
+    content:"✦";color:var(--gold);font-size:9px;margin-left:14px;
+  }
+  @keyframes marquee-roll{
+    0%{transform:translateX(0)}
+    100%{transform:translateX(-50%)}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .marquee-track{animation:none}
+  }
+
   /* Feature 2: Live "Nu in Porto Petro" strip */
   .now-strip{ max-width:680px; margin:14px auto 0; padding:0 20px; }
   .now-inner{
@@ -894,6 +926,29 @@
       </div>
       <div class="h-right">6 dagen · tap voor details</div>
     </div>
+
+    <!-- Feature 3: Marquee feiten-ticker -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span class="m-item">5 zwembaden</span>
+        <span class="m-item">2 zandige baaien</span>
+        <span class="m-item">Mondragó natuurpark</span>
+        <span class="m-item">Anne Semonin Paris spa</span>
+        <span class="m-item">Michelin-gecureerd</span>
+        <span class="m-item">60 km van Palma</span>
+        <span class="m-item">Nieuw voor 2026</span>
+        <span class="m-item">Pla i Llevant DO</span>
+        <span class="m-item">5 zwembaden</span>
+        <span class="m-item">2 zandige baaien</span>
+        <span class="m-item">Mondragó natuurpark</span>
+        <span class="m-item">Anne Semonin Paris spa</span>
+        <span class="m-item">Michelin-gecureerd</span>
+        <span class="m-item">60 km van Palma</span>
+        <span class="m-item">Nieuw voor 2026</span>
+        <span class="m-item">Pla i Llevant DO</span>
+      </div>
+    </div>
+
     <div class="days" id="days">
       <div class="skeleton"><div class="sk-cover"></div></div>
       <div class="skeleton"><div class="sk-cover"></div></div>
