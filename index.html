@@ -690,6 +690,12 @@
   .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.2,.6,.2,1), transform .8s cubic-bezier(.2,.6,.2,1)}
   .reveal.in{opacity:1;transform:none}
 
+  /* Feature 9: Confetti canvas */
+  #confetti{
+    position:fixed;inset:0;pointer-events:none;z-index:200;
+    width:100%;height:100%;
+  }
+
   /* Feature 8: Hourly sparkline per dag */
   .hourly{
     margin:18px 0 6px;
@@ -987,6 +993,9 @@
 
 <!-- Scroll progress bar -->
 <div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- Feature 9: Confetti overlay -->
+<canvas id="confetti" aria-hidden="true"></canvas>
 
 <!-- Feature 7: Time-of-day tint overlay -->
 <div class="time-tint" id="timeTint" aria-hidden="true"></div>
@@ -1702,6 +1711,7 @@ async function run(){
 
   const score = overallScore(agg);
   animateNumber(document.getElementById('gradeBig'), score, 1);
+  if(score >= 9.5) setTimeout(fireConfetti, 1300);    // ★ celebration moment
   document.getElementById('gradeBlurb').textContent = blurbFor(score, agg);
   document.getElementById('metaSources').textContent = ok;
   document.getElementById('srcLine').textContent = `${ok} live weermodellen · ververst bij elke opening`;
@@ -1725,6 +1735,60 @@ function tickClock(){
 }
 tickClock();
 setInterval(tickClock, 30000);
+
+/* Feature 9: Confetti burst (canvas, geen libs) — bij grade ≥ 9.5, eenmalig per sessie */
+let confettiFired = false;
+function fireConfetti(){
+  if(confettiFired) return;
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  confettiFired = true;
+  const c = document.getElementById('confetti'); if(!c) return;
+  const dpr = window.devicePixelRatio || 1;
+  c.width  = innerWidth  * dpr;
+  c.height = innerHeight * dpr;
+  c.style.width  = innerWidth  + 'px';
+  c.style.height = innerHeight + 'px';
+  const ctx = c.getContext('2d'); ctx.scale(dpr, dpr);
+  const W = innerWidth, H = innerHeight;
+  const COLORS = ['#C39653','#EBD2A0','#E58D5B','#FAF6EC','#BE5E3E','#D9BD80'];
+  const parts = [];
+  for(let i=0;i<90;i++){
+    parts.push({
+      x: W/2 + (Math.random()-.5)*W*0.4,
+      y: H*0.34,
+      vx: (Math.random()-.5)*9,
+      vy: -Math.random()*10 - 4,
+      g: 0.32 + Math.random()*0.18,
+      s: 4 + Math.random()*5,
+      a: Math.random()*Math.PI*2,
+      va: (Math.random()-.5)*0.3,
+      col: COLORS[i%COLORS.length],
+      shape: Math.random()<.6 ? 'rect' : 'circle',
+      life: 1,
+    });
+  }
+  const start = performance.now();
+  function frame(t){
+    const elapsed = (t-start)/1000;
+    ctx.clearRect(0,0,W,H);
+    let alive = 0;
+    for(const p of parts){
+      p.vy += p.g; p.x += p.vx; p.y += p.vy; p.a += p.va;
+      p.life = Math.max(0, 1 - elapsed/3.4);
+      if(p.life<=0) continue;
+      alive++;
+      ctx.save();
+      ctx.globalAlpha = Math.min(1, p.life*1.4);
+      ctx.translate(p.x, p.y); ctx.rotate(p.a); ctx.fillStyle = p.col;
+      if(p.shape==='rect') ctx.fillRect(-p.s/2, -p.s/2, p.s, p.s*0.5);
+      else { ctx.beginPath(); ctx.arc(0,0,p.s*0.45,0,Math.PI*2); ctx.fill(); }
+      ctx.restore();
+    }
+    if(alive>0 && elapsed<4) requestAnimationFrame(frame);
+    else ctx.clearRect(0,0,W,H);
+  }
+  requestAnimationFrame(frame);
+}
 
 /* Feature 7: Time-of-day achtergrond-tint */
 function applyTimeTint(){
