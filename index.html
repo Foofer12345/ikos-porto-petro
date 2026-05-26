@@ -1368,7 +1368,7 @@ const fmtNL=(n,d=1)=>n==null?'—':Number(n).toFixed(d).replace('.',',');
 
 async function fetchOne(s){
   const ctl = new AbortController();
-  const to  = setTimeout(()=>ctl.abort(), 7000);   // langzamer model = sla over, blokkeer niet
+  const to  = setTimeout(()=>ctl.abort(), 10000);   // 10s — wat ruimer voor trage API
   try{
     const r=await fetch(s.url, {signal:ctl.signal});
     clearTimeout(to);
@@ -1381,6 +1381,20 @@ async function fetchOne(s){
   }
 }
 const fetchAll=()=>Promise.all(SOURCES.map(fetchOne));
+
+/* localStorage cache zodat we ook bij API-uitval iets tonen */
+const CACHE_KEY = 'ikos-pp-agg-v1';
+function cacheSave(agg){
+  try{ localStorage.setItem(CACHE_KEY, JSON.stringify({ts: Date.now(), agg})); }catch{}
+}
+function cacheLoad(){
+  try{
+    const raw = localStorage.getItem(CACHE_KEY);
+    if(!raw) return null;
+    const obj = JSON.parse(raw);
+    return obj && obj.agg ? obj : null;
+  }catch{ return null; }
+}
 
 function aggregate(results){
   const per={};
@@ -1725,9 +1739,31 @@ async function run(){
   document.getElementById('heroLiveText').textContent='12 bronnen…';
   document.getElementById('topbarStatus').textContent='Live…';
 
+  // Toon direct gecachte data zodat de gebruiker geen leeg scherm ziet
+  const cached = cacheLoad();
+  let usingCache = false;
+  if(cached && cached.agg){
+    const cAgg = cached.agg;
+    const cBest = topDay(cAgg);
+    daysEl.innerHTML = DAYS.map((d,i)=>renderDay(d, cAgg, i, cBest)).join('');
+    applyOpen();
+    autoExpandToday();
+    usingCache = true;
+  }
+
   const results = await fetchAll();
   const ok = results.filter(r=>r.ok).length;
-  const agg = aggregate(results);
+  let agg;
+  let fromCache = false;
+  if(ok > 0){
+    agg = aggregate(results);
+    cacheSave(agg);
+  } else if(cached && cached.agg){
+    agg = cached.agg;
+    fromCache = true;
+  } else {
+    agg = aggregate(results); // alles leeg, toont "—"
+  }
 
   const best = topDay(agg);
   daysEl.innerHTML = DAYS.map((d,i)=>renderDay(d, agg, i, best)).join('');
@@ -1738,12 +1774,20 @@ async function run(){
   animateNumber(document.getElementById('gradeBig'), score, 1);
   if(score >= 9.5) setTimeout(fireConfetti, 1300);    // ★ celebration moment
   document.getElementById('gradeBlurb').textContent = blurbFor(score, agg);
-  document.getElementById('metaSources').textContent = ok;
-  document.getElementById('srcLine').textContent = `${ok} live weermodellen · ververst bij elke opening`;
-
-  heroLive.classList.remove('loading');
-  document.getElementById('heroLiveText').textContent = ok + ' van 12 bronnen';
-  document.getElementById('topbarStatus').textContent = 'Live · ' + ok;
+  if(fromCache){
+    const minsAgo = Math.round((Date.now() - cached.ts) / 60000);
+    document.getElementById('metaSources').textContent = '—';
+    document.getElementById('srcLine').textContent = `Weerdienst tijdelijk offline · laatste data ${minsAgo} min geleden`;
+    heroLive.classList.remove('loading');
+    document.getElementById('heroLiveText').textContent = 'Cache · weerdienst offline';
+    document.getElementById('topbarStatus').textContent = 'Cache';
+  } else {
+    document.getElementById('metaSources').textContent = ok;
+    document.getElementById('srcLine').textContent = `${ok} live weermodellen · ververst bij elke opening`;
+    heroLive.classList.remove('loading');
+    document.getElementById('heroLiveText').textContent = ok + ' van 12 bronnen';
+    document.getElementById('topbarStatus').textContent = 'Live · ' + ok;
+  }
 
   setSunInfo(agg);
   setFresh();
