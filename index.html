@@ -108,11 +108,19 @@
   }
   .topbar-status{
     font-size:11px;font-weight:600;letter-spacing:.08em;color:var(--ink-soft);
-    display:flex;align-items:center;gap:6px;
+    display:flex;align-items:center;gap:8px;
   }
   .topbar-status .dot{
     width:6px;height:6px;border-radius:50%;background:var(--emerald);
     box-shadow:0 0 0 3px rgba(59,122,92,.2);animation:pulse 2s ease-in-out infinite;
+  }
+  .topbar-status .t-clock{
+    font-variant-numeric:tabular-nums;color:var(--ink);
+    display:inline-flex;align-items:center;gap:6px;
+    padding-right:8px;border-right:1px solid var(--line);
+  }
+  .topbar-status .t-clock .t-l{
+    font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:700;
   }
   @keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.25);opacity:.7}}
 
@@ -746,7 +754,10 @@
 <header class="topbar" id="topbar">
   <div class="topbar-inner">
     <div class="topbar-title"><em>Claire</em> &amp; Michiel · Porto Petro</div>
-    <div class="topbar-status"><span class="dot"></span><span id="topbarStatus">Live</span></div>
+    <div class="topbar-status">
+      <span class="t-clock"><span class="t-l">PMI</span><span id="topbarClock">—</span></span>
+      <span class="dot"></span><span id="topbarStatus">Live</span>
+    </div>
   </div>
 </header>
 
@@ -1337,6 +1348,17 @@ async function run(){
   setFresh();
   onScroll();
 }
+
+/* Mallorca-klok in topbar (lokale tijd) */
+function tickClock(){
+  const el = document.getElementById('topbarClock');
+  if(!el) return;
+  el.textContent = new Date().toLocaleTimeString('nl-NL',{
+    hour:'2-digit', minute:'2-digit', timeZone:'Europe/Madrid'
+  });
+}
+tickClock();
+setInterval(tickClock, 30000);
 
 document.addEventListener('visibilitychange', ()=>{ if(!document.hidden) run(); });
 window.addEventListener('pageshow', run);
