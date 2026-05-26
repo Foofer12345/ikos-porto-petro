@@ -690,6 +690,58 @@
   .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.2,.6,.2,1), transform .8s cubic-bezier(.2,.6,.2,1)}
   .reveal.in{opacity:1;transform:none}
 
+  /* Feature 6: Aftellen tot de trip */
+  .countdown-card{
+    max-width:680px;margin:14px auto 0;padding:0 20px;
+  }
+  .cd-inner{
+    background:linear-gradient(135deg, #0F1115 0%, #1A2333 100%);
+    color:var(--light);
+    border-radius:var(--r-lg);
+    padding:24px 22px;
+    position:relative;overflow:hidden;
+    box-shadow:0 8px 32px rgba(15,17,21,.2);
+  }
+  .cd-inner::before{
+    content:"";position:absolute;top:-30px;right:-30px;
+    width:120px;height:120px;border-radius:50%;
+    background:radial-gradient(circle, rgba(195,150,83,.32), transparent 70%);
+    pointer-events:none;
+  }
+  .cd-inner::after{
+    content:"";position:absolute;bottom:-40px;left:-40px;
+    width:100px;height:100px;border-radius:50%;
+    background:radial-gradient(circle, rgba(14,71,104,.4), transparent 70%);
+    pointer-events:none;
+  }
+  .cd-kicker{
+    font-size:9.5px;font-weight:700;letter-spacing:.36em;
+    text-transform:uppercase;color:var(--gold-light);position:relative;
+  }
+  .cd-big{
+    font-family:var(--font-display);font-weight:200;
+    font-size:72px;line-height:.9;letter-spacing:-.04em;
+    margin:8px 0 2px;position:relative;
+    font-variation-settings:"opsz" 96, "wght" 200;
+    background:linear-gradient(180deg, #FFFFFF 0%, #E8D2A4 100%);
+    -webkit-background-clip:text;background-clip:text;
+    color:transparent;-webkit-text-fill-color:transparent;
+  }
+  .cd-label{
+    font-family:var(--font-display);font-style:italic;font-size:14px;
+    color:var(--gold-light);position:relative;
+    font-variation-settings:"opsz" 14, "wght" 400;
+  }
+  .cd-ticker{
+    margin-top:12px;font-size:12px;font-weight:600;letter-spacing:.04em;
+    color:var(--light-2);font-variant-numeric:tabular-nums;position:relative;
+    display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+  }
+  .cd-ticker .seg{display:inline-flex;align-items:baseline;gap:3px}
+  .cd-ticker .seg b{color:var(--light);font-weight:600;font-size:13px}
+  .cd-ticker .seg span{font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-light);font-weight:700}
+  .cd-ticker .pip{width:3px;height:3px;border-radius:50%;background:var(--gold);opacity:.6}
+
   /* Feature 5: Day-nav chip-bar (sticky) */
   .day-nav{
     position:sticky;top:54px;z-index:20;
@@ -958,6 +1010,22 @@
     <div class="meta">
       <span><strong id="metaSources">12</strong> bronnen</span>
       <span><strong id="metaRefresh">—</strong> bijgewerkt</span>
+    </div>
+  </div>
+</section>
+
+<!-- Feature 6: Live countdown to the trip -->
+<section class="countdown-card reveal">
+  <div class="cd-inner">
+    <div class="cd-kicker" id="cdKicker">Aftellen tot Mallorca</div>
+    <div class="cd-big tabnum" id="cdBig">—</div>
+    <div class="cd-label" id="cdLabel">dagen</div>
+    <div class="cd-ticker" id="cdTicker">
+      <span class="seg"><b>—</b><span>u</span></span>
+      <span class="pip"></span>
+      <span class="seg"><b>—</b><span>min</span></span>
+      <span class="pip"></span>
+      <span class="seg"><b>—</b><span>sec</span></span>
     </div>
   </div>
 </section>
@@ -1568,6 +1636,54 @@ function tickClock(){
 }
 tickClock();
 setInterval(tickClock, 30000);
+
+/* Feature 6: Live aftellen tot de trip */
+const TRIP_START = new Date('2026-06-02T06:00:00+02:00');
+const TRIP_END   = new Date('2026-06-07T18:35:00+02:00');
+function tickCountdown(){
+  const big = document.getElementById('cdBig');
+  const label = document.getElementById('cdLabel');
+  const ticker = document.getElementById('cdTicker');
+  const kicker = document.getElementById('cdKicker');
+  if(!big) return;
+  const now = new Date();
+
+  if(now < TRIP_START){
+    const diff = TRIP_START - now;
+    const days  = Math.floor(diff/86400000);
+    const hours = Math.floor((diff%86400000)/3600000);
+    const mins  = Math.floor((diff%3600000)/60000);
+    const secs  = Math.floor((diff%60000)/1000);
+    kicker.textContent = 'Aftellen tot Mallorca';
+    big.textContent = String(days);
+    label.textContent = days===1 ? 'dag tot vertrek' : 'dagen tot vertrek';
+    ticker.innerHTML =
+      `<span class="seg"><b>${String(hours).padStart(2,'0')}</b><span>u</span></span>`+
+      `<span class="pip"></span>`+
+      `<span class="seg"><b>${String(mins).padStart(2,'0')}</b><span>min</span></span>`+
+      `<span class="pip"></span>`+
+      `<span class="seg"><b>${String(secs).padStart(2,'0')}</b><span>sec</span></span>`;
+  } else if(now < TRIP_END){
+    const dayOfTrip = Math.floor((now - TRIP_START)/86400000) + 1;
+    kicker.textContent = `Dag ${dayOfTrip} van 6 · jullie zijn er ★`;
+    const rem = TRIP_END - now;
+    const remD = Math.floor(rem/86400000);
+    const remH = Math.floor((rem%86400000)/3600000);
+    big.textContent = String(remD);
+    label.textContent = remD===1 ? 'dag nog te gaan' : 'dagen nog te gaan';
+    ticker.innerHTML =
+      `<span class="seg"><b>${remH}</b><span>uur</span></span>`+
+      `<span class="pip"></span>`+
+      `<span class="seg"><b>nu</b><span>op Mallorca</span></span>`;
+  } else {
+    kicker.textContent = 'Bedankt voor de mooie reis';
+    big.textContent = '∞';
+    label.textContent = 'recuerdos';
+    ticker.innerHTML = '<span class="seg"><b>vamos a volver</b></span>';
+  }
+}
+tickCountdown();
+setInterval(tickCountdown, 1000);
 
 /* Feature 5: Day-nav chip-bar — jump-to-day */
 function buildDayNav(){
