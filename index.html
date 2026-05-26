@@ -1425,27 +1425,40 @@ async function fetchMetNo(){
     const j=await r.json();
     const ts=j?.properties?.timeseries; if(!ts?.length) return null;
     // Bouw zelfde per-dag structuur als aggregate()
-    const per={};
-    for(const d of DAYS) per[d]={hi:[],lo:[],p:[],pp:[],w:[],sun:[],wc:[],sunrise:null,sunset:null,n:0,hourly:[]};
+    const per={}; const clouds={};
+    for(const d of DAYS){
+      per[d]={hi:[],lo:[],p:[],pp:[],w:[],sun:[],wc:[],sunrise:null,sunset:null,n:0,hourly:[]};
+      clouds[d]=[]; // bewolking voor zon-schatting
+    }
     for(const e of ts){
-      const tIso=e.time; // "2026-06-02T18:00:00Z"
+      const tIso=e.time;
       const d=tIso.slice(0,10);
       if(!per[d]) continue;
       const inst=e.data?.instant?.details; if(!inst) continue;
-      const at=inst.air_temperature, wnd=inst.wind_speed; // m/s
+      const at=inst.air_temperature, wnd=inst.wind_speed;
+      const cloud=inst.cloud_area_fraction;     // 0-100 %
       if(at!=null){ per[d].hi.push(at); per[d].lo.push(at); }
-      if(wnd!=null) per[d].w.push(wnd*3.6); // m/s → km/u
-      // regen (volgende 1 uur)
+      if(wnd!=null) per[d].w.push(wnd*3.6);
+      if(cloud!=null){
+        const hr = parseInt(tIso.slice(11,13),10);
+        if(hr>=7 && hr<=21) clouds[d].push(cloud);  // alleen daglicht-uren
+      }
       const p1=e.data?.next_1_hours?.details?.precipitation_amount;
       if(p1!=null) per[d].p.push(p1);
-      // weersymbool
       const sym=e.data?.next_1_hours?.summary?.symbol_code || e.data?.next_6_hours?.summary?.symbol_code;
       if(sym) per[d].wc.push(metnoSymbolToWC(sym));
-      // hourly per dag (voor sparkline)
       if(at!=null && per[d].hourly.length<24){
         per[d].hourly.push({h: parseInt(tIso.slice(11,13),10), t: at});
       }
-      per[d].n=1; // markeer dat dag data heeft
+      per[d].n=1;
+    }
+    // Zonuren schatten uit bewolking (Mallorca juni: ±15u dag)
+    for(const d of DAYS){
+      if(clouds[d].length){
+        const avgCloud = clouds[d].reduce((a,b)=>a+b,0) / clouds[d].length;
+        const estSunHours = 15 * (1 - avgCloud/100);
+        per[d].sun = [estSunHours * 3600]; // opslaan als seconden (zelfde unit als Open-Meteo)
+      }
     }
     // Verwerk hi/lo correct: hi = max, lo = min
     for(const d of DAYS){
@@ -2066,34 +2079,48 @@ function buildDayNav(){
 }
 buildDayNav();
 
-/* Feature 2: "Nu in Porto Petro" — live current weather (ververst elke 5 min) */
+/* Feature 2: "Nu in Porto Petro" — live current weather (ververst elke 5 min)
+   Primair: Open-Meteo current · Fallback: MET Norway eerste timeseries entry */
 const NOW_URL = `https://api.open-meteo.com/v1/forecast?latitude=${LAT}&longitude=${LON}&current=temperature_2m,weather_code&timezone=${encodeURIComponent(TZ)}`;
-async function refreshNow(retry=true){
+function renderNow(t, wc){
+  const [ic, phrase] = wxIcon(wc, 0);
+  const set = (id, val)=>{ const e=document.getElementById(id); if(e) e.textContent = val; };
+  if(t!=null)  set('nowTemp', Math.round(t));
+  if(phrase)   set('nowPhrase', phrase);
+  if(ic)       set('nowIcon', ic);
+  set('nowClock', new Date().toLocaleTimeString('nl-NL',{hour:'2-digit',minute:'2-digit',timeZone:'Europe/Madrid'}));
+}
+async function refreshNow(){
+  // 1) Open-Meteo
   try{
-    const ctl = new AbortController();
-    const to  = setTimeout(()=>ctl.abort(), 8000);
-    const r   = await fetch(NOW_URL, {signal:ctl.signal});
-    clearTimeout(to);
-    if(!r.ok){
-      if(retry) setTimeout(()=>refreshNow(false), 4000);   // bij rate-limit één keer opnieuw
-      return;
+    const ctl=new AbortController(); setTimeout(()=>ctl.abort(),8000);
+    const r=await fetch(NOW_URL,{signal:ctl.signal});
+    if(r.ok){
+      const j=await r.json();
+      const cur=j.current;
+      if(cur && cur.temperature_2m!=null){
+        renderNow(cur.temperature_2m, cur.weather_code ?? cur.weathercode);
+        return;
+      }
     }
-    const j = await r.json();
-    const cur = j.current; if(!cur) return;
-    const t  = cur.temperature_2m;
-    const wc = cur.weather_code ?? cur.weathercode;
-    const [ic, phrase] = wxIcon(wc, 0);
-    const set = (id, val)=>{ const e=document.getElementById(id); if(e) e.textContent = val; };
-    if(t!=null)      set('nowTemp', Math.round(t));
-    if(phrase)       set('nowPhrase', phrase);
-    if(ic)           set('nowIcon', ic);
-    set('nowClock', new Date().toLocaleTimeString('nl-NL',{hour:'2-digit',minute:'2-digit',timeZone:'Europe/Madrid'}));
-  }catch{
-    if(retry) setTimeout(()=>refreshNow(false), 4000);     // netwerk-hiccup: één retry
-  }
+  }catch{}
+  // 2) MET Norway als fallback
+  try{
+    const ctl=new AbortController(); setTimeout(()=>ctl.abort(),8000);
+    const r=await fetch(METNO_URL,{signal:ctl.signal});
+    if(r.ok){
+      const j=await r.json();
+      const first=j?.properties?.timeseries?.[0];
+      if(first){
+        const t=first.data?.instant?.details?.air_temperature;
+        const sym=first.data?.next_1_hours?.summary?.symbol_code || first.data?.next_6_hours?.summary?.symbol_code;
+        renderNow(t, metnoSymbolToWC(sym));
+      }
+    }
+  }catch{}
 }
 refreshNow();
-setInterval(()=>refreshNow(true), 300000);
+setInterval(refreshNow, 300000);
 
 document.addEventListener('visibilitychange', ()=>{ if(!document.hidden) run(); });
 window.addEventListener('pageshow', run);
