@@ -1396,6 +1396,79 @@ function cacheLoad(){
   }catch{ return null; }
 }
 
+/* MET Norway fallback (als Open-Meteo onbereikbaar is) */
+const METNO_URL = `https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=${LAT}&lon=${LON}`;
+function metnoSymbolToWC(sym){
+  if(!sym) return 3;
+  const s = String(sym).toLowerCase();
+  if(s.startsWith('clearsky'))     return 0;
+  if(s.startsWith('fair'))         return 1;
+  if(s.startsWith('partlycloudy')) return 2;
+  if(s.startsWith('cloudy'))       return 3;
+  if(s.startsWith('fog'))          return 45;
+  if(s.includes('drizzle'))        return 51;
+  if(s.includes('lightrain'))      return 61;
+  if(s.includes('heavyrain'))      return 65;
+  if(s.includes('rain'))           return 63;
+  if(s.includes('thunder'))        return 95;
+  if(s.includes('snow'))           return 71;
+  if(s.includes('sleet'))          return 67;
+  return 3;
+}
+async function fetchMetNo(){
+  try{
+    const ctl=new AbortController();
+    const to=setTimeout(()=>ctl.abort(), 12000);
+    const r=await fetch(METNO_URL, {signal:ctl.signal});
+    clearTimeout(to);
+    if(!r.ok) return null;
+    const j=await r.json();
+    const ts=j?.properties?.timeseries; if(!ts?.length) return null;
+    // Bouw zelfde per-dag structuur als aggregate()
+    const per={};
+    for(const d of DAYS) per[d]={hi:[],lo:[],p:[],pp:[],w:[],sun:[],wc:[],sunrise:null,sunset:null,n:0,hourly:[]};
+    for(const e of ts){
+      const tIso=e.time; // "2026-06-02T18:00:00Z"
+      const d=tIso.slice(0,10);
+      if(!per[d]) continue;
+      const inst=e.data?.instant?.details; if(!inst) continue;
+      const at=inst.air_temperature, wnd=inst.wind_speed; // m/s
+      if(at!=null){ per[d].hi.push(at); per[d].lo.push(at); }
+      if(wnd!=null) per[d].w.push(wnd*3.6); // m/s → km/u
+      // regen (volgende 1 uur)
+      const p1=e.data?.next_1_hours?.details?.precipitation_amount;
+      if(p1!=null) per[d].p.push(p1);
+      // weersymbool
+      const sym=e.data?.next_1_hours?.summary?.symbol_code || e.data?.next_6_hours?.summary?.symbol_code;
+      if(sym) per[d].wc.push(metnoSymbolToWC(sym));
+      // hourly per dag (voor sparkline)
+      if(at!=null && per[d].hourly.length<24){
+        per[d].hourly.push({h: parseInt(tIso.slice(11,13),10), t: at});
+      }
+      per[d].n=1; // markeer dat dag data heeft
+    }
+    // Verwerk hi/lo correct: hi = max, lo = min
+    for(const d of DAYS){
+      const all=per[d].hi.slice();
+      if(all.length){
+        per[d].hi=[Math.max(...all)];
+        per[d].lo=[Math.min(...all)];
+      }
+      // som regen per dag
+      if(per[d].p.length){
+        per[d].p=[per[d].p.reduce((a,b)=>a+b,0)];
+      }
+      // wc: kies meestvoorkomend
+      if(per[d].wc.length){
+        const f={};
+        per[d].wc.forEach(c=>{f[c]=(f[c]||0)+1});
+        per[d].wc=[+Object.keys(f).sort((a,b)=>f[b]-f[a])[0]];
+      }
+    }
+    return per;
+  }catch{ return null; }
+}
+
 function aggregate(results){
   const per={};
   for(const d of DAYS) per[d]={hi:[],lo:[],p:[],pp:[],w:[],sun:[],wc:[],sunrise:null,sunset:null,n:0,hourly:[]};
@@ -1755,14 +1828,23 @@ async function run(){
   const ok = results.filter(r=>r.ok).length;
   let agg;
   let fromCache = false;
+  let fromMetNo = false;
   if(ok > 0){
     agg = aggregate(results);
     cacheSave(agg);
-  } else if(cached && cached.agg){
-    agg = cached.agg;
-    fromCache = true;
   } else {
-    agg = aggregate(results); // alles leeg, toont "—"
+    // Open-Meteo geeft niets — probeer MET Norway als backup
+    const metAgg = await fetchMetNo();
+    if(metAgg){
+      agg = metAgg;
+      cacheSave(agg);
+      fromMetNo = true;
+    } else if(cached && cached.agg){
+      agg = cached.agg;
+      fromCache = true;
+    } else {
+      agg = aggregate(results); // alles leeg, toont "—"
+    }
   }
 
   const best = topDay(agg);
@@ -1774,17 +1856,21 @@ async function run(){
   animateNumber(document.getElementById('gradeBig'), score, 1);
   if(score >= 9.5) setTimeout(fireConfetti, 1300);    // ★ celebration moment
   document.getElementById('gradeBlurb').textContent = blurbFor(score, agg);
-  if(fromCache){
+  heroLive.classList.remove('loading');
+  if(fromMetNo){
+    document.getElementById('metaSources').textContent = '1';
+    document.getElementById('srcLine').textContent = 'MET Norway · backup-bron (Open-Meteo offline)';
+    document.getElementById('heroLiveText').textContent = 'MET Norway · backup';
+    document.getElementById('topbarStatus').textContent = 'Backup';
+  } else if(fromCache){
     const minsAgo = Math.round((Date.now() - cached.ts) / 60000);
     document.getElementById('metaSources').textContent = '—';
     document.getElementById('srcLine').textContent = `Weerdienst tijdelijk offline · laatste data ${minsAgo} min geleden`;
-    heroLive.classList.remove('loading');
     document.getElementById('heroLiveText').textContent = 'Cache · weerdienst offline';
     document.getElementById('topbarStatus').textContent = 'Cache';
   } else {
     document.getElementById('metaSources').textContent = ok;
     document.getElementById('srcLine').textContent = `${ok} live weermodellen · ververst bij elke opening`;
-    heroLive.classList.remove('loading');
     document.getElementById('heroLiveText').textContent = ok + ' van 12 bronnen';
     document.getElementById('topbarStatus').textContent = 'Live · ' + ok;
   }
