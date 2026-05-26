@@ -690,6 +690,19 @@
   .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.2,.6,.2,1), transform .8s cubic-bezier(.2,.6,.2,1)}
   .reveal.in{opacity:1;transform:none}
 
+  /* Feature 7: Time-of-day achtergrond-tint */
+  .time-tint{
+    position:fixed;inset:0;pointer-events:none;z-index:99;
+    background:transparent;
+    opacity:0;
+    transition:opacity 2s ease, background 2s ease;
+    mix-blend-mode:multiply;
+  }
+  .time-tint.on{opacity:.06}
+  @media (prefers-reduced-motion: reduce){
+    .time-tint{transition:none}
+  }
+
   /* Feature 6: Aftellen tot de trip */
   .countdown-card{
     max-width:680px;margin:14px auto 0;padding:0 20px;
@@ -950,6 +963,9 @@
 
 <!-- Scroll progress bar -->
 <div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- Feature 7: Time-of-day tint overlay -->
+<div class="time-tint" id="timeTint" aria-hidden="true"></div>
 
 <!-- Sticky condensed header -->
 <header class="topbar" id="topbar">
@@ -1636,6 +1652,25 @@ function tickClock(){
 }
 tickClock();
 setInterval(tickClock, 30000);
+
+/* Feature 7: Time-of-day achtergrond-tint */
+function applyTimeTint(){
+  const el = document.getElementById('timeTint');
+  if(!el) return;
+  const h = parseInt(new Date().toLocaleString('en-GB',{hour:'2-digit',hour12:false,timeZone:'Europe/Madrid'}),10);
+  let tint;
+  if(h<6)        tint = '#0E1F3A';                                                   // nacht
+  else if(h<8)   tint = 'linear-gradient(180deg,#F0A77A,#FBD89C)';                   // dageraad
+  else if(h<11)  tint = '#FFE7A8';                                                   // ochtend
+  else if(h<17)  tint = 'transparent';                                               // dag — geen tint
+  else if(h<20)  tint = 'linear-gradient(180deg,#F2C18B,#E58D5B)';                   // schemer
+  else if(h<22)  tint = 'linear-gradient(180deg,#52375D,#1F2E47)';                   // avond
+  else           tint = '#0E1F3A';                                                   // nacht
+  el.style.background = tint;
+  el.classList.toggle('on', tint !== 'transparent');
+}
+applyTimeTint();
+setInterval(applyTimeTint, 300000);
 
 /* Feature 6: Live aftellen tot de trip */
 const TRIP_START = new Date('2026-06-02T06:00:00+02:00');
