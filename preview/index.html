@@ -1,0 +1,1790 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+
+<title>Ikos Porto Petro · Jouw luxe Mallorca reisplanner · 2–7 juni 2026</title>
+<meta name="description" content="Premium dagelijkse reisgids voor je verblijf bij Ikos Porto Petro op Mallorca. Live weer, op-de-dag-afgestemde activiteiten, weekplan en tips — kalm, mooi en bruikbaar." />
+<meta name="theme-color" content="#082A47" />
+<meta name="color-scheme" content="light only" />
+<link rel="canonical" href="https://foofer12345.github.io/ikos-porto-petro/preview/" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="nl_NL" />
+<meta property="og:title" content="Ikos Porto Petro · Jouw luxe Mallorca reisplanner" />
+<meta property="og:description" content="Premium dagelijkse reisgids voor je verblijf bij Ikos Porto Petro · 2–7 juni 2026." />
+<meta property="og:image" content="https://foofer12345.github.io/ikos-porto-petro/resort-hero.jpg" />
+<meta property="og:url" content="https://foofer12345.github.io/ikos-porto-petro/preview/" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Ikos Porto Petro · Mallorca reisplanner" />
+<meta name="twitter:description" content="Dagelijkse luxe reisgids · weer · activiteiten · weekplan." />
+<meta name="twitter:image" content="https://foofer12345.github.io/ikos-porto-petro/resort-hero.jpg" />
+
+<!-- PWA -->
+<link rel="manifest" href="manifest.json" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="Ikos Porto Petro" />
+<link rel="apple-touch-icon" href="../icon-192.png" />
+<link rel="icon" type="image/png" sizes="192x192" href="../icon-192.png" />
+<link rel="icon" type="image/png" sizes="512x512" href="../icon-512.png" />
+
+<!-- Preload critical hero image -->
+<link rel="preload" as="image" href="../resort-hero.jpg" fetchpriority="high" />
+
+<!-- Display font (only this externally) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
+
+<style>
+  /* ─────────────────────────────────────────────────────────
+     DESIGN SYSTEM · Ikos Porto Petro Travel Companion
+     Mediterranean luxe · refined · serene · mobile-first
+     ───────────────────────────────────────────────────────── */
+  :root{
+    /* Color */
+    --sea-deep: #082A47;
+    --sea:      #1A5F8C;
+    --sea-mid:  #4E89AE;
+    --sea-pale: #C7DCE6;
+    --sand:     #E5D6B3;
+    --sand-warm:#D5C091;
+    --ivory:    #FAF3E2;
+    --ivory-2:  #F4ECD8;
+    --olive:    #6B7F4A;
+    --olive-soft:#9CB07C;
+    --coral:    #D9714E;
+    --coral-soft:#E89C7C;
+    --gold:     #B9914A;
+    --gold-soft:#D2B077;
+    --ink:      #15191F;
+    --ink-soft: #5C5849;
+    --ink-faint:#8F8A7A;
+    --line:     rgba(21,25,31,.10);
+    --line-soft:rgba(21,25,31,.05);
+    --bg:       #FAF7EE;
+    --bg-card:  #FFFFFF;
+
+    /* Typography */
+    --font-display: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+    --font-sans:    system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --fs-xs:   clamp(11px, 0.75rem + 0.05vw, 12px);
+    --fs-sm:   clamp(12px, 0.85rem + 0.05vw, 13.5px);
+    --fs-base: clamp(15px, 0.94rem + 0.18vw, 17px);
+    --fs-lg:   clamp(18px, 1.04rem + 0.25vw, 21px);
+    --fs-xl:   clamp(22px, 1.2rem + 0.6vw, 30px);
+    --fs-2xl:  clamp(28px, 1.5rem + 1.2vw, 40px);
+    --fs-3xl:  clamp(40px, 2.2rem + 3vw, 76px);
+    --fs-4xl:  clamp(56px, 3rem + 5vw, 112px);
+
+    /* Spacing */
+    --s-1: 4px;  --s-2: 8px;  --s-3: 12px;
+    --s-4: 16px; --s-5: 24px; --s-6: 32px;
+    --s-7: 48px; --s-8: 64px; --s-9: 96px; --s-10: 128px;
+
+    /* Radius */
+    --r-sm:  10px;
+    --r-md:  16px;
+    --r-lg:  22px;
+    --r-xl:  28px;
+    --r-pill:999px;
+
+    /* Shadow */
+    --sh-1: 0 1px 2px rgba(15,30,50,.04), 0 2px 8px rgba(15,30,50,.06);
+    --sh-2: 0 2px 4px rgba(15,30,50,.05), 0 12px 32px -8px rgba(15,30,50,.14);
+    --sh-3: 0 6px 12px rgba(15,30,50,.08), 0 30px 64px -16px rgba(15,30,50,.22);
+    --sh-deep:0 40px 80px -32px rgba(8,42,71,.45);
+
+    /* Motion */
+    --ease: cubic-bezier(.2,.7,.2,1);
+    --bottom-nav-h: 68px;
+  }
+
+  *,*::before,*::after{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg)}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    font-family:var(--font-sans);font-size:var(--fs-base);line-height:1.55;color:var(--ink);
+    background:var(--bg);
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+    overflow-x:hidden;
+    padding-bottom: calc(var(--bottom-nav-h) + env(safe-area-inset-bottom));
+  }
+  @media (min-width:900px){
+    body{padding-bottom:0}
+  }
+  img{max-width:100%;display:block;height:auto}
+  a{color:inherit;text-decoration:none}
+  button{font:inherit;color:inherit;background:none;border:none;cursor:pointer;padding:0}
+  ::selection{background:rgba(217,113,78,.25);color:var(--ink)}
+
+  :focus-visible{
+    outline:2.5px solid var(--coral);
+    outline-offset:3px;
+    border-radius:6px;
+  }
+  .skip{
+    position:absolute;top:-100px;left:8px;z-index:10000;
+    background:var(--ink);color:var(--ivory);padding:10px 16px;border-radius:8px;font-size:13px;font-weight:600;
+  }
+  .skip:focus{top:8px}
+
+  /* Containers */
+  .wrap{max-width:1100px;margin:0 auto;padding:0 clamp(16px,4vw,28px)}
+
+  /* Typography helpers */
+  .serif{font-family:var(--font-display);font-weight:400}
+  .it{font-style:italic}
+  .eyebrow{
+    font-family:var(--font-sans);font-size:11px;font-weight:600;
+    letter-spacing:.24em;text-transform:uppercase;color:var(--gold);
+  }
+  .h1{font-family:var(--font-display);font-weight:500;font-size:var(--fs-3xl);line-height:.95;letter-spacing:-.015em;margin:0}
+  .h2{font-family:var(--font-display);font-weight:500;font-size:var(--fs-2xl);line-height:1.05;letter-spacing:-.01em;margin:0 0 var(--s-3)}
+  .h2 em{font-style:italic;font-weight:400;color:var(--sea)}
+  .lead{font-family:var(--font-display);font-style:italic;font-size:var(--fs-lg);color:var(--ink-soft);margin:0}
+
+  /* ─────────────────────────────────────────────────────────
+     DESKTOP TOP NAV
+     ───────────────────────────────────────────────────────── */
+  .topnav{
+    position:sticky;top:0;z-index:60;
+    background:rgba(250,247,238,.82);
+    backdrop-filter:saturate(160%) blur(20px);
+    -webkit-backdrop-filter:saturate(160%) blur(20px);
+    border-bottom:1px solid var(--line);
+    display:none;
+  }
+  @media (min-width:900px){
+    .topnav{display:block}
+  }
+  .topnav-inner{
+    display:flex;align-items:center;justify-content:space-between;
+    height:64px;max-width:1100px;margin:0 auto;padding:0 28px;
+  }
+  .brand{
+    font-family:var(--font-display);font-size:20px;font-weight:500;letter-spacing:.02em;
+    display:flex;align-items:center;gap:8px;color:var(--ink);
+  }
+  .brand .b-mark{
+    font-size:9px;letter-spacing:.4em;text-transform:uppercase;font-family:var(--font-sans);font-weight:700;color:var(--gold);
+    border-left:1px solid var(--line);padding-left:10px;margin-left:4px;
+  }
+  .topnav-links{display:flex;gap:4px}
+  .topnav-links a{
+    padding:8px 14px;font-size:13px;font-weight:500;color:var(--ink-soft);
+    border-radius:var(--r-pill);transition:all .2s var(--ease);
+  }
+  .topnav-links a:hover{background:rgba(8,42,71,.06);color:var(--ink)}
+  .topnav-links a[aria-current="true"]{background:var(--ink);color:var(--ivory)}
+
+  /* ─────────────────────────────────────────────────────────
+     MOBILE BOTTOM NAV
+     ───────────────────────────────────────────────────────── */
+  .bottomnav{
+    position:fixed;left:0;right:0;bottom:0;z-index:80;
+    background:rgba(255,255,255,.95);
+    backdrop-filter:saturate(170%) blur(22px);
+    -webkit-backdrop-filter:saturate(170%) blur(22px);
+    border-top:1px solid var(--line);
+    padding:8px 4px calc(8px + env(safe-area-inset-bottom));
+  }
+  @media (min-width:900px){
+    .bottomnav{display:none}
+  }
+  .bottomnav-inner{
+    max-width:560px;margin:0 auto;
+    display:grid;grid-template-columns:repeat(5,1fr);gap:0;
+  }
+  .bottomnav a{
+    display:flex;flex-direction:column;align-items:center;gap:3px;
+    padding:6px 4px;border-radius:12px;
+    font-size:10px;font-weight:600;letter-spacing:.04em;color:var(--ink-faint);
+    transition:color .2s var(--ease);
+    min-height:44px;justify-content:center;
+  }
+  .bottomnav a .ic{width:22px;height:22px;display:block;opacity:.85}
+  .bottomnav a[aria-current="true"]{color:var(--sea-deep)}
+  .bottomnav a[aria-current="true"] .ic{opacity:1}
+  .bottomnav a:active{transform:scale(.96)}
+
+  /* ─────────────────────────────────────────────────────────
+     HERO
+     ───────────────────────────────────────────────────────── */
+  .hero{
+    position:relative;
+    min-height:min(720px, 96vh);
+    color:var(--ivory);
+    overflow:hidden;
+    isolation:isolate;
+  }
+  .hero-bg{
+    position:absolute;inset:0;z-index:-2;
+    background:var(--sea-deep);
+  }
+  .hero-bg img{
+    width:100%;height:100%;object-fit:cover;object-position:center 38%;
+    opacity:0;
+    transition:opacity 1.4s var(--ease);
+  }
+  .hero-bg img.loaded{opacity:1}
+  .hero-bg::after{
+    content:"";position:absolute;inset:0;
+    background:
+      linear-gradient(180deg, rgba(8,42,71,.35) 0%, rgba(8,42,71,.05) 30%, rgba(8,42,71,.10) 55%, rgba(8,42,71,.78) 100%),
+      linear-gradient(135deg, rgba(8,42,71,.28), transparent 40%);
+  }
+  .hero-top{
+    position:absolute;top:0;left:0;right:0;z-index:2;
+    padding:calc(env(safe-area-inset-top) + 18px) 24px 0;
+    display:flex;justify-content:space-between;align-items:center;
+    font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;
+  }
+  @media (min-width:900px){ .hero-top{display:none} }
+  .hero-top-l{color:rgba(250,243,226,.85);display:flex;align-items:center;gap:8px}
+  .hero-top-l .flag{width:18px;height:13px;border-radius:2px;overflow:hidden;display:inline-block;box-shadow:0 1px 3px rgba(0,0,0,.3)}
+  .hero-top-r{
+    display:inline-flex;align-items:center;gap:6px;
+    padding:6px 12px;border-radius:999px;
+    background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);
+    backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+    color:var(--ivory);font-weight:500;letter-spacing:.06em;
+  }
+  .hero-top-r .dot{
+    width:6px;height:6px;border-radius:50%;background:#5EE3A9;box-shadow:0 0 0 3px rgba(94,227,169,.25);
+    animation:pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.25);opacity:.7}}
+
+  .hero-inner{
+    position:relative;z-index:1;
+    max-width:1100px;margin:0 auto;
+    padding:clamp(120px, 22vh, 220px) clamp(20px,5vw,40px) clamp(56px, 8vh, 96px);
+    display:flex;flex-direction:column;justify-content:flex-end;
+    min-height:min(720px, 96vh);
+  }
+  .hero-eyebrow{
+    font-size:11px;font-weight:600;letter-spacing:.32em;text-transform:uppercase;
+    color:var(--gold-soft);margin-bottom:14px;
+    display:inline-flex;align-items:center;gap:14px;align-self:flex-start;
+  }
+  .hero-eyebrow .pin{width:18px;height:1px;background:var(--gold);display:inline-block}
+  .hero h1{
+    font-family:var(--font-display);font-weight:500;
+    font-size:var(--fs-4xl);line-height:.94;letter-spacing:-.022em;
+    color:var(--ivory);margin:0 0 12px;
+    text-shadow:0 2px 24px rgba(0,0,0,.25);
+  }
+  .hero h1 em{font-style:italic;font-weight:400;color:var(--sand-warm);display:inline-block}
+  .hero-sub{
+    font-family:var(--font-display);font-style:italic;font-weight:400;
+    font-size:clamp(16px, .9rem + 0.6vw, 22px);
+    color:rgba(250,243,226,.86);margin:0 0 28px;max-width:36ch;
+  }
+  .pills{
+    display:flex;gap:8px;flex-wrap:wrap;margin:0 0 28px;max-width:100%;
+  }
+  .pill{
+    display:inline-flex;align-items:center;gap:6px;
+    padding:7px 13px;border-radius:999px;
+    background:rgba(255,255,255,.12);
+    border:1px solid rgba(255,255,255,.22);
+    backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+    color:var(--ivory);font-size:13px;font-weight:500;letter-spacing:.02em;
+    font-variant-numeric:tabular-nums;
+  }
+  .pill .ic{font-size:14px;line-height:1;opacity:.95}
+  .pill.pri{background:rgba(217,113,78,.5);border-color:rgba(217,113,78,.7)}
+  .hero-ctas{display:flex;gap:10px;flex-wrap:wrap}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:14px 22px;border-radius:999px;
+    font-family:var(--font-sans);font-size:14px;font-weight:600;letter-spacing:.04em;
+    transition:transform .2s var(--ease), background .2s var(--ease), box-shadow .2s var(--ease);
+    cursor:pointer;
+    min-height:48px;min-width:48px;
+  }
+  .btn.primary{
+    background:var(--ivory);color:var(--ink);
+    box-shadow:0 8px 24px rgba(0,0,0,.18);
+  }
+  .btn.primary:hover{transform:translateY(-2px);box-shadow:0 12px 36px rgba(0,0,0,.24)}
+  .btn.primary:active{transform:translateY(0)}
+  .btn.ghost{
+    background:rgba(255,255,255,.10);color:var(--ivory);
+    border:1px solid rgba(255,255,255,.32);
+    backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  }
+  .btn.ghost:hover{background:rgba(255,255,255,.18)}
+  .btn .arrow{transition:transform .2s var(--ease)}
+  .btn:hover .arrow{transform:translateX(3px)}
+
+  .hero-scroll{
+    position:absolute;left:50%;bottom:18px;transform:translateX(-50%);
+    color:rgba(250,243,226,.55);font-size:9px;font-weight:700;letter-spacing:.36em;
+    text-transform:uppercase;
+    display:flex;flex-direction:column;align-items:center;gap:8px;
+    animation:bob 2.6s ease-in-out infinite;
+    z-index:1;
+  }
+  .hero-scroll::after{
+    content:"";width:1px;height:24px;background:linear-gradient(180deg,var(--gold) 0%, transparent 100%);
+  }
+  @keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,4px)}}
+
+  /* ─────────────────────────────────────────────────────────
+     SECTIONS
+     ───────────────────────────────────────────────────────── */
+  .section{padding:clamp(52px, 9vh, 96px) 0;position:relative}
+  .section-head{
+    margin:0 auto clamp(28px, 4vh, 44px);
+    max-width:1100px;padding:0 clamp(16px,4vw,28px);
+    display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;
+  }
+  .section-head .h-l{max-width:42ch}
+  .section-head .h-r{color:var(--ink-faint);font-size:13px;font-weight:500}
+
+  /* ─────────────────────────────────────────────────────────
+     VANDAAG · TODAY DASHBOARD
+     ───────────────────────────────────────────────────────── */
+  .vandaag{
+    background:linear-gradient(180deg, var(--ivory) 0%, var(--bg) 100%);
+  }
+  .comfort{
+    background:var(--bg-card);
+    border-radius:var(--r-xl);
+    padding:clamp(20px,3vw,28px);
+    box-shadow:var(--sh-2);
+    border:1px solid var(--line-soft);
+    display:grid;grid-template-columns:1fr;gap:18px;
+    margin-bottom:var(--s-5);
+    position:relative;overflow:hidden;
+  }
+  @media (min-width:680px){
+    .comfort{grid-template-columns:1.1fr 1fr;align-items:center;gap:36px;padding:28px 32px}
+  }
+  .comfort::before{
+    content:"";position:absolute;top:-40px;right:-40px;
+    width:200px;height:200px;border-radius:50%;
+    background:radial-gradient(circle, rgba(217,113,78,.10), transparent 70%);
+    pointer-events:none;
+  }
+  .comfort .c-head{
+    display:flex;align-items:center;gap:14px;margin-bottom:10px;
+  }
+  .comfort .c-icon{
+    width:64px;height:64px;border-radius:50%;
+    background:linear-gradient(135deg, var(--sand) 0%, var(--ivory-2) 100%);
+    display:flex;align-items:center;justify-content:center;
+    font-size:32px;
+    box-shadow:inset 0 -6px 12px rgba(185,145,74,.16);
+  }
+  .comfort .c-meta .c-day{
+    font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);
+  }
+  .comfort .c-meta .c-title{
+    font-family:var(--font-display);font-size:clamp(24px,2vw,32px);font-weight:500;letter-spacing:-.01em;line-height:1.1;
+    color:var(--ink);margin-top:2px;
+  }
+  .comfort .c-temp{
+    display:flex;align-items:baseline;gap:6px;margin-top:6px;
+  }
+  .comfort .c-temp .c-t-big{
+    font-family:var(--font-display);font-weight:300;font-size:64px;line-height:.9;color:var(--ink);
+    letter-spacing:-.04em;
+  }
+  .comfort .c-temp .c-t-lo{
+    font-size:18px;color:var(--ink-soft);font-weight:500;
+  }
+  .comfort .c-phrase{
+    font-family:var(--font-display);font-style:italic;color:var(--ink-soft);font-size:17px;margin-top:6px;
+  }
+  .comfort .c-stats{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:8px;
+  }
+  @media (max-width:500px){
+    .comfort .c-stats{grid-template-columns:repeat(2,1fr)}
+  }
+  .comfort .stat{
+    background:var(--ivory-2);border-radius:var(--r-md);
+    padding:10px 8px;text-align:center;
+  }
+  .comfort .stat .s-l{font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint)}
+  .comfort .stat .s-v{font-family:var(--font-display);font-size:22px;font-weight:500;color:var(--ink);margin-top:2px;line-height:1;letter-spacing:-.01em}
+  .comfort .stat .s-s{font-size:10px;color:var(--ink-soft);margin-top:1px}
+
+  .comfort-score{
+    margin-top:14px;display:flex;align-items:center;gap:14px;
+  }
+  .comfort-score .gauge{
+    flex:1;height:8px;border-radius:999px;background:rgba(8,42,71,.08);overflow:hidden;
+  }
+  .comfort-score .gauge i{
+    display:block;height:100%;border-radius:999px;
+    background:linear-gradient(90deg, var(--olive) 0%, var(--gold) 60%, var(--coral) 100%);
+    width:var(--w,80%);
+    transition:width 1s var(--ease);
+  }
+  .comfort-score .label{
+    font-size:12px;font-weight:600;letter-spacing:.04em;color:var(--ink-soft);
+  }
+  .comfort-score .label b{color:var(--ink);font-weight:700}
+
+  .moments{
+    display:grid;grid-template-columns:1fr;gap:14px;
+    margin-bottom:var(--s-5);
+  }
+  @media (min-width:700px){ .moments{grid-template-columns:repeat(3,1fr)} }
+  .moment{
+    background:var(--bg-card);border-radius:var(--r-lg);
+    padding:18px 18px 20px;
+    border:1px solid var(--line-soft);
+    box-shadow:var(--sh-1);
+    transition:transform .25s var(--ease), box-shadow .25s var(--ease);
+  }
+  .moment:hover{transform:translateY(-2px);box-shadow:var(--sh-2)}
+  .moment .m-h{
+    display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;
+  }
+  .moment .m-eyebrow{font-size:10px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--sea)}
+  .moment .m-time{font-size:11px;font-weight:600;color:var(--ink-faint);font-variant-numeric:tabular-nums}
+  .moment .m-icon{
+    width:48px;height:48px;border-radius:14px;
+    background:linear-gradient(135deg, var(--sea-pale) 0%, var(--ivory-2) 100%);
+    display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:10px;
+  }
+  .moment.aft .m-icon{background:linear-gradient(135deg, var(--sand) 0%, var(--ivory-2) 100%)}
+  .moment.eve .m-icon{background:linear-gradient(135deg, #C7B7E0 0%, var(--ivory-2) 100%)}
+  .moment .m-title{
+    font-family:var(--font-display);font-size:22px;font-weight:500;line-height:1.15;letter-spacing:-.01em;color:var(--ink);
+  }
+  .moment .m-desc{
+    font-size:14px;color:var(--ink-soft);margin-top:6px;line-height:1.5;
+  }
+  .moment .m-tags{margin-top:10px;display:flex;flex-wrap:wrap;gap:6px}
+  .moment .tag{
+    font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+    padding:3px 9px;border-radius:999px;
+    background:rgba(8,42,71,.06);color:var(--sea-deep);
+  }
+  .moment .tag.coral{background:rgba(217,113,78,.12);color:var(--coral)}
+  .moment .tag.olive{background:rgba(107,127,74,.14);color:var(--olive)}
+
+  .vandaag-grid{
+    display:grid;grid-template-columns:repeat(auto-fit, minmax(220px,1fr));gap:12px;
+  }
+  .v-card{
+    background:var(--bg-card);border-radius:var(--r-md);
+    border:1px solid var(--line-soft);box-shadow:var(--sh-1);
+    padding:16px 16px 18px;
+  }
+  .v-card .v-h{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+  .v-card .v-ic{
+    width:34px;height:34px;border-radius:10px;background:var(--ivory-2);
+    display:flex;align-items:center;justify-content:center;font-size:18px;
+  }
+  .v-card .v-l{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+  .v-card .v-t{font-family:var(--font-display);font-size:18px;font-weight:500;color:var(--ink);line-height:1.25}
+  .v-card .v-d{font-size:13.5px;color:var(--ink-soft);margin-top:6px;line-height:1.5}
+
+  /* ─────────────────────────────────────────────────────────
+     WEER · FORECAST
+     ───────────────────────────────────────────────────────── */
+  .weer{background:var(--ivory)}
+  .data-note{
+    margin:0 auto var(--s-5);max-width:1100px;
+    padding:10px clamp(16px,4vw,28px);
+    font-size:12px;color:var(--ink-soft);
+    display:flex;align-items:center;gap:8px;
+  }
+  .data-note .dn-dot{width:8px;height:8px;border-radius:50%;background:var(--olive);flex:0 0 auto}
+  .data-note.stale .dn-dot{background:var(--coral)}
+  .data-note b{color:var(--ink);font-weight:700}
+
+  .forecast-scroll{
+    margin:0 -16px;
+    padding:0 16px;
+    overflow-x:auto;-webkit-overflow-scrolling:touch;
+    scroll-snap-type:x mandatory;
+    scrollbar-width:none;
+  }
+  .forecast-scroll::-webkit-scrollbar{display:none}
+  @media (min-width:900px){ .forecast-scroll{margin:0;padding:0;overflow-x:visible} }
+  .forecast-track{
+    display:grid;grid-auto-flow:column;grid-auto-columns:78%;gap:14px;
+    padding:4px 16px 8px;
+    max-width:1100px;margin:0 auto;
+  }
+  @media (min-width:560px){ .forecast-track{grid-auto-columns:340px} }
+  @media (min-width:900px){
+    .forecast-track{grid-auto-flow:initial;grid-auto-columns:initial;
+      grid-template-columns:repeat(6,minmax(0,1fr));padding:0 clamp(16px,4vw,28px)}
+  }
+  .fcast{
+    scroll-snap-align:start;
+    background:var(--bg-card);border-radius:var(--r-lg);
+    border:1px solid var(--line-soft);box-shadow:var(--sh-1);
+    padding:18px 16px 16px;
+    display:flex;flex-direction:column;gap:10px;
+    transition:transform .25s var(--ease), box-shadow .25s var(--ease);
+  }
+  .fcast:hover{transform:translateY(-3px);box-shadow:var(--sh-2)}
+  .fcast .f-head{display:flex;align-items:center;justify-content:space-between;gap:8px}
+  .fcast .f-day{font-size:10px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
+  .fcast .f-date{font-family:var(--font-display);font-size:22px;font-weight:500;color:var(--ink);letter-spacing:-.01em}
+  .fcast .f-best{
+    display:inline-block;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+    padding:3px 9px;border-radius:999px;background:rgba(8,42,71,.06);color:var(--sea-deep);
+  }
+  .fcast .f-icon{font-size:46px;line-height:1;text-align:center;margin:4px 0 -4px}
+  .fcast .f-temps{
+    display:flex;align-items:baseline;gap:6px;justify-content:center;font-variant-numeric:tabular-nums;
+  }
+  .fcast .f-hi{font-family:var(--font-display);font-size:42px;font-weight:300;color:var(--ink);letter-spacing:-.04em;line-height:1}
+  .fcast .f-lo{font-size:16px;color:var(--ink-soft);font-weight:500}
+  .fcast .f-phrase{
+    text-align:center;font-family:var(--font-display);font-style:italic;font-size:14px;color:var(--ink-soft);
+    margin-top:-2px;
+  }
+  .fcast .f-bar{
+    height:6px;border-radius:99px;background:rgba(8,42,71,.08);overflow:hidden;
+    position:relative;margin-top:8px;
+  }
+  .fcast .f-bar i{
+    position:absolute;top:0;bottom:0;border-radius:99px;
+    background:linear-gradient(90deg,#4E89AE 0%,#E89C7C 60%,#D9714E 100%);
+  }
+  .fcast .f-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:6px}
+  .fcast .f-stat{text-align:center}
+  .fcast .f-stat .l{font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint)}
+  .fcast .f-stat .v{font-size:14px;font-weight:600;color:var(--ink);margin-top:2px;font-variant-numeric:tabular-nums}
+
+  /* ─────────────────────────────────────────────────────────
+     ACTIVITEITEN
+     ───────────────────────────────────────────────────────── */
+  .activiteiten{background:linear-gradient(180deg, var(--bg) 0%, var(--ivory) 100%)}
+  .filters{
+    display:flex;gap:8px;flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;
+    padding:4px 4px 12px;margin:0 auto var(--s-5);max-width:1100px;
+    scrollbar-width:none;
+  }
+  .filters::-webkit-scrollbar{display:none}
+  .chip{
+    flex:0 0 auto;
+    padding:9px 16px;border-radius:999px;
+    border:1px solid var(--line);background:var(--bg-card);
+    font-size:13px;font-weight:600;color:var(--ink);
+    transition:all .2s var(--ease);
+    white-space:nowrap;
+    min-height:38px;
+  }
+  .chip:hover{border-color:var(--gold-soft);background:var(--ivory-2)}
+  .chip[aria-pressed="true"]{background:var(--ink);color:var(--ivory);border-color:var(--ink)}
+  .chip .x{margin-right:6px;font-size:14px}
+
+  .activity-grid{
+    display:grid;grid-template-columns:1fr;gap:14px;
+  }
+  @media (min-width:680px){ .activity-grid{grid-template-columns:repeat(2,1fr)} }
+  @media (min-width:1000px){ .activity-grid{grid-template-columns:repeat(3,1fr)} }
+  .act{
+    background:var(--bg-card);border-radius:var(--r-lg);
+    border:1px solid var(--line-soft);box-shadow:var(--sh-1);
+    padding:18px;
+    display:flex;gap:14px;align-items:flex-start;
+    transition:transform .25s var(--ease), box-shadow .25s var(--ease);
+  }
+  .act:hover{transform:translateY(-2px);box-shadow:var(--sh-2)}
+  .act .a-ic{
+    flex:0 0 auto;
+    width:52px;height:52px;border-radius:16px;
+    background:linear-gradient(135deg, var(--sea-pale) 0%, var(--ivory-2) 100%);
+    display:flex;align-items:center;justify-content:center;font-size:26px;
+    box-shadow:inset 0 -4px 8px rgba(78,137,174,.12);
+  }
+  .act .a-body{flex:1;min-width:0}
+  .act .a-title{font-family:var(--font-display);font-size:20px;font-weight:500;color:var(--ink);line-height:1.2;letter-spacing:-.01em}
+  .act .a-meta{display:flex;align-items:center;gap:8px;margin-top:4px;font-size:11px;color:var(--ink-faint);font-weight:600;letter-spacing:.04em}
+  .act .a-meta .score{
+    display:inline-flex;align-items:baseline;gap:2px;font-variant-numeric:tabular-nums;color:var(--olive);font-weight:700;
+  }
+  .act .a-desc{font-size:13.5px;color:var(--ink-soft);margin-top:8px;line-height:1.5}
+  .act.dim{opacity:.6}
+  .act.dim .a-ic{background:var(--ivory-2)}
+
+  /* ─────────────────────────────────────────────────────────
+     WEEKPLAN
+     ───────────────────────────────────────────────────────── */
+  .weekplan{background:var(--ivory)}
+  .week-grid{
+    display:grid;grid-template-columns:1fr;gap:16px;
+  }
+  @media (min-width:800px){ .week-grid{grid-template-columns:repeat(2,1fr)} }
+  @media (min-width:1100px){ .week-grid{grid-template-columns:repeat(3,1fr)} }
+  .wday{
+    background:var(--bg-card);border-radius:var(--r-lg);
+    border:1px solid var(--line-soft);box-shadow:var(--sh-1);
+    overflow:hidden;
+    display:flex;flex-direction:column;
+    transition:transform .25s var(--ease), box-shadow .25s var(--ease);
+  }
+  .wday:hover{transform:translateY(-3px);box-shadow:var(--sh-2)}
+  .wday-img{
+    aspect-ratio: 16/9;position:relative;overflow:hidden;background:var(--sea-deep);
+  }
+  .wday-img img{width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .6s var(--ease), transform .8s var(--ease)}
+  .wday-img img.loaded{opacity:1}
+  .wday:hover .wday-img img.loaded{transform:scale(1.04)}
+  .wday-img::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg, transparent 40%, rgba(8,42,71,.7));
+  }
+  .wday-img .w-head{
+    position:absolute;inset:auto 0 0 0;padding:14px 18px;z-index:2;color:var(--ivory);
+    display:flex;align-items:flex-end;justify-content:space-between;gap:10px;
+  }
+  .wday-img .w-day{font-size:10px;font-weight:700;letter-spacing:.32em;text-transform:uppercase;color:rgba(250,243,226,.85)}
+  .wday-img .w-date{font-family:var(--font-display);font-size:26px;font-weight:500;letter-spacing:-.01em;line-height:1}
+  .wday-img .w-temps{font-family:var(--font-display);font-weight:400;font-size:22px;color:var(--ivory);font-variant-numeric:tabular-nums}
+  .wday-img .w-temps small{font-size:13px;color:rgba(250,243,226,.7)}
+  .wday-body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:10px;flex:1}
+  .wday-row{display:flex;gap:10px;align-items:flex-start}
+  .wday-row .r-ic{
+    flex:0 0 auto;width:30px;height:30px;border-radius:9px;
+    background:var(--ivory-2);display:flex;align-items:center;justify-content:center;
+    font-size:15px;
+  }
+  .wday-row .r-l{font-size:9.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+  .wday-row .r-t{font-size:13.5px;color:var(--ink);line-height:1.45;margin-top:1px;font-weight:500}
+  .wday-row .r-t b{font-weight:700}
+
+  /* ─────────────────────────────────────────────────────────
+     STORIES (resort)
+     ───────────────────────────────────────────────────────── */
+  .stories{background:var(--bg)}
+  .stories-grid{
+    display:grid;gap:12px;
+    grid-template-columns:repeat(2,1fr);
+  }
+  @media (min-width:760px){ .stories-grid{grid-template-columns:repeat(6,1fr);grid-auto-rows:200px} }
+  .story{
+    position:relative;border-radius:var(--r-md);overflow:hidden;
+    background:var(--sea-deep);box-shadow:var(--sh-1);
+    aspect-ratio:1/1.1;
+    transition:transform .35s var(--ease), box-shadow .35s var(--ease);
+  }
+  .story:hover{transform:translateY(-3px);box-shadow:var(--sh-2)}
+  .story img{
+    width:100%;height:100%;object-fit:cover;
+    opacity:0;transition:opacity .6s var(--ease), transform 1s var(--ease);
+  }
+  .story img.loaded{opacity:1}
+  .story:hover img.loaded{transform:scale(1.06)}
+  .story::after{
+    content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg, transparent 40%, rgba(8,42,71,.8));
+  }
+  .story .s-label{
+    position:absolute;left:14px;right:14px;bottom:14px;z-index:2;color:var(--ivory);
+  }
+  .story .s-kicker{font-size:9.5px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:rgba(250,243,226,.8);margin-bottom:4px}
+  .story .s-title{font-family:var(--font-display);font-size:22px;font-weight:500;line-height:1.1;letter-spacing:-.01em}
+  /* asymmetric grid on wide */
+  @media (min-width:760px){
+    .stories-grid .a{grid-column:span 3;aspect-ratio:auto;grid-row:span 2}
+    .stories-grid .b{grid-column:span 3;aspect-ratio:auto}
+    .stories-grid .c{grid-column:span 2;aspect-ratio:auto}
+    .stories-grid .d{grid-column:span 2;aspect-ratio:auto}
+    .stories-grid .e{grid-column:span 2;aspect-ratio:auto}
+    .stories-grid .f{grid-column:span 6;aspect-ratio:auto;grid-row:span 1;min-height:280px}
+  }
+
+  /* ─────────────────────────────────────────────────────────
+     TIPS
+     ───────────────────────────────────────────────────────── */
+  .tips{background:var(--sea-deep);color:var(--ivory);position:relative;overflow:hidden}
+  .tips::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:
+      radial-gradient(ellipse 60% 40% at 20% 20%, rgba(185,145,74,.18), transparent),
+      radial-gradient(ellipse 50% 30% at 80% 80%, rgba(78,137,174,.22), transparent);
+  }
+  .tips .section-head{position:relative}
+  .tips .eyebrow{color:var(--gold-soft)}
+  .tips .h2{color:var(--ivory)}
+  .tips .h2 em{color:var(--sand-warm)}
+  .tips .section-head .h-r{color:rgba(250,243,226,.6)}
+  .tips-grid{
+    display:grid;grid-template-columns:1fr;gap:14px;
+    max-width:1100px;margin:0 auto;padding:0 clamp(16px,4vw,28px);position:relative;
+  }
+  @media (min-width:680px){ .tips-grid{grid-template-columns:repeat(2,1fr)} }
+  @media (min-width:1000px){ .tips-grid{grid-template-columns:repeat(3,1fr)} }
+  .tip{
+    background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.10);
+    border-radius:var(--r-lg);padding:20px;
+    backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  }
+  .tip .t-ic{
+    width:44px;height:44px;border-radius:12px;
+    background:rgba(185,145,74,.16);display:flex;align-items:center;justify-content:center;
+    font-size:22px;margin-bottom:12px;
+  }
+  .tip .t-eyebrow{font-size:10px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--gold-soft);margin-bottom:6px}
+  .tip .t-title{font-family:var(--font-display);font-size:20px;font-weight:500;color:var(--ivory);line-height:1.2;letter-spacing:-.01em}
+  .tip .t-body{font-size:14px;color:rgba(250,243,226,.78);margin-top:8px;line-height:1.55}
+
+  /* ─────────────────────────────────────────────────────────
+     FOOTER
+     ───────────────────────────────────────────────────────── */
+  footer{
+    background:var(--ink);color:rgba(250,243,226,.75);
+    padding:48px 24px 40px;text-align:center;
+  }
+  footer .f-mark{
+    font-family:var(--font-display);font-size:26px;font-weight:500;color:var(--ivory);letter-spacing:-.01em;
+  }
+  footer .f-mark em{color:var(--gold-soft);font-style:italic}
+  footer .f-tag{font-family:var(--font-display);font-style:italic;color:var(--gold-soft);font-size:15px;margin-top:6px}
+  footer .f-meta{font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:500;margin-top:18px;color:rgba(250,243,226,.45)}
+  footer .f-source{font-size:11px;color:rgba(250,243,226,.5);margin-top:6px}
+
+  /* ─────────────────────────────────────────────────────────
+     REVEAL ON SCROLL
+     ───────────────────────────────────────────────────────── */
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .9s var(--ease), transform .9s var(--ease)}
+  .reveal.in{opacity:1;transform:none}
+
+  /* ─────────────────────────────────────────────────────────
+     REDUCED MOTION
+     ───────────────────────────────────────────────────────── */
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+    .reveal{opacity:1;transform:none}
+  }
+
+  /* ─────────────────────────────────────────────────────────
+     OFFLINE BANNER
+     ───────────────────────────────────────────────────────── */
+  .offline{
+    position:fixed;left:12px;right:12px;bottom:calc(var(--bottom-nav-h) + env(safe-area-inset-bottom) + 12px);
+    background:var(--ink);color:var(--ivory);
+    padding:12px 16px;border-radius:14px;
+    font-size:13px;font-weight:500;
+    box-shadow:var(--sh-3);
+    z-index:90;
+    display:none;
+    align-items:center;gap:10px;
+  }
+  .offline.show{display:flex}
+  .offline .dot{width:8px;height:8px;border-radius:50%;background:var(--coral)}
+  @media (min-width:900px){ .offline{bottom:24px;left:auto;right:24px;max-width:360px} }
+
+  /* Small utility */
+  .scroll-mt{scroll-margin-top:80px}
+  @media (min-width:900px){ .scroll-mt{scroll-margin-top:96px} }
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">Naar inhoud</a>
+
+<!-- ─────────────────────────────────────────────────────────
+     DESKTOP TOP NAV
+     ───────────────────────────────────────────────────────── -->
+<header class="topnav" role="banner">
+  <div class="topnav-inner">
+    <a class="brand" href="#top">
+      <span>Ikos Porto Petro</span>
+      <span class="b-mark">Mallorca · Juni '26</span>
+    </a>
+    <nav class="topnav-links" aria-label="Hoofdnavigatie (desktop)">
+      <a href="#vandaag" data-jump>Vandaag</a>
+      <a href="#weer" data-jump>Weer</a>
+      <a href="#activiteiten" data-jump>Activiteiten</a>
+      <a href="#weekplan" data-jump>Weekplan</a>
+      <a href="#stories" data-jump>Het resort</a>
+      <a href="#tips" data-jump>Tips</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" role="main">
+
+  <!-- ─────────────────────────────────────────────────────────
+       HERO
+       ───────────────────────────────────────────────────────── -->
+  <section class="hero" id="top" aria-labelledby="hero-title">
+    <div class="hero-bg">
+      <img src="../resort-hero.jpg" alt="Luchtfoto Ikos Porto Petro: turquoise baaien en groene pijnbomen op de zuidkust van Mallorca"
+           width="1800" height="1171" decoding="async" fetchpriority="high"
+           onload="this.classList.add('loaded')" />
+    </div>
+
+    <!-- Mobile-only top strip (info + status) -->
+    <div class="hero-top">
+      <div class="hero-top-l">
+        <svg class="flag" viewBox="0 0 60 40" aria-label="Spanje" role="img">
+          <rect width="60" height="10" fill="#AA151B"/><rect y="10" width="60" height="20" fill="#F1BF00"/><rect y="30" width="60" height="10" fill="#AA151B"/>
+        </svg>
+        <span>Mallorca</span>
+      </div>
+      <div class="hero-top-r" id="liveHero"><span class="dot"></span><span id="liveHeroText">Live</span></div>
+    </div>
+
+    <div class="hero-inner">
+      <span class="hero-eyebrow"><span class="pin"></span>Travel Companion · Anno MMXXVI</span>
+      <h1 id="hero-title">Ikos <em>Porto</em> Petro</h1>
+      <p class="hero-sub">Jouw luxe Mallorca reisplanner · 2 — 7 juni 2026</p>
+
+      <div class="pills" id="heroPills" aria-label="Vandaag in een oogopslag">
+        <span class="pill" id="pillTemp"><span class="ic">☀</span><span id="pillTempV">—°</span></span>
+        <span class="pill" id="pillCond"><span class="ic">🌤</span><span id="pillCondV">Helder</span></span>
+        <span class="pill" id="pillWind"><span class="ic">↗</span><span id="pillWindV">— km/u</span></span>
+        <span class="pill" id="pillUV"><span class="ic">⌁</span><span id="pillUVV">UV —</span></span>
+        <span class="pill pri" id="pillBest"><span class="ic">★</span><span id="pillBestV">Strand</span></span>
+      </div>
+
+      <div class="hero-ctas">
+        <a class="btn primary" href="#vandaag" data-jump>Bekijk vandaag <span class="arrow">→</span></a>
+        <a class="btn ghost" href="#weekplan" data-jump>Plan de week</a>
+      </div>
+    </div>
+
+    <div class="hero-scroll" aria-hidden="true">Scroll</div>
+  </section>
+
+  <!-- ─────────────────────────────────────────────────────────
+       VANDAAG
+       ───────────────────────────────────────────────────────── -->
+  <section class="section vandaag scroll-mt" id="vandaag" aria-labelledby="t-vandaag">
+    <div class="section-head reveal">
+      <div class="h-l">
+        <div class="eyebrow">Vandaag</div>
+        <h2 class="h2" id="t-vandaag">Een dag <em>op maat</em></h2>
+        <p class="lead">Aanbevelingen die meebewegen met het weer, het uur en de stemming.</p>
+      </div>
+      <div class="h-r" id="vandaagDate">—</div>
+    </div>
+
+    <div class="wrap">
+
+      <!-- Comfort card -->
+      <div class="comfort reveal" id="comfortCard">
+        <div>
+          <div class="c-head">
+            <div class="c-icon" id="cIcon">🌤</div>
+            <div class="c-meta">
+              <div class="c-day" id="cDayLabel">Vandaag</div>
+              <div class="c-title" id="cTitle">Een mooie Mallorca-dag</div>
+            </div>
+          </div>
+          <div class="c-temp"><span class="c-t-big" id="cHi">—°</span><span class="c-t-lo">/ <span id="cLo">—°</span></span></div>
+          <p class="c-phrase" id="cPhrase">Forecast laadt…</p>
+
+          <div class="comfort-score">
+            <span class="label">Comfort <b id="cScoreV">—</b>/10</span>
+            <span class="gauge"><i id="cGauge" style="--w:0%"></i></span>
+          </div>
+        </div>
+
+        <div class="c-stats">
+          <div class="stat"><div class="s-l">Regen</div><div class="s-v" id="cRain">—</div><div class="s-s">mm · <span id="cRainP">—</span>%</div></div>
+          <div class="stat"><div class="s-l">Wind</div><div class="s-v" id="cWind">—</div><div class="s-s">km/u</div></div>
+          <div class="stat"><div class="s-l">Zon</div><div class="s-v" id="cSun">—</div><div class="s-s">uur</div></div>
+          <div class="stat"><div class="s-l">Zee</div><div class="s-v">~21°</div><div class="s-s">aangenaam</div></div>
+        </div>
+      </div>
+
+      <!-- Moments -->
+      <div class="moments reveal">
+        <article class="moment mor">
+          <div class="m-h"><span class="m-eyebrow">Ochtend</span><span class="m-time">07–12</span></div>
+          <div class="m-icon">🏖</div>
+          <h3 class="m-title" id="mMorTitle">Strand & SUP</h3>
+          <p class="m-desc" id="mMorDesc">Rustige zee in de ochtend — perfect voor de baai of een eerste duik.</p>
+          <div class="m-tags"><span class="tag olive">water</span><span class="tag">actief</span></div>
+        </article>
+        <article class="moment aft">
+          <div class="m-h"><span class="m-eyebrow">Middag</span><span class="m-time">12–17</span></div>
+          <div class="m-icon">☀</div>
+          <h3 class="m-title" id="mAftTitle">Pool of schaduw</h3>
+          <p class="m-desc" id="mAftDesc">Hoogste UV — duik en ligbed onder de palmen.</p>
+          <div class="m-tags"><span class="tag coral">UV hoog</span><span class="tag">water</span></div>
+        </article>
+        <article class="moment eve">
+          <div class="m-h"><span class="m-eyebrow">Avond</span><span class="m-time">19–23</span></div>
+          <div class="m-icon">🍷</div>
+          <h3 class="m-title" id="mEveTitle">Diner & sunset</h3>
+          <p class="m-desc" id="mEveDesc">Zachte bries — terrastafel met zee in zicht.</p>
+          <div class="m-tags"><span class="tag">avond</span><span class="tag olive">rustig</span></div>
+        </article>
+      </div>
+
+      <!-- Vandaag-grid -->
+      <div class="vandaag-grid reveal">
+        <div class="v-card">
+          <div class="v-h"><div class="v-ic">★</div><div class="v-l">Aanbevolen</div></div>
+          <div class="v-t" id="vBest">Strand · Cala Petita</div>
+          <p class="v-d" id="vBestD">Onze top-keuze op basis van het huidige weer.</p>
+        </div>
+        <div class="v-card">
+          <div class="v-h"><div class="v-ic">🎒</div><div class="v-l">Meenemen</div></div>
+          <div class="v-t" id="vBring">Zonnebrand · pet · waterfles</div>
+          <p class="v-d">Linnen badjas hoeft niet — die hangt in de Deluxe Suite.</p>
+        </div>
+        <div class="v-card">
+          <div class="v-h"><div class="v-ic">👨‍👩‍👧</div><div class="v-l">Met kinderen</div></div>
+          <div class="v-t" id="vKids">Heel geschikt</div>
+          <p class="v-d">Heroes Kids Club is open · zachte branding aan het strand.</p>
+        </div>
+        <div class="v-card">
+          <div class="v-h"><div class="v-ic">📷</div><div class="v-l">Beste fotomoment</div></div>
+          <div class="v-t" id="vPhoto">Atardecer · Cap de Ses Salines</div>
+          <p class="v-d">Goud licht ±20 min vóór zonsondergang.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────────────────────────────────
+       WEER · FORECAST
+       ───────────────────────────────────────────────────────── -->
+  <section class="section weer scroll-mt" id="weer" aria-labelledby="t-weer">
+    <div class="section-head reveal">
+      <div class="h-l">
+        <div class="eyebrow">Vooruitzicht · 6 dagen</div>
+        <h2 class="h2" id="t-weer">Het <em>weer</em> in beeld</h2>
+        <p class="lead">Geveegd uit twaalf internationale modellen — met MET Norway als backup.</p>
+      </div>
+      <div class="h-r" id="weerNote">—</div>
+    </div>
+    <p class="data-note" id="dataNote">
+      <span class="dn-dot"></span>
+      <span><b id="dataSource">—</b> · <span id="dataFresh">verversen…</span></span>
+    </p>
+
+    <div class="forecast-scroll">
+      <div class="forecast-track" id="fcastTrack" aria-label="Voorspelling per dag"></div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────────────────────────────────
+       ACTIVITEITEN
+       ───────────────────────────────────────────────────────── -->
+  <section class="section activiteiten scroll-mt" id="activiteiten" aria-labelledby="t-act">
+    <div class="section-head reveal">
+      <div class="h-l">
+        <div class="eyebrow">Wat past bij vandaag</div>
+        <h2 class="h2" id="t-act"><em>Aanbevolen</em> activiteiten</h2>
+        <p class="lead">Slim gerangschikt op basis van temperatuur, regen, wind en uur.</p>
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="filters" role="group" aria-label="Filters">
+        <button class="chip" data-filter="" aria-pressed="true"><span class="x">✦</span>Alles</button>
+        <button class="chip" data-filter="family" aria-pressed="false">Met kinderen</button>
+        <button class="chip" data-filter="calm" aria-pressed="false">Rustig</button>
+        <button class="chip" data-filter="active" aria-pressed="false">Actief</button>
+        <button class="chip" data-filter="water" aria-pressed="false">Water</button>
+        <button class="chip" data-filter="indoor" aria-pressed="false">Binnen / schaduw</button>
+        <button class="chip" data-filter="evening" aria-pressed="false">Avond</button>
+      </div>
+      <div class="activity-grid" id="actGrid" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────────────────────────────────
+       WEEKPLAN
+       ───────────────────────────────────────────────────────── -->
+  <section class="section weekplan scroll-mt" id="weekplan" aria-labelledby="t-week">
+    <div class="section-head reveal">
+      <div class="h-l">
+        <div class="eyebrow">2 — 7 juni 2026</div>
+        <h2 class="h2" id="t-week">Een <em>balanced</em> weekplan</h2>
+        <p class="lead">Niet elke dag vol — ruimte voor luiheid, ontdekking en een diner zonder haast.</p>
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="week-grid" id="weekGrid"></div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────────────────────────────────
+       STORIES — het resort
+       ───────────────────────────────────────────────────────── -->
+  <section class="section stories scroll-mt" id="stories" aria-labelledby="t-stories">
+    <div class="section-head reveal">
+      <div class="h-l">
+        <div class="eyebrow">Het domein</div>
+        <h2 class="h2" id="t-stories">Porto Petro <em>in beeld</em></h2>
+        <p class="lead">Vijf zwembaden · twee baaien · Mondragó in de achtertuin.</p>
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="stories-grid">
+        <a class="story a" href="#weer">
+          <img src="../beachclub-aerial.jpg" alt="Luchtfoto van het beach club gebied met zwembaden en parasols" loading="lazy" decoding="async" width="900" height="683" onload="this.classList.add('loaded')">
+          <div class="s-label"><div class="s-kicker">Strand & Pools</div><div class="s-title">Cala's & infinity pools</div></div>
+        </a>
+        <a class="story b" href="#weekplan">
+          <img src="../seasons.jpg" alt="Tafels met witte tafelkleden onder warme lampen bij restaurant Seasons" loading="lazy" decoding="async" width="900" height="600" onload="this.classList.add('loaded')">
+          <div class="s-label"><div class="s-kicker">Dining</div><div class="s-title">8+ restaurants · Michelin-gecureerd</div></div>
+        </a>
+        <a class="story c" href="#tips">
+          <img src="../pool.jpg" alt="Rustig zwembad met blauwe parasols overdag" loading="lazy" decoding="async" width="900" height="675" onload="this.classList.add('loaded')">
+          <div class="s-label"><div class="s-kicker">Wellness</div><div class="s-title">Anne Semonin Paris spa</div></div>
+        </a>
+        <a class="story d" href="#activiteiten">
+          <img src="../sup.jpg" alt="SUP boards bij het strand van Porto Petro" loading="lazy" decoding="async" width="600" height="400" onload="this.classList.add('loaded')">
+          <div class="s-label"><div class="s-kicker">Activiteiten</div><div class="s-title">SUP · kajak · padel · catamaran</div></div>
+        </a>
+        <a class="story e" href="#vandaag">
+          <img src="../villa.jpg" alt="Exterieur van een Deluxe villa met privézwembad en tuinen" loading="lazy" decoding="async" width="900" height="486" onload="this.classList.add('loaded')">
+          <div class="s-label"><div class="s-kicker">Suites & Villas</div><div class="s-title">Deluxe Suite · privé-terras</div></div>
+        </a>
+        <a class="story f" href="#stories">
+          <img src="../formentor.jpg" alt="Cap de Formentor — kliffen en vuurtoren op het noorden van Mallorca" loading="lazy" decoding="async" width="900" height="600" onload="this.classList.add('loaded')">
+          <div class="s-label"><div class="s-kicker">Lokaal · Mallorca</div><div class="s-title">Porto Petro · Santanyí · Felanitx · Cap de Ses Salines</div></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────────────────────────────────────
+       TIPS
+       ───────────────────────────────────────────────────────── -->
+  <section class="section tips scroll-mt" id="tips" aria-labelledby="t-tips">
+    <div class="section-head reveal">
+      <div class="h-l">
+        <div class="eyebrow">Premium · praktisch</div>
+        <h2 class="h2" id="t-tips">Slimme <em>tips</em></h2>
+        <p class="lead">Kleine details die het verschil maken — beknopt en bruikbaar.</p>
+      </div>
+    </div>
+    <div class="tips-grid reveal">
+      <article class="tip"><div class="t-ic">☀</div><div class="t-eyebrow">UV & zon</div><h3 class="t-title">Smeer voor het ontbijt</h3><p class="t-body">Mediterraans licht is sterker dan het voelt — SPF 50 op het gezicht en de oren, ook bij bewolking. Pet en zonnebril voor de jongens.</p></article>
+      <article class="tip"><div class="t-ic">🌬</div><div class="t-eyebrow">Wind & zee</div><h3 class="t-title">SUP in de ochtend</h3><p class="t-body">Tot ±10:00 is de baai meestal glad. Na de middag pakt de bries op — heerlijk voor de catamaran, minder voor SUP-balans.</p></article>
+      <article class="tip"><div class="t-ic">🌧</div><div class="t-eyebrow">Plan B bij regen</div><h3 class="t-title">Spa · Anaya · Santanyí</h3><p class="t-body">Twee uur hammam, lunch bij Anaya, daarna de stenen straten van Santanyí. Een natte dag wordt vaak de mooiste herinnering.</p></article>
+      <article class="tip"><div class="t-ic">👨‍👩‍👧</div><div class="t-eyebrow">Met kinderen</div><h3 class="t-title">Heroes Kids Club</h3><p class="t-body">Ofsted-gecertificeerd · meld kinderen vóór 9:30 aan voor de ochtend-sessie. Spaans-Engelse begeleiders.</p></article>
+      <article class="tip"><div class="t-ic">🍷</div><div class="t-eyebrow">Avondritueel</div><h3 class="t-title">Apéro op de marina</h3><p class="t-body">Loop ±19:00 naar de haven van Porto Petro voor een gin tonic op het terras — boten dobberen, licht wordt goud.</p></article>
+      <article class="tip"><div class="t-ic">📅</div><div class="t-eyebrow">Vooraf regelen</div><h3 class="t-title">Reserveer op tijd</h3><p class="t-body">Seasons en The Garden zitten vol in juni — boek diners en spa-treatments meteen na check-in via de conciërge-app.</p></article>
+    </div>
+  </section>
+
+</main>
+
+<!-- ─────────────────────────────────────────────────────────
+     MOBILE BOTTOM NAV
+     ───────────────────────────────────────────────────────── -->
+<nav class="bottomnav" aria-label="Hoofdnavigatie (mobiel)" role="navigation">
+  <div class="bottomnav-inner">
+    <a href="#vandaag" data-jump>
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      Vandaag
+    </a>
+    <a href="#weer" data-jump>
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 17a4 4 0 0 1 .9-7.9 6 6 0 0 1 11.7 1.4A4 4 0 0 1 17 17H5z"/></svg>
+      Weer
+    </a>
+    <a href="#activiteiten" data-jump>
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 11l9-7 9 7M5 11v9h14v-9M9 20v-6h6v6"/></svg>
+      Activiteiten
+    </a>
+    <a href="#weekplan" data-jump>
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg>
+      Weekplan
+    </a>
+    <a href="#tips" data-jump>
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3a6 6 0 0 0-4 10.5V16a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2v-2.5A6 6 0 0 0 12 3zM10 22h4"/></svg>
+      Tips
+    </a>
+  </div>
+</nav>
+
+<footer>
+  <div class="f-mark">Ikos <em>·</em> Porto Petro</div>
+  <div class="f-tag">Mediterráneo en estado puro</div>
+  <div class="f-meta">2 — 7 juni 2026 · Mallorca</div>
+  <div class="f-source" id="fSource">Weer · Open-Meteo (12 modellen) · MET Norway backup</div>
+</footer>
+
+<div class="offline" id="offlineBanner" role="status" aria-live="polite">
+  <span class="dot"></span>
+  <span>Geen internet — laatst opgeslagen data wordt getoond.</span>
+</div>
+
+<script>
+/* ═════════════════════════════════════════════════════════════
+   IKOS PORTO PETRO · Travel Companion · vanilla JS
+   ═════════════════════════════════════════════════════════════ */
+
+const TZ='Europe/Madrid', LAT=39.3404, LON=3.2127;
+const DAYS=['2026-06-02','2026-06-03','2026-06-04','2026-06-05','2026-06-06','2026-06-07'];
+const WEEKDAYS={'2026-06-02':'Dinsdag','2026-06-03':'Woensdag','2026-06-04':'Donderdag','2026-06-05':'Vrijdag','2026-06-06':'Zaterdag','2026-06-07':'Zondag'};
+const MONTHS_NL=['januari','februari','maart','april','mei','juni','juli','augustus','september','oktober','november','december'];
+const TRIP_START=new Date('2026-06-02T06:00:00+02:00');
+const TRIP_END  =new Date('2026-06-07T18:35:00+02:00');
+
+/* Baked sample forecast — used as fallback when live data is unavailable.
+   Realistic values for early June in Mallorca, marked as "voorbeeld" in UI. */
+const SAMPLE = {
+  '2026-06-02': {hi:29, lo:20, rain:0,   pp:8,  wind:21, sun:14.5, uv:8, wc:0},
+  '2026-06-03': {hi:27, lo:20, rain:0,   pp:5,  wind:20, sun:14.5, uv:8, wc:1},
+  '2026-06-04': {hi:26, lo:20, rain:0,   pp:10, wind:18, sun:14.5, uv:8, wc:2},
+  '2026-06-05': {hi:27, lo:19, rain:0,   pp:6,  wind:21, sun:14.6, uv:9, wc:1},
+  '2026-06-06': {hi:26, lo:19, rain:0.4, pp:18, wind:18, sun:13.8, uv:8, wc:2},
+  '2026-06-07': {hi:26, lo:18, rain:0.2, pp:14, wind:17, sun:14.0, uv:8, wc:1}
+};
+
+/* ─────────────────────────────────────────────────────────
+   ACTIVITIES DB · recommendation engine input
+   ───────────────────────────────────────────────────────── */
+const ACTIVITIES_DB = [
+  {id:'beach',  name:'Strand · Cala Petita',          icon:'🏖', tags:['water','family','active'],
+    bf:{temp:[21,38], wind:[0,25], rain:[0,1]},
+    desc:'Stille kustlijn op loopafstand · ideaal bij warm weer met weinig wind.'},
+  {id:'pool',   name:'Zwembad · adults of family',    icon:'🏊', tags:['water','family','calm'],
+    bf:{temp:[18,40], wind:[0,40], rain:[0,3]},
+    desc:'Adults-only infinity of family pool — koel water onder de palmen.'},
+  {id:'sup',    name:'SUP & kayak',                   icon:'🏄', tags:['water','active'],
+    bf:{temp:[19,35], wind:[0,16], rain:[0,1], time:['morning']},
+    desc:'Het kalmst in de ochtend — paddle naar de overkant en terug.'},
+  {id:'snorkel',name:'Snorkelen · Cala Mondragó',     icon:'🤿', tags:['water','active','family'],
+    bf:{temp:[20,35], wind:[0,18], rain:[0,1]},
+    desc:'Helder water, kleine vis, weinig diepte — perfect voor een eerste duik.'},
+  {id:'boat',   name:'Boottocht · privé sloep',       icon:'⛵', tags:['water','active'],
+    bf:{temp:[20,38], wind:[0,22], rain:[0,1]},
+    desc:'Anker uit boven een zandbank in het natuurpark — picknick aan boord.'},
+  {id:'tennis', name:'Padel & tennis',                icon:'🎾', tags:['active','family'],
+    bf:{temp:[14,32], wind:[0,28], rain:[0,1], time:['morning','evening']},
+    desc:'Boek 90 min onder de palmen · verlicht in de avond.'},
+  {id:'spa',    name:'Spa · Anne Semonin Paris',      icon:'💆', tags:['calm','indoor'],
+    bf:{temp:[0,45], wind:[0,99], rain:[0,99]},
+    desc:'Sauna, hammam, koude dompel — perfect als plan B bij regen of UV-hoog.'},
+  {id:'mondrago',name:'Mondragó natuurpark',          icon:'🌿', tags:['outdoor','active','family'],
+    bf:{temp:[14,32], wind:[0,32], rain:[0,2]},
+    desc:'Wandelpaden tot aan turquoise inhammen — schaduw onder de pijnbomen.'},
+  {id:'village',name:'Porto Petro dorp',              icon:'⚓', tags:['calm','family','evening'],
+    bf:{temp:[13,34], wind:[0,40], rain:[0,4]},
+    desc:'Marina afslenteren, vroege apéro op een terras.'},
+  {id:'mallorca',name:'Mallorca road-trip',           icon:'🚗', tags:['outdoor','family'],
+    bf:{temp:[10,35], wind:[0,40], rain:[0,3]},
+    desc:'Cala d\'Or → Santanyí markt → Es Trenc → Cap de Ses Salines.'},
+  {id:'wine',   name:'Wijnproeverij · Dalt Turó',     icon:'🍇', tags:['calm','indoor','evening'],
+    bf:{temp:[5,38], wind:[0,99], rain:[0,99]},
+    desc:'Biologische bodega boven Felanitx · Callet en Manto Negro.'},
+  {id:'dinner', name:'Diner · Seasons of The Garden', icon:'🍷', tags:['evening','calm','family'],
+    bf:{temp:[8,38], wind:[0,40], rain:[0,8], time:['evening']},
+    desc:'Michelin-gecureerd · vraag de tafel met zeezicht en een glas Mallorquí.'},
+  {id:'kids',   name:'Heroes Kids Club',              icon:'🎈', tags:['indoor','family'],
+    bf:{temp:[0,45], wind:[0,99], rain:[0,99]},
+    desc:'Ofsted-standard kinderopvang · ochtend- en middag-sessies.'},
+  {id:'sunset', name:'Atardecer · Cap de Ses Salines',icon:'🌅', tags:['calm','evening','family'],
+    bf:{temp:[12,40], wind:[0,40], rain:[0,2], time:['evening']},
+    desc:'Vuurtoren uit 1863 op het zuidelijkste punt — magisch licht.'}
+];
+
+/* ─────────────────────────────────────────────────────────
+   WEEK PLAN · enhanced
+   ───────────────────────────────────────────────────────── */
+const WEEK_PLAN = {
+  '2026-06-02':{
+    img:'../suite.jpg',
+    primary:'Check-in Deluxe Suite + welkomstduik in de adults-only pool',
+    backup:'The Market lichte lunch en jet-lag-loungen',
+    dining:'Diner · Seasons (Mediterraan + Aziatische accenten)',
+    pack:'Linnen overhemd voor het diner · pet voor het terras'
+  },
+  '2026-06-03':{
+    img:'../sup.jpg',
+    primary:'Sport & watersport — SUP voor twee + padel-toernooi',
+    backup:'Spa-uur voor twee (Anne Semonin Paris)',
+    dining:'Diner · Oliva (Grieks-Mediterraan)',
+    pack:'Watersport-T-shirt · droge tas voor telefoon'
+  },
+  '2026-06-04':{
+    img:'../beach.jpg',
+    primary:'Día de Playa — handdoek vroeg neerleggen, snorkelen vanaf het strand',
+    backup:'Beach Club Bar lunch + middag-zwem',
+    dining:'Diner · Anaya (Pan-Aziatisch)',
+    pack:'Snorkelset · waterschoenen · grote handdoek'
+  },
+  '2026-06-05':{
+    img:'../winetasting.jpg',
+    primary:'Roadtrip · Cala d\'Or → Santanyí → Felanitx + wijnproeverij Dalt Turó',
+    backup:'Atardecer bij Cap de Ses Salines',
+    dining:'Dinner on the Beach · privé op het zand',
+    pack:'Lichte cardigan voor de avondbries · contant geld voor de markt'
+  },
+  '2026-06-06':{
+    img:'../beachclub.jpg',
+    primary:'Relajación extrema — geen wekker, lange Beach Club middag',
+    backup:'Catamaran-les of e-bike rondje Mondragó',
+    dining:'Diner · Beachclub aan zee',
+    pack:'Boek · oordoppen · zonnehoed'
+  },
+  '2026-06-07':{
+    img:'../overview.jpg',
+    primary:'Afscheidsochtend — laatste duik, brunch bij The Market',
+    backup:'Una copita op het Lobby Bar terras',
+    dining:'Lichte lunch · transfer ±13:30',
+    pack:'Reisdocumenten klaarleggen · paspoort + boarding pass'
+  }
+};
+
+/* ─────────────────────────────────────────────────────────
+   WEATHER ICON + PHRASE
+   ───────────────────────────────────────────────────────── */
+function wxIcon(wc, p){
+  if(wc==null){ return p>2?['🌧','Lichte regen'] : p>0.3?['🌦','Motregentje'] : ['☀','Zonneschijn']; }
+  if(wc===0) return ['☀','Helder & zonnig'];
+  if(wc<=2)  return ['🌤','Overwegend zonnig'];
+  if(wc===3) return ['⛅','Half bewolkt'];
+  if(wc<=48) return ['🌫','Mistige start'];
+  if(wc<=57) return ['🌦','Lichte motregen'];
+  if(wc<=67) return ['🌧','Regenbuien'];
+  if(wc<=77) return ['❄','Sneeuw (zelden)'];
+  if(wc<=82) return ['🌦','Buien'];
+  if(wc<=99) return ['⛈','Mogelijk onweer'];
+  return ['⛅','Gemengde lucht'];
+}
+
+/* ─────────────────────────────────────────────────────────
+   FETCH · Open-Meteo + MET Norway fallback
+   ───────────────────────────────────────────────────────── */
+const OM_URL =
+  `https://api.open-meteo.com/v1/forecast?latitude=${LAT}&longitude=${LON}`+
+  `&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_probability_max,windspeed_10m_max,sunshine_duration,uv_index_max,weathercode`+
+  `&current=temperature_2m,wind_speed_10m,uv_index,weather_code`+
+  `&timezone=${encodeURIComponent(TZ)}&forecast_days=16`;
+
+const METNO_URL = `https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=${LAT}&lon=${LON}`;
+
+async function withTimeout(url, ms=8000, opts={}){
+  const ctl=new AbortController();
+  const id=setTimeout(()=>ctl.abort(), ms);
+  try{
+    const r=await fetch(url, {...opts, signal:ctl.signal});
+    clearTimeout(id);
+    return r;
+  }catch(e){ clearTimeout(id); throw e; }
+}
+
+async function fetchForecast(){
+  try{
+    const r = await withTimeout(OM_URL, 10000);
+    if(!r.ok) throw 0;
+    const j = await r.json();
+    if(!j.daily?.time) throw 0;
+    const per = {}; const d = j.daily;
+    for(let i=0;i<d.time.length;i++){
+      const date = d.time[i];
+      if(!DAYS.includes(date)) continue;
+      per[date] = {
+        hi:   d.temperature_2m_max?.[i],
+        lo:   d.temperature_2m_min?.[i],
+        rain: d.precipitation_sum?.[i] ?? 0,
+        pp:   d.precipitation_probability_max?.[i] ?? 0,
+        wind: d.windspeed_10m_max?.[i],
+        sun:  (d.sunshine_duration?.[i] ?? 0)/3600,
+        uv:   d.uv_index_max?.[i],
+        wc:   d.weathercode?.[i]
+      };
+    }
+    return { per, current: j.current, source:'open-meteo', updated: Date.now() };
+  }catch{ return null; }
+}
+
+async function fetchMetNo(){
+  try{
+    const r = await withTimeout(METNO_URL, 8000);
+    if(!r.ok) return null;
+    const j = await r.json();
+    const ts = j?.properties?.timeseries; if(!ts?.length) return null;
+    const buckets = {};
+    for(const d of DAYS) buckets[d] = {temps:[], rains:[], winds:[], clouds:[], wcs:[]};
+    let current = null;
+    for(const e of ts){
+      const t = e.time, d = t.slice(0,10);
+      if(!current){
+        const inst = e.data?.instant?.details||{};
+        current = {
+          temperature_2m: inst.air_temperature,
+          wind_speed_10m: (inst.wind_speed||0)*3.6,
+          weather_code: metnoSymbolToWC(e.data?.next_1_hours?.summary?.symbol_code)
+        };
+      }
+      if(!buckets[d]) continue;
+      const inst = e.data?.instant?.details||{};
+      if(inst.air_temperature!=null) buckets[d].temps.push(inst.air_temperature);
+      if(inst.wind_speed!=null)      buckets[d].winds.push(inst.wind_speed*3.6);
+      if(inst.cloud_area_fraction!=null){
+        const hr = parseInt(t.slice(11,13),10);
+        if(hr>=7 && hr<=21) buckets[d].clouds.push(inst.cloud_area_fraction);
+      }
+      const p = e.data?.next_1_hours?.details?.precipitation_amount;
+      if(p!=null) buckets[d].rains.push(p);
+      const sym = e.data?.next_1_hours?.summary?.symbol_code || e.data?.next_6_hours?.summary?.symbol_code;
+      if(sym) buckets[d].wcs.push(metnoSymbolToWC(sym));
+    }
+    const per = {};
+    for(const d of DAYS){
+      const b = buckets[d];
+      if(!b.temps.length){ per[d] = null; continue; }
+      const avgCloud = b.clouds.length ? b.clouds.reduce((a,c)=>a+c,0)/b.clouds.length : 50;
+      per[d] = {
+        hi: Math.max(...b.temps),
+        lo: Math.min(...b.temps),
+        rain: b.rains.reduce((a,c)=>a+c,0),
+        pp: avgCloud > 50 ? 20 : 5,
+        wind: b.winds.reduce((a,c)=>a+c,0)/b.winds.length,
+        sun: 15 * (1 - avgCloud/100),
+        uv: 7,
+        wc: mostCommon(b.wcs)
+      };
+    }
+    return { per, current, source:'met-norway', updated: Date.now() };
+  }catch{ return null; }
+}
+function mostCommon(arr){
+  if(!arr.length) return null;
+  const f={}; for(const v of arr) f[v]=(f[v]||0)+1;
+  return +Object.keys(f).sort((a,b)=>f[b]-f[a])[0];
+}
+function metnoSymbolToWC(sym){
+  if(!sym) return null;
+  const s = String(sym).toLowerCase();
+  if(s.startsWith('clearsky'))     return 0;
+  if(s.startsWith('fair'))         return 1;
+  if(s.startsWith('partlycloudy')) return 2;
+  if(s.startsWith('cloudy'))       return 3;
+  if(s.startsWith('fog'))          return 45;
+  if(s.includes('drizzle'))        return 51;
+  if(s.includes('lightrain'))      return 61;
+  if(s.includes('heavyrain'))      return 65;
+  if(s.includes('rain'))           return 63;
+  if(s.includes('thunder'))        return 95;
+  if(s.includes('snow'))           return 71;
+  if(s.includes('sleet'))          return 67;
+  return 3;
+}
+
+const CACHE_KEY = 'ikos-pp-fc-v2';
+function cacheSave(data){ try{ localStorage.setItem(CACHE_KEY, JSON.stringify(data)); }catch{} }
+function cacheLoad(){ try{ return JSON.parse(localStorage.getItem(CACHE_KEY)||'null'); }catch{ return null; } }
+
+async function loadWeather(){
+  // 1) Open-Meteo
+  let data = await fetchForecast();
+  // 2) MET Norway
+  if(!data || !Object.values(data.per).some(Boolean)){
+    data = await fetchMetNo();
+  }
+  // 3) localStorage cache
+  if(!data){
+    const c = cacheLoad();
+    if(c){ c.fromCache = true; return c; }
+  }
+  // 4) sample/baked
+  if(!data){
+    return { per: structuredClone(SAMPLE), current: null, source:'sample', updated: Date.now(), isSample: true };
+  }
+  // Fill any missing day from SAMPLE so UI never shows blanks
+  for(const d of DAYS){
+    if(!data.per[d]){ data.per[d] = {...SAMPLE[d], _filledFromSample:true}; }
+  }
+  cacheSave(data);
+  return data;
+}
+
+/* ─────────────────────────────────────────────────────────
+   ACTIVITY RECOMMENDATION ENGINE
+   ───────────────────────────────────────────────────────── */
+function timeOfDay(){
+  const h = new Date().getHours();
+  if(h < 11) return 'morning';
+  if(h < 17) return 'afternoon';
+  return 'evening';
+}
+function fitActivity(act, wx, time){
+  const bf = act.bf;
+  if(wx.hi!=null && (wx.hi < bf.temp[0] || wx.hi > bf.temp[1])) return null;
+  if(wx.wind!=null && wx.wind > bf.wind[1]) return null;
+  if((wx.rain||0) > bf.rain[1]) return null;
+  if(bf.time && time && !bf.time.includes(time)) return 0.45; // tijd-mismatch dempt maar verwerpt niet
+  let s = 0.7;
+  const tCenter = (bf.temp[0]+bf.temp[1])/2;
+  s += 0.3 * Math.max(0, 1 - Math.abs(wx.hi - tCenter)/Math.max(1,(bf.temp[1]-bf.temp[0])));
+  if((wx.rain||0) < 0.2) s += 0.05;
+  if(wx.wind < 18)       s += 0.05;
+  return Math.max(0.2, Math.min(1, s));
+}
+function recommend(wx, time, filters){
+  const useFilters = filters.length && !filters.includes('');
+  return ACTIVITIES_DB
+    .filter(a => !useFilters || a.tags.some(t => filters.includes(t)))
+    .map(a => ({...a, fit: fitActivity(a, wx, time)}))
+    .filter(a => a.fit !== null)
+    .sort((a,b) => b.fit - a.fit);
+}
+
+/* ─────────────────────────────────────────────────────────
+   COMFORT SCORE per day
+   ───────────────────────────────────────────────────────── */
+function comfortScore(wx){
+  if(!wx || wx.hi==null) return null;
+  let s = 7.5;
+  const tc = 1 - Math.min(1, Math.abs((wx.hi||27)-27)/7);
+  s += tc * 1.6;
+  s += (20 - (wx.wind||16))*0.05;
+  if(wx.sun>=12) s += 0.2;
+  if((wx.rain||0)>5) s -= 2.5; else if((wx.rain||0)>2) s -= 1.2; else if((wx.rain||0)>0.5) s -= 0.4;
+  return Math.round(Math.max(5.5, Math.min(9.8, s))*10)/10;
+}
+
+/* ─────────────────────────────────────────────────────────
+   RENDER · everything
+   ───────────────────────────────────────────────────────── */
+function todayKey(){
+  // pick first trip day from today; fallback to first day
+  const todayISO = new Date().toISOString().slice(0,10);
+  if(DAYS.includes(todayISO)) return todayISO;
+  // If before trip → show first day; during trip → already handled; after → last
+  if(new Date() < TRIP_START) return DAYS[0];
+  return DAYS[DAYS.length-1];
+}
+
+function renderHero(today, wx, current){
+  const t = current?.temperature_2m;
+  const wc = current?.weather_code ?? today?.wc;
+  const [ic, phrase] = wxIcon(wc, today?.rain||0);
+  document.getElementById('pillTempV').textContent = (t!=null?Math.round(t):today?.hi!=null?Math.round(today.hi):'—') + '°';
+  document.getElementById('pillCondV').textContent = phrase;
+  document.getElementById('pillWind').firstElementChild.textContent = '↗';
+  document.getElementById('pillWindV').textContent = (current?.wind_speed_10m!=null?Math.round(current.wind_speed_10m):today?.wind!=null?Math.round(today.wind):'—') + ' km/u';
+  const uv = current?.uv_index ?? today?.uv;
+  document.getElementById('pillUVV').textContent = 'UV ' + (uv!=null?Math.round(uv):'—');
+}
+
+function renderVandaag(dKey, wx){
+  const date = new Date(dKey+'T00:00:00');
+  document.getElementById('vandaagDate').textContent =
+    WEEKDAYS[dKey] + ' · ' + date.getDate() + ' ' + MONTHS_NL[date.getMonth()];
+  document.getElementById('cDayLabel').textContent = WEEKDAYS[dKey];
+  const [ic, phrase] = wxIcon(wx.wc, wx.rain);
+  document.getElementById('cIcon').textContent = ic;
+  document.getElementById('cTitle').textContent = phrase;
+  document.getElementById('cHi').textContent = Math.round(wx.hi)+'°';
+  document.getElementById('cLo').textContent = Math.round(wx.lo)+'°';
+  document.getElementById('cPhrase').textContent = comfortPhrase(wx);
+  document.getElementById('cRain').textContent = (wx.rain||0).toFixed(1).replace('.',',');
+  document.getElementById('cRainP').textContent = Math.round(wx.pp||0);
+  document.getElementById('cWind').textContent = Math.round(wx.wind||0);
+  document.getElementById('cSun').textContent = (wx.sun||0).toFixed(1).replace('.',',');
+  const sc = comfortScore(wx) || 8;
+  document.getElementById('cScoreV').textContent = sc.toString().replace('.',',');
+  document.getElementById('cGauge').style.setProperty('--w', (sc*10)+'%');
+
+  // Moments
+  const recAll = recommend(wx, 'all', []);
+  document.getElementById('mMorTitle').textContent = recommendForTime(wx,'morning')?.name || 'Beach of pool';
+  document.getElementById('mAftTitle').textContent = recommendForTime(wx,'afternoon')?.name || 'Pool of schaduw';
+  document.getElementById('mEveTitle').textContent = recommendForTime(wx,'evening')?.name || 'Diner of sunset';
+
+  // Vandaag-grid
+  const best = recAll[0];
+  if(best){
+    document.getElementById('vBest').textContent = best.name;
+    document.getElementById('vBestD').textContent = best.desc;
+  }
+  document.getElementById('vBring').textContent = bringFor(wx);
+  document.getElementById('vKids').textContent = kidsFor(wx);
+  document.getElementById('vPhoto').textContent = photoFor(wx);
+}
+
+function comfortPhrase(wx){
+  if(wx.rain>2) return 'Wisselvallig — plan B is wijs vandaag.';
+  if(wx.wind>25) return 'Stevige bries — top voor zeilen, minder voor SUP.';
+  if(wx.hi>=28 && wx.sun>=12) return 'Volle zonnige dag · maximale schaduw vinden voor 14:00.';
+  if(wx.hi>=24 && wx.rain<0.5) return 'Een lekkere Mallorca-dag · zee binnen handbereik.';
+  if(wx.hi<20) return 'Zachte voorjaarsdag — perfecte wandel-condities.';
+  return 'Aangename dag · pak gerust een ligbed.';
+}
+function recommendForTime(wx, t){
+  return recommend(wx, t, []).filter(a => !a.bf.time || a.bf.time.includes(t))[0];
+}
+function bringFor(wx){
+  const items = [];
+  if(wx.hi>=22) items.push('zonnebrand');
+  if((wx.uv||0)>=7) items.push('pet');
+  items.push('waterfles');
+  if(wx.rain>1) items.push('lichte regenjas');
+  if(wx.wind>25) items.push('windjack');
+  if(wx.hi<22) items.push('vest voor de avond');
+  return items.slice(0,4).join(' · ');
+}
+function kidsFor(wx){
+  if(wx.rain>3) return 'Indoor dag · Kids Club + spa';
+  if(wx.wind>28) return 'Pool & Kids Club aanrader';
+  if(wx.hi>=24 && wx.rain<1) return 'Heel geschikt voor strand & pool';
+  if(wx.hi<19) return 'Liever indoor of dorp';
+  return 'Prima dag — varieer pool en strand';
+}
+function photoFor(wx){
+  if(wx.rain>3) return 'Hammam-stoom + groene tuin';
+  if(wx.hi>=24 && wx.sun>=12) return 'Atardecer · Cap de Ses Salines';
+  return 'Marina · golden hour 19:30';
+}
+
+function renderForecast(per, source, updated){
+  const track = document.getElementById('fcastTrack');
+  track.innerHTML = '';
+  for(const d of DAYS){
+    const wx = per[d]; if(!wx) continue;
+    const [ic, phrase] = wxIcon(wx.wc, wx.rain);
+    const date = new Date(d+'T00:00:00');
+    const dd = date.getDate() + ' ' + MONTHS_NL[date.getMonth()].slice(0,3);
+    const best = recommend(wx, 'all', [])[0]?.name?.split('·')[0]?.trim() || '—';
+    const tempRange = Math.max(8, 12); // visual bar
+    const fill = Math.max(0, Math.min(100, ((wx.hi - 18) / (32 - 18)) * 100));
+    const sample = wx._filledFromSample;
+    const card = document.createElement('article');
+    card.className = 'fcast reveal';
+    card.innerHTML = `
+      <div class="f-head">
+        <div>
+          <div class="f-day">${WEEKDAYS[d]}</div>
+          <div class="f-date">${dd}</div>
+        </div>
+        <span class="f-best">${best}</span>
+      </div>
+      <div class="f-icon" aria-hidden="true">${ic}</div>
+      <div class="f-temps"><span class="f-hi">${Math.round(wx.hi)}°</span><span class="f-lo">/ ${Math.round(wx.lo)}°</span></div>
+      <div class="f-phrase">${phrase}${sample?' · voorbeeld':''}</div>
+      <div class="f-bar" aria-hidden="true"><i style="left:0;width:${fill}%"></i></div>
+      <div class="f-stats">
+        <div class="f-stat"><div class="l">Regen</div><div class="v">${(wx.rain||0).toFixed(1).replace('.',',')}mm</div></div>
+        <div class="f-stat"><div class="l">Wind</div><div class="v">${Math.round(wx.wind||0)}</div></div>
+        <div class="f-stat"><div class="l">Zon</div><div class="v">${(wx.sun||0).toFixed(0)}u</div></div>
+      </div>
+    `;
+    track.appendChild(card);
+  }
+  // data note
+  const labels = {'open-meteo':'Open-Meteo · 12 modellen', 'met-norway':'MET Norway (backup)', 'sample':'Voorbeeld-data', 'cache':'Cache · weerdienst offline'};
+  document.getElementById('dataSource').textContent = labels[source] || source;
+  document.getElementById('dataFresh').textContent = freshLabel(updated, source);
+  document.getElementById('weerNote').textContent = source==='sample' ? 'Voorbeeld · live data niet bereikbaar' : 'Live · ververst bij elke opening';
+  document.getElementById('dataNote').classList.toggle('stale', source==='sample' || source==='cache');
+}
+function freshLabel(ts, source){
+  if(source==='sample') return 'verbinding niet beschikbaar — data is een realistisch voorbeeld';
+  if(!ts) return 'verversen…';
+  const ago = Math.round((Date.now()-ts)/60000);
+  if(ago < 1) return 'zojuist bijgewerkt';
+  if(ago < 60) return ago + ' min geleden';
+  return Math.round(ago/60) + ' uur geleden';
+}
+
+function renderActivities(wx, filters){
+  const grid = document.getElementById('actGrid');
+  const time = timeOfDay();
+  const rec = recommend(wx, time, filters);
+  grid.innerHTML = rec.length ? '' : '<p style="grid-column:1/-1;text-align:center;color:var(--ink-faint);padding:20px">Geen activiteiten matchen — pas filters aan.</p>';
+  for(const a of rec){
+    const scorePct = Math.round((a.fit||0.7)*100);
+    const dim = (a.fit||0.7) < 0.55;
+    const el = document.createElement('article');
+    el.className = 'act' + (dim?' dim':'');
+    el.innerHTML = `
+      <div class="a-ic">${a.icon}</div>
+      <div class="a-body">
+        <div class="a-title">${a.name}</div>
+        <div class="a-meta">${a.tags.slice(0,2).map(t=>tagLabel(t)).join(' · ')} <span class="score">★ ${scorePct}%</span></div>
+        <div class="a-desc">${a.desc}</div>
+      </div>`;
+    grid.appendChild(el);
+  }
+}
+function tagLabel(t){
+  return ({family:'met kinderen', calm:'rustig', active:'actief', water:'water', indoor:'binnen/schaduw', evening:'avond', outdoor:'buiten'})[t] || t;
+}
+
+function renderWeek(per){
+  const g = document.getElementById('weekGrid');
+  g.innerHTML = '';
+  for(const d of DAYS){
+    const wx = per[d]; if(!wx) continue;
+    const plan = WEEK_PLAN[d] || {};
+    const [ic, phrase] = wxIcon(wx.wc, wx.rain);
+    const date = new Date(d+'T00:00:00');
+    const card = document.createElement('article');
+    card.className = 'wday reveal';
+    card.innerHTML = `
+      <div class="wday-img">
+        ${plan.img?`<img src="${plan.img}" alt="" loading="lazy" decoding="async" onload="this.classList.add('loaded')">`:''}
+        <div class="w-head">
+          <div>
+            <div class="w-day">${WEEKDAYS[d]}</div>
+            <div class="w-date">${date.getDate()} ${MONTHS_NL[date.getMonth()]}</div>
+          </div>
+          <div class="w-temps">${Math.round(wx.hi)}° <small>/ ${Math.round(wx.lo)}°</small></div>
+        </div>
+      </div>
+      <div class="wday-body">
+        <div class="wday-row"><div class="r-ic">${ic}</div><div><div class="r-l">Weer</div><div class="r-t">${phrase} · ${Math.round(wx.wind||0)} km/u · ${(wx.sun||0).toFixed(0)}u zon</div></div></div>
+        <div class="wday-row"><div class="r-ic">★</div><div><div class="r-l">Hoofdactiviteit</div><div class="r-t">${plan.primary||'—'}</div></div></div>
+        <div class="wday-row"><div class="r-ic">↻</div><div><div class="r-l">Backup</div><div class="r-t">${plan.backup||'—'}</div></div></div>
+        <div class="wday-row"><div class="r-ic">🍷</div><div><div class="r-l">Avond</div><div class="r-t">${plan.dining||'—'}</div></div></div>
+        <div class="wday-row"><div class="r-ic">🎒</div><div><div class="r-l">Meenemen</div><div class="r-t">${plan.pack||'—'}</div></div></div>
+      </div>`;
+    g.appendChild(card);
+  }
+}
+
+/* ─────────────────────────────────────────────────────────
+   Smooth scroll · scroll-spy · reveal
+   ───────────────────────────────────────────────────────── */
+function setupNav(){
+  document.querySelectorAll('a[data-jump]').forEach(a=>{
+    a.addEventListener('click', e=>{
+      const href = a.getAttribute('href');
+      if(!href || !href.startsWith('#')) return;
+      const el = document.querySelector(href);
+      if(!el) return;
+      e.preventDefault();
+      el.scrollIntoView({behavior:'smooth', block:'start'});
+    });
+  });
+  // scroll-spy
+  const sections = ['vandaag','weer','activiteiten','weekplan','tips'].map(id => ({id, el:document.getElementById(id)})).filter(s=>s.el);
+  const spy = new IntersectionObserver((entries)=>{
+    for(const e of entries){
+      if(e.isIntersecting){
+        document.querySelectorAll('[data-jump]').forEach(a=>{
+          a.removeAttribute('aria-current');
+          if(a.getAttribute('href') === '#'+e.target.id) a.setAttribute('aria-current','true');
+        });
+      }
+    }
+  },{rootMargin:'-40% 0px -55% 0px'});
+  sections.forEach(s => spy.observe(s.el));
+}
+function setupReveal(){
+  const io = new IntersectionObserver((entries)=>{
+    for(const e of entries){
+      if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    }
+  },{rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+}
+
+/* ─────────────────────────────────────────────────────────
+   FILTERS
+   ───────────────────────────────────────────────────────── */
+let activeFilters = [''];
+function setupFilters(weatherState){
+  document.querySelectorAll('.chip[data-filter]').forEach(c=>{
+    c.addEventListener('click', ()=>{
+      const f = c.getAttribute('data-filter');
+      if(f === ''){
+        document.querySelectorAll('.chip').forEach(x=>x.setAttribute('aria-pressed','false'));
+        c.setAttribute('aria-pressed','true');
+        activeFilters = [''];
+      } else {
+        const all = document.querySelector('.chip[data-filter=""]');
+        if(all) all.setAttribute('aria-pressed','false');
+        const isOn = c.getAttribute('aria-pressed') === 'true';
+        c.setAttribute('aria-pressed', isOn ? 'false' : 'true');
+        activeFilters = Array.from(document.querySelectorAll('.chip[aria-pressed="true"]')).map(x=>x.getAttribute('data-filter')).filter(Boolean);
+        if(!activeFilters.length){
+          all?.setAttribute('aria-pressed','true');
+          activeFilters = [''];
+        }
+      }
+      const today = weatherState.per[todayKey()];
+      renderActivities(today, activeFilters);
+    });
+  });
+}
+
+/* ─────────────────────────────────────────────────────────
+   OFFLINE STATUS
+   ───────────────────────────────────────────────────────── */
+function setupOnline(){
+  const b = document.getElementById('offlineBanner');
+  const update = ()=>{ b.classList.toggle('show', !navigator.onLine); };
+  window.addEventListener('online', update);
+  window.addEventListener('offline', update);
+  update();
+}
+
+/* ─────────────────────────────────────────────────────────
+   MAIN
+   ───────────────────────────────────────────────────────── */
+let WEATHER = null;
+
+async function init(){
+  setupNav();
+  setupReveal();
+  setupOnline();
+  document.getElementById('liveHeroText').textContent = 'Forecast laadt…';
+
+  WEATHER = await loadWeather();
+  const dKey = todayKey();
+  const today = WEATHER.per[dKey];
+  renderHero(today, WEATHER, WEATHER.current);
+  renderVandaag(dKey, today);
+  renderForecast(WEATHER.per, WEATHER.source, WEATHER.updated);
+  renderWeek(WEATHER.per);
+  renderActivities(today, activeFilters);
+  setupFilters(WEATHER);
+
+  // Hero live indicator
+  const map = {'open-meteo':'Live', 'met-norway':'Backup', 'sample':'Voorbeeld', 'cache':'Cache'};
+  document.getElementById('liveHeroText').textContent = map[WEATHER.source] || 'Live';
+  document.getElementById('fSource').textContent = (
+    WEATHER.source === 'sample' ? 'Voorbeeld-data · live verbinding niet bereikbaar' :
+    WEATHER.source === 'met-norway' ? 'Weer · MET Norway (backup-bron)' :
+    'Weer · Open-Meteo (12 modellen) · MET Norway backup'
+  );
+
+  // Pre-derive a 'best activity' for hero pill
+  const bestNow = recommend(today, timeOfDay(), [])[0];
+  if(bestNow){
+    document.getElementById('pillBestV').textContent = bestNow.name.split('·')[0].trim();
+  }
+}
+
+document.addEventListener('visibilitychange', ()=>{ if(!document.hidden) init(); });
+window.addEventListener('pageshow', init);
+init();
+
+// SW register
+if('serviceWorker' in navigator){
+  window.addEventListener('load', ()=>{
+    navigator.serviceWorker.register('sw.js').then(reg=>{
+      // when a new SW is found, prompt-less refresh on activation
+      reg.addEventListener('updatefound', ()=>{
+        const sw = reg.installing;
+        if(!sw) return;
+        sw.addEventListener('statechange', ()=>{
+          if(sw.state === 'activated' && navigator.serviceWorker.controller){
+            // optionally show a discreet "updated" indicator — for now silent reload on next nav
+          }
+        });
+      });
+    }).catch(()=>{});
+  });
+}
+</script>
+</body>
+</html>
